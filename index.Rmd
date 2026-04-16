@@ -50,12 +50,25 @@ For that, try
 My work is often one-off: I analyze the data, write the report or paper, 
 and never look back.
 Why would I care about reproducibility then? 
-Reproducibility ensures that your analysis can be independently verified and built upon by others. It is critical for:
+First of all: most work isn't *that* one-off. 
+Parts of my code can always be reused in new projects.
+Making sure my code can easily be repurposed for other projects by changing a few
+parameters is thus worthwhile just because of the time it saves me.
+But this has important positive side effects as well:
+it forces me to write code in a more general way that makes less assumptions
+about the data. 
+Often I may get some additional data after writing my code, 
+or I may make some changes to my cleaning script, 
+which may break some of the assumptions I made in my analysis code:
+perhaps a few observations are now dropped, 
+a few outliers are now included, or a few variables are now missing,
+changing the results of my analysis, potentially without me noticing it!
+General code tends to make fewer assumptions about the data, 
+and is thus less likely to cause such errors.
 
-- **Scientific Integrity:** Validating research findings.
-- **Collaboration:** Enabling team members to understand and extend your work.
-- **Transparency:** Providing clear documentation of methods and results.
-- **Efficiency:** Reducing errors and saving time by automating report generation.
+Code written with reproducibility in mind is also easier to read and understand.
+This makes it easier for collobarotors to join your project, or review your work.
+This again improves the quality of your work, while reducing stress for you.
 
 Without reproducibility, 
 research and analysis can become opaque, error-prone, and difficult to validate.
@@ -81,14 +94,14 @@ So if you want all code and data follow the following steps:
 - Select Version Control, Git, and enter `https://github.com/kleuveld/r_cheatsheet` 
 as the repository URL.
 - The Project will open.
-- In the console, type `renv::restore()` to instal all packages.
+- In the console, type `renv::restore()` to install all packages.
 
 (See how easy that was? Reproducible workflows, baby!)
 
 ## Road map
 
 The site is organized in two parts:
-the first cover advice on general best practives: 
+the first cover advice on general best practices: 
 project oriented workflows, general R techniques such as loops and functions that facilitate reproducibility and RMarkdown.
 The chapters in part two each cover a part of the research cycle:
 design, data cleaning and data analysis (including reporting the results). 

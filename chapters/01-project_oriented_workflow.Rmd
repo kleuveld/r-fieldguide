@@ -12,8 +12,6 @@ because if you need to come back to your own code on a new device
 you can easily get it running again.
 It also helps your co-workers, as they can easily use your code.
 It also helps research integrity, as you can easily show how you got your results.
-In fact, this website was made using these principles: 
-you can download the all code from github and run it on your own machine.
 
 Do note that there is an up-front cost in setting up such workflows,
 so plan for that, making sure all collaborators are on-board with how you approach 
@@ -23,8 +21,6 @@ This chapter discusses two R-specific aspects of project-oriented workflows:
 the project folder and the renv package.
 I also recommend using git, but that goes beyond the scope of this field guide.
 
-
-
 ## Project folders
 
 Oftentimes, you will see R scripts start with `setwd()`.
@@ -33,7 +29,8 @@ as it relies on the exact folder structure of the machine the script
 was written on.
 
 A better practice is to adopt a project-oriented workflow. 
-[In the words of Jenny Bryan](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/):
+[In the words of Jenny Bryan](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/)
+(leaving out the bits where she threatens to set your PC on fire):
 
 > I suggest organizing each data analysis into a project: 
 > a folder on your computer that holds all the files relevant to 

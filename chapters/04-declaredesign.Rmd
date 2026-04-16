@@ -4,15 +4,15 @@
 # start with a clean environment
 rm(list = ls())
 
-# run diagnosis?
+# run diagnosis? if set to false, diagnosis results will be read from CSV files
 run_diagnosis <- FALSE
 
 
 ```
 
-# (PART\*) Part 2: the research life cycle {-}
+# (PART\*) Part 2: phases of your research {-}
 
-# 4. DeclareDesign {#declaredesign}
+# 4. Design {#declaredesign}
 
 There's a lot that goes into research design, 
 but here we focus on one thing that can be done well in R: power calculations.
@@ -67,18 +67,34 @@ rhomis <-
   # split the sample in villages, by lattitude
   filter(!is.na(GPS_LAT)) %>%
   arrange(GPS_LAT) %>%
-  mutate(village = rep(1:n_clusters, each = nrow(.) / n_clusters , length.out =  nrow(.))) %>%
+  mutate(
+    village = rep(
+      1:n_clusters,
+      each = nrow(.) / n_clusters,
+      length.out =  nrow(.)
+    )
+  ) %>%
   # create some variables
-  mutate(HFIAS_status = factor(HFIAS_status, levels = c("FoodSecure", "MildlyFI", "ModeratelyFI", "SeverelyFI")),
-         food_secure = 1 * (as.numeric(HFIAS_status) <= 3),
-         educated = 1*(Head_EducationLevel != "No_school"),
-         female = 1* (HouseholdType == "woman_single")) %>%
+  mutate(
+    HFIAS_status = factor(
+      HFIAS_status, 
+      levels = c("FoodSecure", "MildlyFI", "ModeratelyFI", "SeverelyFI")
+    ),
+    food_secure = 1 * (as.numeric(HFIAS_status) <= 3),
+    educated = 1*(Head_EducationLevel != "No_school"),
+    female = 1* (HouseholdType == "woman_single")
+  ) %>%
   mutate(hh = row_number()) %>%
   select(!HFIAS_status) %>%
 
-  # there are too many missings in my data; these seem reasonable to assume to be 0 when missing:
-  mutate(across(c(LandOwned,NFertInput,educated),
-         ~ if_else(is.na(.x),0,.x))) %>%
+  # there are too many missings in my data;
+  # these seem reasonable to assume to be 0 when missing:
+  mutate(
+    across(
+      c(LandOwned, NFertInput, educated),
+      ~if_else(is.na(.x), 0, .x)
+    )
+  ) %>%
   select(village, hh, NFertInput, food_secure, educated, LivestockHoldings)
 
 
@@ -98,7 +114,7 @@ In this case, I add potential outcomes, using `potential_outcomes()`:
 
 effect_size_simple <- 70
 
-model_simple <- 
+model_simple <-
   declare_model(
     rhomis %>% select(village, NFertInput),
     potential_outcomes(Y ~ NFertInput + Z * effect_size_simple)
@@ -119,7 +135,7 @@ I do a clustered randomization, based on the villages:
 ```{r}
 
 assignment_simple <-
-  declare_assignment(Z = cluster_ra(clusters = village, prob = 0.5)) 
+  declare_assignment(Z = cluster_ra(clusters = village, prob = 0.5))
 
 ```
 
@@ -130,17 +146,18 @@ This is basically my research question.
 
 ```{r}
 
-inquiry_simple <-  
-  declare_inquiry(ATE = mean(Y_Z_1 - Y_Z_0)) 
+inquiry_simple <-
+  declare_inquiry(ATE = mean(Y_Z_1 - Y_Z_0))
 
 ```
 
 
 ```{r}
 
-measurement_simple <- declare_measurement(
-  Y = reveal_outcomes(Y ~ Z)
-)
+measurement_simple <- 
+  declare_measurement(
+    Y = reveal_outcomes(Y ~ Z)
+  )
 
 ```
 
@@ -152,11 +169,13 @@ and the `term` argument determines which coefficient is our estimate of interest
 ```{r}
 
 estimator_simple <-
-  declare_estimator(Y ~ Z,
-                    clusters = village, 
-                    inquiry = "ATE", 
-                    term = "Z", 
-                    label = "Simple")
+  declare_estimator(
+    Y ~ Z,
+    clusters = village,
+    inquiry = "ATE",
+    term = "Z",
+    label = "Simple"
+  )
 
 ```
 
@@ -165,8 +184,11 @@ it's only here that R starts actually running the code to randomize
 things. The previous was just declaration!
 
 ```{r}
-  
-design_simple <- model_simple + assignment_simple + inquiry_simple + measurement_simple + estimator_simple
+
+design_simple <- 
+  model_simple + assignment_simple + inquiry_simple + measurement_simple + 
+  estimator_simple
+
 summary(design_simple)
 
 ```
@@ -214,7 +236,7 @@ num_sims <- 500
 set.seed(1)
 diagnosis_simple <-
   design_simple %>%
-  redesign(effect_size_simple = seq(100,300,50)) %>%
+  redesign(effect_size_simple = seq(100, 300, 50)) %>%
   diagnose_design(sims = num_sims) %>%
   tidy() %>%
   as_tibble()
@@ -337,12 +359,14 @@ I modify the inquiry and assignment to only take into account `t == 1`
 
 ```{r}
 
-inquiry_dd <-  
+inquiry_dd <-
   declare_inquiry(ATE = mean(Y_Z_1 - Y_Z_0), subset = (t == 1)) 
 
 assignment_dd <-
-  declare_assignment(treatment_group = cluster_ra(clusters = village, prob = 0.5),
-                     Z = t * treatment_group)
+  declare_assignment(
+    treatment_group = cluster_ra(clusters = village, prob = 0.5),
+    Z = t * treatment_group
+  )
 
 ```
 
@@ -351,10 +375,10 @@ Measurement is unchanged:
 
 ```{r}
 
-measurement_dd <- declare_measurement(
-  Y = reveal_outcomes(Y~Z)
-
-)
+measurement_dd <- 
+  declare_measurement(
+    Y = reveal_outcomes(Y ~ Z)
+  )
 
 ```
 
@@ -371,12 +395,14 @@ library(fixest)
 library(broom)
  
 estimator_dd <-
-  declare_estimator(Y ~ Z | treatment_group + t,
-                    cluster = "village",
-                    .method = feols, 
-                    term = "Z", 
-                    inquiry = "ATE", 
-                    label = "2FE")
+  declare_estimator(
+    Y ~ Z | treatment_group + t,
+    cluster = "village",
+    .method = feols,
+    term = "Z", 
+    inquiry = "ATE",
+    label = "2FE"
+  )
 
 ```
 
@@ -385,7 +411,8 @@ The complete design is then:
 
 ```{r diagnose_dd_power}
 
-design_dd <- model_dd + assignment_dd + inquiry_dd + measurement_dd + estimator_dd
+design_dd <- 
+  model_dd + assignment_dd + inquiry_dd + measurement_dd + estimator_dd
 
 
 ```
@@ -460,42 +487,44 @@ more households than are in my original data set.
 The first novel thing is the binary outcome.
 We want an easy to interpret effect size:
 a percentage point increase in food secure households.
-This is a bit trickey: before we just added the effect size to everyone. 
-But for binary variables, we only change a 0 to a 1 for a certain share of the population.
-Let's just define that first.
-The function below flips a certain number of 0s to 1, so that we have a nice effect size:
+This is a bit tricky: before we just added the effect size to everyone. 
+But for binary variables,
+we only change a 0 to a 1 for a certain share of the population.
+Let's just work out how to do that first.
+The function below flips a certain number of 0s to 1, 
+so that the proportion of 1s increases by the effect size.
 
 
 ```{r}
-  
+
 flip_zeroes <- function(x, Z, effect) {
 
-    # how many 1s do we currently have?
-    n_current_ones <- sum(x[Z == 1])
+  # how many 1s do we currently have?
+  n_current_ones <- sum(x[Z == 1])
 
-    # how many 1s should we have?
-    p_current <- mean(x[Z == 1])
-    p_target  <- p_current + effect
-    n_target_ones  <- round(p_target * sum(Z == 1))
+  # how many 1s should we have?
+  p_current <- mean(x[Z == 1])
+  p_target  <- p_current + effect
+  n_target_ones  <- round(p_target * sum(Z == 1))
+
+  # figure out which zeros to flip
+  n_to_flip <- n_target_ones - n_current_ones
   
-    # figure out which zeros to flip
-    n_to_flip <- n_target_ones - n_current_ones
-    
-    # If nothing to flip, return x
-    if (n_to_flip <= 0) return(x)
-    
-    zeros_index <- which(x[Z==1] == 0)
-    
-    # Can't flip more zeros than exist
-    n_to_flip <- min(n_to_flip, length(zeros_index))
-    if (n_to_flip == 0) return(x)
-    
-    flip_index <- sample(zeros_index, n_to_flip)
+  # If nothing to flip, return x
+  if (n_to_flip <= 0) return(x)
+  
+  zeros_index <- which(x[Z==1] == 0)
+  
+  # Can't flip more zeros than exist
+  n_to_flip <- min(n_to_flip, length(zeros_index))
+  if (n_to_flip == 0) return(x)
+  
+  flip_index <- sample(zeros_index, n_to_flip)
 
-    # do it, and return the new x
-    x[Z==1][flip_index] <- 1
-    x
-  }
+  # do it, and return the new x
+  x[Z==1][flip_index] <- 1
+  x
+}
 
 ```
 
@@ -550,7 +579,8 @@ so we sample randomly.
 which is a parameter we can vary in our diagnosis. 
 The number differs between treatment and control communities, 
 to allow oversampling the control observation to compensate for matching losses.
-To do this, we run the `resample_data()` function separately for treatment and control communities,
+To do this, we run the `resample_data()` function separately for treatment and control
+communities,
 using a combination of nest and map2 functions 
 (see [here](https://jennybc.github.io/purrr-tutorial/ls12_different-sized-samples.html)).
 
@@ -560,7 +590,8 @@ communities_per_arm <- 10
 respondents_treat <- 10
 respondents_control <- 15
 
-resample_hhs  <- function(df, communities_per_arm, respondents_treat, respondents_control){
+resample_hhs  <- function(df, communities_per_arm, respondents_treat, 
+                          respondents_control){
   df %>% 
     filter(vill_treat == 0 | Z == 1) %>% 
     mutate(respondents = if_else(Z == 1, respondents_treat, respondents_control)) %>%
@@ -577,7 +608,7 @@ resample_hhs  <- function(df, communities_per_arm, respondents_treat, respondent
         )
       )
     ) %>% 
-  unnest(data) 
+  unnest(data)
 }
 
 resampling_matching <- declare_step(
@@ -605,9 +636,9 @@ and just define my estimand as the effect size.
 effect_size_matching <- 0.1
 
 measurement_matching <-
- declare_measurement(
-  Y = flip_zeroes(food_secure, Z, effect_size_matching)
-)
+  declare_measurement(
+    Y = flip_zeroes(food_secure, Z, effect_size_matching)
+  )
 
 inquiry_matching <- declare_inquiry(ATE = effect_size_matching)
 
@@ -660,7 +691,12 @@ custom_match <- function(data,
   matched_df <- match.data(matchit_model)
 
   # run a regression, weighted by the propensity score
-  lm_robust(Y ~ Z, data = matched_df, weights = weights, clusters = village_unique) %>%
+  lm_robust(
+    Y ~ Z, 
+    data = matched_df,
+    weights = weights, 
+    clusters = village_unique
+  ) %>%
     tidy() %>%
     mutate(outcome = outcome) %>%
     filter(term == term_value)

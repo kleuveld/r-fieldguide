@@ -2,7 +2,7 @@
 
 RMarkdown is an authoring format that enables easy creation of dynamic documents, 
 reports, and presentations. 
-It combine text, written in easy-to-read-and-write markdown format, 
+It combines text, written in easy-to-read-and-write markdown format, 
 with embedded R code chunks. 
 You can render the file to create an output document 
 (in Word, PDF or HTML format) that includes the text,
@@ -15,21 +15,26 @@ the documentation in one place.
 Raw code alone doesn't mean much, especially if you 
 can't share the data along with it.
 A rendered RMarkdown data cleaning document contains the code, an explanataion of what
-the code does and why. This will include table and visualization such as boxplots, 
-which go into deciging data cleaning actions.
+the code does and why. 
+This will include the tables and visualization such as boxplots, 
+which go into deciding data cleaning actions.
 So even if you can't share your data, 
 you can share the rendered RMarkdown document, 
-and it will still be useful for others to understand the logic behind your data cleaning decisions, and to adapt the code to their own data.
+and it will still be useful for others to understand the logic behind your data
+cleaning decisions, and to adapt the code to their own data.
 - For outputs, such as reports and papers, 
 it allows me to combine the code and writing in one place.
-This means I don't have to copy and paste results into a word document every time I update my code.
+This means I don't have to copy and paste results into a word document every time I 
+update my code.
 I just re-render the output document, and all results are updated. 
 
 ## How to get started with RMarkdown
 
 This site will not go into the details of how to use RMarkdown,
-but there are many resources available online to get you started:
+as there are many resources available online to get you started:
 
 - The Carpentries have a great section on starting with RMarkdown in their R for Social Science Workshop: https://datacarpentry.org/r-socialsci/04-rmarkdown/index.html
 - RStudio has a great introduction to RMarkdown: https://rmarkdown.rstudio.com/
 - RStudio will also create a template RMarkdown file for you when you create a new RMarkdown document, which is a great way to get started.
+- This website was written RMarkdown, you can check out the
+[source code on github](https://github.com/kleuveld/r-fieldguide).

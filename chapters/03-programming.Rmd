@@ -221,8 +221,9 @@ my_plot(x1)
 Why can't it find `x1`? It's right there in the data frame!
 But when evaluating `my_plot(x1)`, R doesn't look for `x1` in the dataframe
 (why would it?),
-it looks for `x1` in the global environment. 
-So we have to make sure R waits until it's inside `ggplot()` to look for `x1` in the data frame.
+it looks for `x1` in the global environment, and it's not there. 
+So we have to make sure R waits until it's inside `ggplot()` to look for `x1` in the
+data frame.
 This is actually quite easy to do,
 simply wrap the variable name in `{{ }}` in the function body:
 
@@ -243,11 +244,13 @@ see [here](https://dplyr.tidyverse.org/articles/programming.html).
 If that's all black magic to you,
 just remember that if you want to use unquoted variable names
 in your functions, wrap them in `{{ }}` in the function body.
+Alternatively, there's something to be said for using quoted variable names in your 
+functions.
 
 
 ## Map() {#map}
 
-`map()` works just like loop, but generally faster. It takes two arguments:
+`map()` works just like a loop, but sometimes faster. It takes two arguments:
 
 - An iterable object, like a vector or list
 - A function
@@ -266,10 +269,11 @@ map(vector,sqrt)
 
 You may not quite like the fact that map returns a list, but quite a few things in
 R use lists. `modelsummary()` for example.
-Suppose I want to put all the results from `my_model()` above in a nice table.
- Suppose I want to regress the same y on
-a number of combinations of independent variables, I can put the combination of
+Suppose I want to regress the same y on
+a number of combinations of independent variables, using the `my_model()` function we made.
+I can put the combination of
 variables in a list, and then run my model for each element of the list.
+The result is a nice list that we can pipe into `modelsummary()` to get a table of results:
 
 
 
@@ -298,27 +302,28 @@ models %>%
 
 ```
 
-If you want to specify more arguments to the function you are using in `map()`,
-you can do so by using an anonymous function.
-
+What If you want to specify more arguments to the function you are using in `map()`?
 Let's say I want to calculate the mean of a number of vectors, 
-but I want to remove missing values.
+but I want to remove missing values. 
+I will have to pass two arguments to `mean()`: the vector, and `na.rm = TRUE`:
 
 
 ```{r}
  
-vectors <- list(c(1,NA,3,-99,5),
-               c(10,20,-99,30,40,50),
-               c(-99,NA,200,300))
+vectors <- 
+  list(
+    c(1,NA,3,-99,5),
+    c(10,20,-99,30,40,50),
+    c(-99,NA,200,300)
+  )
 
-# the ~ creates a purrr-style anonymous function, where .x is current element of the list
 vectors %>% 
   map(mean)
 
 
 ```
 
-That didn;t work, since mean doesn't remove NAs by default. 
+That didn't work, since mean doesn't remove NAs by default. 
 I can make a new function that does remove NAs by defaults:
 
 ```{r}
@@ -343,6 +348,20 @@ vectors %>%
 
 ```
 
+There's more ways to define this functions, but they work the same:
+
+```{r}
+
+# using \ instead of function
+vectors %>% 
+  map(function(x) mean(x, na.rm = TRUE))
+
+# using purr-style lambda functions, where .x is the current element of the vector
+vectors %>% 
+  map(~mean(.x, na.rm = TRUE))
+```
+
+
 Note it will be quite difficult to use `map()` with data frame columns to edit 
 multiple variables. 
 For this, use  `across()`, as seen in the [data cleaning chapter](#across) 
@@ -362,14 +381,14 @@ First, I put the parameters of each specification in a data frame like this:
 
 ```{r}
 
-specs <- 
-tribble(
-  ~label, ~depvar, ~controls,
-  "X1 only" ,"y", "x1",
-  "X2 only" ,"y", "x2",
-   "X3 only" , "y","x3",
-  "Full" ,"y", c("x1", "x2", "x3")
-)
+specs <-
+  tribble(
+    ~label, ~depvar, ~controls,
+    "X1 only" ,"y", "x1",
+    "X2 only" ,"y", "x2",
+    "X3 only" , "y","x3",
+    "Full" ,"y", c("x1", "x2", "x3")
+  )
 
 
 ```
@@ -393,7 +412,7 @@ So I need to convert the lists to a string:
 `paste(controls, collapse = ",")` does that, but it will take the entire column;
 and I want it for each cell individually.
 To do that, I can either use `rowwise()`, 
-or pass the column to `map()`. 
+or pass the column to `map()`, which will iterate over each row. 
 The `map_chr()` variant is especially handy, 
 as it outputs a vector of strings (rather than a list),
 which is what we need for `mutate` to work.
@@ -425,7 +444,7 @@ Notes:
 
 This particular function uses only 2 arguments, 
 so `map2()` would have worked fine here as well, 
-but this can be more easily expanded to more complex things than `map2()`.
+but my approach here can be more easily expanded to more complex things than `map2()`.
 
 
 ## Making functions re-usable with box
