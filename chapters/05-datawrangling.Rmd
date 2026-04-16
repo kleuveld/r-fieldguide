@@ -1,4 +1,4 @@
-# 4. Data Cleaning {#datawrangling}
+# 5. Data Cleaning {#datawrangling}
 
 Data from the field never quite comes in the form you want,
 and the form you want your data in changes depending on what you want to do with it.
@@ -66,9 +66,11 @@ raw_data <-
 # Paradata 
 paradata <- 
   raw_data %>% 
-  mutate(day = day(interview_date),
-         month = month(interview_date),
-         year = year(interview_date)) %>% 
+  mutate(
+    day = day(interview_date),
+    month = month(interview_date),
+    year = year(interview_date)
+  ) %>% 
   filter(village == "Chirodzo") %>%
   filter(interview_date > "2016-11-16" & interview_date < "2017-01-01") %>% 
   select(key_ID, interview_date, day, month, year, village)
@@ -76,33 +78,40 @@ paradata <-
 # housing
 housing <- 
   raw_data %>% 
-  mutate(people_per_room = no_membrs / rooms,
-         respondent_wall_type = as_factor(respondent_wall_type),
-         respondent_wall_type = fct_recode(respondent_wall_type, 
-                                           "Burned bricks" = "burntbricks",
-                                           "Mud Daub" = "muddaub",
-                                           "Sun bricks" = "sunbricks")) %>% 
+  mutate(
+    people_per_room = no_membrs / rooms,
+    respondent_wall_type = as_factor(respondent_wall_type),
+    respondent_wall_type = fct_recode(
+      respondent_wall_type,
+      "Burned bricks" = "burntbricks",
+      "Mud Daub" = "muddaub",
+      "Sun bricks" = "sunbricks"
+    )
+  ) %>% 
   select(key_ID, no_membrs, rooms, people_per_room, respondent_wall_type)
-      
+
 # conflict
 conflict <- 
   raw_data %>% 
-  mutate(conflict_yn = case_when(affect_conflicts == "frequently" ~ 1,
-                                 affect_conflicts == "more_once" ~ 1,
-                                 affect_conflicts == "once" ~ 1,
-                                 affect_conflicts == "never" ~ 0,
-                                 .default = NA)) %>% 
+  mutate(
+    conflict_yn = case_when(
+    affect_conflicts == "frequently" ~ 1,
+    affect_conflicts == "more_once" ~ 1,
+    affect_conflicts == "once" ~ 1,
+    affect_conflicts == "never" ~ 0,
+    .default = NA)
+  ) %>% 
   select(key_ID, conflict_yn)
 
 
 # join data
 clean_data <-
   paradata %>% 
-  left_join(housing) %>% 
+  left_join(housing) %>%
   left_join(conflict)
 
 # saving clean data for later use
-clean_data %>% saveRDS(here("data/SAFI_cleaner.rds")) 
+clean_data %>% saveRDS(here("data/SAFI_cleaner.rds"))
 
 ```
 
@@ -124,7 +133,7 @@ we can make a boxplot:
 ```{r }{}
 
 raw_data %>% 
-  ggplot(aes(x = years_liv)) + 
+  ggplot(aes(x = years_liv)) +
   geom_boxplot()
 
 
@@ -139,9 +148,13 @@ just so that the few high values don't affect our analysis too much.
 years_liv_clean <-
   raw_data %>%
   select(key_ID, years_liv) %>% 
-  mutate(years_liv = if_else(years_liv > quantile(years_liv, 0.95, na.rm = TRUE),
-                             quantile(years_liv, 0.95, na.rm = TRUE),
-                             years_liv))
+  mutate(
+    years_liv = if_else(
+      years_liv > quantile(years_liv, 0.95, na.rm = TRUE),
+      quantile(years_liv, 0.95, na.rm = TRUE),
+      years_liv
+    )
+  )
 
 ```
 
@@ -179,16 +192,20 @@ be `-99`, which should be considered missing.
 
 set.seed(1)
 long_data <- 
-    read_csv(here("data/SAFI_clean.csv"), na = "NULL") %>%
-    select(key_ID,no_membrs ) %>%
-    uncount(no_membrs) %>%
-    group_by(key_ID) %>% 
-    mutate(member_ID = row_number()) %>%
-    rowwise() %>%
-    mutate(female = sample(0:1,1),
-           age = case_when(member_ID == 1 ~ sample(18:86,1),
-                          .default = sample(c(0:86,-99),1))) %>%
-    ungroup()
+  read_csv(here("data/SAFI_clean.csv"), na = "NULL") %>%
+  select(key_ID,no_membrs ) %>%
+  uncount(no_membrs) %>%
+  group_by(key_ID) %>% 
+  mutate(member_ID = row_number()) %>%
+  rowwise() %>%
+  mutate(
+    female = sample(0:1,1),
+    age = case_when(
+      member_ID == 1 ~ sample(18:86,1),
+      .default = sample(c(0:86,-99),1)
+    )
+  ) %>%
+  ungroup()
 
 long_data %>% glimpse()
 
@@ -209,10 +226,12 @@ For this, we use the `pivot_wider()` function (in Stata this would be called res
 ```{r }
 
 wide_data <-
-    long_data %>% 
-    pivot_wider(names_from = member_ID,
-                values_from = !ends_with("_ID"),
-                names_vary = "slowest") 
+  long_data %>% 
+  pivot_wider(
+    names_from = member_ID,
+    values_from = !ends_with("_ID"),
+    names_vary = "slowest"
+  ) 
 
 wide_data %>% glimpse()
 
@@ -264,11 +283,13 @@ and `names_sep` options:
 ```{r }
 
 wide_data %>%
-    pivot_longer(!key_ID,
-                 names_to = c(".value", "member_ID"),
-                 names_sep = "_",
-                 values_drop_na = TRUE,
-                 names_transform = list(member_ID = as.integer))
+  pivot_longer(
+    cols = !key_ID,
+    names_to = c(".value", "member_ID"),
+    names_sep = "_",
+    values_drop_na = TRUE,
+    names_transform = list(member_ID = as.integer)
+  )
 
 ```
 
@@ -324,8 +345,8 @@ The four join functions work as follows:
 
 There's also filtering joins:
 
-    - `semi_join(x,y)` will only keep area B, but won't add columns to X
-    - `anti_join(x,y)`, will only keep area A, and won't add columns to X.
+- `semi_join(x,y)` will only keep area B, but won't add columns to X
+- `anti_join(x,y)`, will only keep area A, and won't add columns to X.
 
 In our case, the data sets match perfectly, i.e. we only have an area B, 
 so there is no practical difference between the four regular joins. 
@@ -336,7 +357,7 @@ To merge the roster to the household data, we use the join_by function:
 ```{r eval=TRUE,echo=TRUE,warning=TRUE,error=TRUE,message=TRUE}
 
 read_csv(here("data/SAFI_clean.csv"), na = "NULL") %>%
-left_join(wide_data)
+  left_join(wide_data)
 
 ```
 
@@ -404,25 +425,26 @@ We could write this:
 ```{r}
 
 wide_data %>%
-  mutate(age_1 = if_else(age_1 == -99,NA,age_1),
-          age_2 = if_else(age_2 == -99,NA,age_2),
-          age_3 = if_else(age_3 == -99,NA,age_3),
-          age_4 = if_else(age_4 == -99,NA,age_4),
-          age_5 = if_else(age_5 == -99,NA,age_5),
-          age_6 = if_else(age_6 == -99,NA,age_6),
-          age_7 = if_else(age_7 == -99,NA,age_7),
-          age_8 = if_else(age_8 == -99,NA,age_8),
-          age_9 = if_else(age_9 == -99,NA,age_9),
-          age_10 = if_else(age_10 == -99,NA,age_10),
-          age_11 = if_else(age_11 == -99,NA,age_11),
-          age_12 = if_else(age_12 == -99,NA,age_12),
-          age_13 = if_else(age_13 == -99,NA,age_13),
-          age_14 = if_else(age_14 == -99,NA,age_14),
-          age_15 = if_else(age_15 == -99,NA,age_15),
-          age_16 = if_else(age_16 == -99,NA,age_16),
-          age_17 = if_else(age_17 == -99,NA,age_17),
-          age_18 = if_else(age_18 == -99,NA,age_18),
-          age_19 = if_else(age_19 == -99,NA,age_19)
+  mutate(
+    age_1 = if_else(age_1 == -99, NA, age_1),
+    age_2 = if_else(age_2 == -99, NA, age_2),
+    age_3 = if_else(age_3 == -99, NA, age_3),
+    age_4 = if_else(age_4 == -99, NA, age_4),
+    age_5 = if_else(age_5 == -99, NA, age_5),
+    age_6 = if_else(age_6 == -99, NA, age_6),
+    age_7 = if_else(age_7 == -99, NA, age_7),
+    age_8 = if_else(age_8 == -99, NA, age_8),
+    age_9 = if_else(age_9 == -99, NA, age_9),
+    age_10 = if_else(age_10 == -99, NA, age_10),
+    age_11 = if_else(age_11 == -99, NA, age_11),
+    age_12 = if_else(age_12 == -99, NA, age_12),
+    age_13 = if_else(age_13 == -99, NA, age_13),
+    age_14 = if_else(age_14 == -99, NA, age_14),
+    age_15 = if_else(age_15 == -99, NA, age_15),
+    age_16 = if_else(age_16 == -99, NA, age_16),
+    age_17 = if_else(age_17 == -99, NA, age_17),
+    age_18 = if_else(age_18 == -99, NA, age_18),
+    age_19 = if_else(age_19 == -99, NA, age_19)
   )
 
 ```
@@ -445,8 +467,12 @@ cleanmissing <- function(x) {
 
 
 wide_data %>%
-  mutate(across(.cols = starts_with("age_"),
-                .fns = cleanmissing))
+  mutate(
+    across(
+      .cols = starts_with("age_"),
+      .fns = cleanmissing
+    )
+  )
 
 ```
 
@@ -465,8 +491,12 @@ anywhere else:
 ```{r eval=TRUE,echo=TRUE,warning=TRUE,error=TRUE,message=TRUE}
 
 wide_data %>%
-    mutate(across(.cols = starts_with("age_"),
-                  .fns = function(var) if_else(var == -99,NA, var)))
+  mutate(
+    across(
+      .cols = starts_with("age_"),
+      .fns = function(var) if_else(var == -99,NA, var)
+    )
+  )
 
 ```
 
@@ -548,14 +578,14 @@ so that we have one `age` variable, and no need to use across.
 ```{r}
 
 wide_data %>%
-    pivot_longer(
+  pivot_longer(
     !key_ID,
     names_to = c(".value", "member_ID"),
     names_sep = "_",
     values_drop_na = TRUE,
     names_transform = list(member_ID = as.integer)
   ) %>%
-  mutate(age = if_else(age == -99,NA,age))  %>% 
+  mutate(age = if_else(age == -99,NA,age)) %>%
   pivot_wider(names_from = member_ID,
               values_from = !ends_with("_ID"),
               names_vary = "slowest") 
@@ -577,9 +607,11 @@ expenditures_raw <-
   select(key_ID) %>%
 
   # generate some repeated questions
-  mutate(expenditures_fertilizer = rnorm(n = nrow(.)),
-         expenditures_seeds = rnorm(n = nrow(.)),
-         expenditures_tools = rnorm(n = nrow(.))) 
+  mutate(
+    expenditures_fertilizer = rnorm(n = nrow(.)),
+    expenditures_seeds = rnorm(n = nrow(.)),
+    expenditures_tools = rnorm(n = nrow(.))
+  ) 
 
 ```
 
@@ -641,13 +673,19 @@ To compute means and sums across rows in R, use `rowSums()` and `rowMeans()`:
 ```{r}
 
 wide_data %>%
-  mutate(across(.cols = starts_with("age_"),
-                .fn   = ~if_else(.x == -99,NA,.x))) %>%
-  mutate(mean_age = rowMeans(across(starts_with("age_")),
+  mutate(
+    across(
+      .cols = starts_with("age_"),
+      .fn   = ~if_else(.x == -99, NA, .x)
+    )
+  ) %>%
+  mutate(
+    mean_age = rowMeans(across(starts_with("age_")),
                           na.rm=TRUE),
-         num_women =  rowSums(across(starts_with("female_")),
-                              na.rm=TRUE),
-         hh_size = rowSums(!is.na(across(starts_with("female_"))))) %>%
+    num_women =  rowSums(across(starts_with("female_")),
+                        na.rm=TRUE),
+    hh_size = rowSums(!is.na(across(starts_with("female_"))))
+  ) %>%
   select(key_ID,hh_size,num_women, mean_age) %>%
   ungroup()
 
@@ -655,32 +693,64 @@ wide_data %>%
 ```
 
 If you want  to compute something other than means or sums, 
-you can use `rowwise()` and`c_across()`
+you can either use `rowwise()` and`c_across()`, 
+or -- if speed is a concern -- `pmap()` 
 to get a bunch of variables into any function you want:
 
 ```{r eval=TRUE,echo=TRUE,warning=TRUE,error=TRUE,message=TRUE}
 
 wide_data %>%
-    mutate(across(.cols = starts_with("age_"),
-                  .fn = ~if_else(.x == -99,NA,.x))) %>%
-    rowwise() %>%
-    mutate(max_age = max(c_across(starts_with("age_")),
-                           na.rm=TRUE),
-           sd_age =  sd(c_across(starts_with("age_")),
-                            na.rm=TRUE)) %>%
-    select(key_ID,max_age,sd_age) %>%
-    ungroup()
+  mutate(
+    across(
+      .cols = starts_with("age_"),
+      .fn = ~if_else(.x == -99, NA, .x)
+    )
+  ) %>%
+
+  # compute the max using rowwise and c_across
+  rowwise() %>%
+  mutate(
+    max_age = max(
+      c_across(starts_with("age_")),
+      na.rm=TRUE
+    )
+  ) %>%
+  ungroup() %>%
+
+  # compute the sd using pmap and an anonymous function
+  mutate(
+    sd_age = pmap_dbl(
+      pick(starts_with("age_")),
+      \(...) sd(c(...), na.rm = TRUE)
+    )
+  ) %>%
+  str()
+
+
+
 
 
 
 ```
 
-`rowwise()` ensures all summaries are computed per row, and `c_across()`
-allows you to use [tidy select](https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html) syntax within any function.
+Above, I compute max_age using `rowwise()` and `c_across()`, and standard deviation using `pmap()`.
 
+`rowwise()` ensures all summaries are computed per row, and `c_across()`
+allows you to use [tidy select](https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html) syntax within any function. 
 Do note that while this is very flexible, it can be EXTREMELY slow, 
 as all computations are done row by row.
-If you have a large dataset, it's probably faster to pivot the data to long first.
+
+`pmap()` is vectorized, so may be faster, but less easy to read.
+Note that `pmap_dbl()` outputs a vector of numbers (doubles) has two arguments:
+
+- The first is the iterabe object, in this case the current data frame 
+with only the age variables selected. 
+Within dplyr verbs such as mutate, you can use `pick()` to create such a dataframe.
+- The second is an anonymous function (here we use the `\` shorthand to declare one),
+which takes all the variabes in the data frame as its arguments using `(...)`.
+
+Another useful way to compute row-wise summary statistics,
+is to pivot to long first, and then just use plain-old `summarize()`.
 
 ### Renaming many variables
 

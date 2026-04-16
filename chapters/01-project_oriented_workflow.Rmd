@@ -1,6 +1,5 @@
-# 1. Reproducible Workflows
-
-## Introduction
+# (PART\*) Part 1: Best practices {-}
+# 1. Project-Oriented Workflows
 
 The most important aspect of reproducibility is not the R code itself,
 but the way you organize your work.
@@ -20,13 +19,13 @@ Do note that there is an up-front cost in setting up such workflows,
 so plan for that, making sure all collaborators are on-board with how you approach 
 the organization of your code and data.
 
-This chapter discusses two R-specific aspects of reproducible workflows:
-projects and the renv package.
-I also recommend using git, but that goes beyond the scope of this cookbook.
+This chapter discusses two R-specific aspects of project-oriented workflows:
+the project folder and the renv package.
+I also recommend using git, but that goes beyond the scope of this field guide.
 
 
 
-## Projects
+## Project folders
 
 Oftentimes, you will see R scripts start with `setwd()`.
 This means the script is no longer reproducible, 
@@ -57,7 +56,7 @@ but most will support some form of project-oriented workflow.
 RStudio, VSCode and Sublime Text all have built-in support for projects.
 And though they may differ in details,
 they all have in common that when you open a project, 
-the working directory is properly set to the project's root folder,,
+the working directory is properly set to the project's root folder,
 and you're working with a clean R environment
 unaffected by whatever other thing you were doing in R just before you switched
 to work on your current project.
@@ -66,7 +65,10 @@ As long as you make sure that all scripts and data are in subfolders of your pro
 you can reference files using relative paths,
 i.e. paths that start from the project root folder.
 These relative paths will work on any machine.
-
+How exactly you organize this project folder,
+and how you name your files etc., is entirely up to you.
+However, if the structure is complex, 
+do use a README file to point the way for others to the files they need.
 
 ### Here
 
@@ -85,7 +87,7 @@ then if it can't find the file, recursively looks in the parent folder
 until it's found.
 
 You can then reference files using `here("path/to","yourfile")`.
-This path will work wherever you move your file,
+This path will work wherever the calling script,
 which is especially useful for RMarkdown files, 
 which tend to ignore your project root folder.
 
@@ -97,7 +99,7 @@ but sometimes it can't be helped.
 For example, 
 your project lives on git, 
 but you need a file from your Teams environment 
-(research data is not supposed to be on git).
+(at WUR, research data is not supposed to be on git).
 The bad way to solve this is to hardcode the path to your teams folder in your script.
 This will mean your collaborators (and you, if you change devices) may not be
 able to use the script, even if they have access to Teams.
@@ -128,7 +130,8 @@ you can just use `teams_path` wherever you had wanted to use the path to teams,
 and it should work for anyone,
 regardless of the exact path to their teams folder.
 This does take a little coordination, 
-as you should make sure everyone has a .Renviron set.
+as you should make sure everyone has a .Renviron set,
+so make sure to describe this in your README file.
 
 ## renv
 
@@ -136,7 +139,7 @@ The power of R lies in the many packages that are available.
 However, here also lies a risk:
 there's no guarantee packages keep working the way they work now,
 meaning that any update may break your work.
-However, you shouldn't stay at an old version of a package for all your work,
+However, you should not stay at an old version of a package for all your work,
 just so that one old project of yours will keep working.
 What if you want to collaborate with someone using a newer version of that 
 package?

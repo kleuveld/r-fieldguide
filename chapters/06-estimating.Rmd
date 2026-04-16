@@ -1,4 +1,4 @@
-# 5. Estimating and reporting {#reporting}
+# 6. Estimating and reporting {#reporting}
 
 This chapter uses a large number of packages, and the SAFI data 
 set, so make sure
@@ -620,7 +620,7 @@ bit of the column names.
 
 For more control, look into [patchwork](https://patchwork.data-imaginist.com/).
 
-### Stacked bar plots in WUR style
+### Stacked bar plots
 
 Stacked bar plots are useful to show distributions of categorical variables.
 Here is a function that makes a stacked bar plot, with percentages on the x-axis,
@@ -628,7 +628,7 @@ counts inside the bars, and a legend at the bottom.
 
 It uses a bunch of techniques:
 
-- The wur household is applied using `[ggthemewur](https://git.wur.nl/wmrkdown/ggthemewur)`.
+<!-- - The wur household is applied using `[ggthemewur](https://git.wur.nl/wmrkdown/ggthemewur)`. -->
 - The plot is complex, but because it is contained in a reusable function,
 it is easy to (re-)use.
 - Category counts are computed, and added to factor labels, using `count_label()`.
@@ -639,7 +639,7 @@ it is easy to (re-)use.
 
 ```{r}
 
-library(ggthemewur)
+#library(ggthemewur)
 
 stacked_bar_plot <- function(df, by, fill) {
   # outputs a stacked bar chart
@@ -650,8 +650,8 @@ stacked_bar_plot <- function(df, by, fill) {
     ggplot(aes(y = {{ by }}, fill = {{ fill }})) +
     geom_bar(position = position_fill(reverse = TRUE)) +
     labs(x= "") +
-    theme_wur() +
-    scale_fill_wur_discrete() +
+    #theme_wur() +
+    #scale_fill_wur_discrete() +
     geom_text(
       stat = "count", 
       # for %: after_stat(scales::percent(count / sum(count),accuracy=1))
@@ -701,8 +701,10 @@ and by saving them in a function, you can reuse them easily.
 ### Lollipop plot
 
 A lollipop plot is a nice alternative to a bar chart. Here is an example. 
-It uses `reorder` to put the longest lollipops are at the top, and
-and the `brewur()` function to select four colors from the WUR theme. 
+It uses `reorder` to put the longest lollipops are at the top. 
+
+<!-- , and
+and the `brewur()` function to select four colors from the WUR theme.  -->
 
 I also quite like `theme_ipsum` from `hrbrthemes`:
 
@@ -728,7 +730,7 @@ read_csv(here("data/SAFI_clean.csv"), na = "NULL") %>%
       aes(x = Count, y = items_owned), 
       size = 4, 
       position = position_dodge(width = 0.5),
-      color = brewur()[[1]]
+      # color = brewur()[[1]]
     ) +
     theme_ipsum() + 
     scale_x_continuous(labels = scales::percent_format()) +

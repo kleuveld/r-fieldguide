@@ -10,8 +10,9 @@ run_diagnosis <- FALSE
 
 ```
 
+# (PART\*) Part 2: the research life cycle {-}
 
-# 3. Power Analysis using DeclareDesign {#declaredesign}
+# 4. DeclareDesign {#declaredesign}
 
 There's a lot that goes into research design, 
 but here we focus on one thing that can be done well in R: power calculations.

@@ -1,19 +1,22 @@
-# 2. Programming with R {#programming}
+# 3. Programming with R {#programming}
 
 Before diving into specific R techniques about managing social science research,
 this chapter will cover some general programming concepts that will help you 
 make your R code more reusable. 
 These techniques help you move away from the specifics of your data,
 and make generalizable solutions that you can then reapply to other data sets.
-This also prevents mistakes, 
-where you copy-paste code and fail to make the necessary changes.
-But perhaps most importantly, it saves you time: these concepts allow you to do 
-a lot of work with just a few simple building blocks of code.
+There's three main advantages this:
+First, it saves you time, as you can reuse code snippets you often need, and you don't have to copy-paste code every time you want to do something similar.
+Second, it makes your code more organized and readable, 
+as you can give your functions meaningful names, 
+and you don't have to scroll through long scripts to find the code you need.
+But most importantly, it prevents mistakes:
+every time you copy-paste code, you run the risk of failing to make the necessary changes.
 
 This chapter will cover ways to iterate code 
 (using either loops or the `map()` function),
 functions (which will let you easily reuse code snippets you often need),
-and making code more reusable with the `box` package.
+and making functions more reusable with the `box` package.
 
 ## Loops
 
@@ -375,7 +378,7 @@ I can print this in my markdown file, so it's easily seen what I am doing:
 
 ```{r}
 library(flextable)
-specs %>% rowwise %>% mutate(controls = paste(controls, collapse = ",")) 
+specs %>% 
   mutate(
     controls = map_chr(controls, ~ paste(.x, collapse = ","))
   ) %>% 
@@ -549,22 +552,22 @@ Of course you are no longer working project-oriented:
 your box modules aren't in your project folder!
 
 If you want to use box modules within your project folder, 
-best to add the root folder as search path:
+best to use the project root folder as search path:
 
 ```{r, eval=FALSE,}
 
-options('box.path' = c(here::here(), getOption('box.path'))
+options('box.path' = here::here())
 
 ```
 
-The function `getOption('box.path')` gets your current box search path,
-and `c()` combines it with your project root folder returned by `here()`.
+You can now store your box_modules in a folder called `box_modules`
+and use  `box::use(box_modules/functions)` in any script in your project.
 
 One way I like to organize my box modules
 is to have them in a git repository
 and use it as a [submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules) in my projects.
 That way you can have a specific version or branch of all your box modules in every 
 project.
-You can also merge changes you make to you box modules of one project, 
+You can also merge changes you make to your box modules of one project, 
 back to all your other active projects.
 It's fantastic, but a bit finnicky to set up.

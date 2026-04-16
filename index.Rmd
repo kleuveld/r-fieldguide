@@ -1,6 +1,6 @@
 --- 
 title: "Reproducible and reusable social science with R: a field guide"
-author: "Koen"
+author: "Koen Leuveld-Postma"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
@@ -33,35 +33,67 @@ library(httpgd)
 
 # Introduction
 
-## About
-
 This website is intended as a quick reference for some techniques 
 that I think people may need to keep their code reproducible
 when cleaning, analyzing, or presenting data. 
-For a more basic intro to R try 
+The main audience is me, but I think it may be useful for other people as well,
+especialy those doing work similar to me: 
+analyzing household survey data.
+It is not intended as a quick-start guide to R. 
+For that, try 
 [the R for Social Science Data Carpentry Workshop](https://datacarpentry.org/r-socialsci/)
 , on which some of this website is based.
 
-The site covers advice on workflows, 
-general R techniques such as loops and functions that facilitate reproducibility.
-Then the following chapters each cover a part of the research cycle:
-design, data cleaning and data analysis (including reporting the results). 
-For each, there's specific code examples using survey data. 
 
-## Setting up {#setup}
+## Why reproducibility?
 
-This book uses the SAFI data set, and a large number of libraries.
-Everything is available on [github](https://github.com/kleuveld/r_cheatsheet),
-and cloning that repo will ensure you can install all packages through renv 
-(see Chapter 1).
+My work is often one-off: I analyze the data, write the report or paper, 
+and never look back.
+Why would I care about reproducibility then? 
+Reproducibility ensures that your analysis can be independently verified and built upon by others. It is critical for:
 
-Throughout this book, I will mostly make use of `tidyverse` packages.
-While there are alternatives that have advantages of this, 
+- **Scientific Integrity:** Validating research findings.
+- **Collaboration:** Enabling team members to understand and extend your work.
+- **Transparency:** Providing clear documentation of methods and results.
+- **Efficiency:** Reducing errors and saving time by automating report generation.
+
+Without reproducibility, 
+research and analysis can become opaque, error-prone, and difficult to validate.
+In short: you run the risk of sloppy science.
+
+## Packages used in this site
+
+Throughout this site, I will mostly make use of `tidyverse` packages.
+While there are alternatives,
 such as `data.table` which is faster,
-`tidyverse` makes easily readable code, 
+`tidyverse` makes writing and reading code easy and quick,
 which is imortant from a reproducibility perspective.
 Moreover, we are not so concerned with performance, 
 since household survey datasets are almost never large enough for that matter.
+
+To provide easy access to the pacakges used in this site, 
+as well as all data,
+everything is available on [github](https://github.com/kleuveld/r_cheatsheet).
+So if you want all code and data follow the following steps:
+
+- Open RStudio
+- Click file, and select "New project..."
+- Select Version Control, Git, and enter `https://github.com/kleuveld/r_cheatsheet` 
+as the repository URL.
+- The Project will open.
+- In the console, type `renv::restore()` to instal all packages.
+
+(See how easy that was? Reproducible workflows, baby!)
+
+## Road map
+
+The site is organized in two parts:
+the first cover advice on general best practives: 
+project oriented workflows, general R techniques such as loops and functions that facilitate reproducibility and RMarkdown.
+The chapters in part two each cover a part of the research cycle:
+design, data cleaning and data analysis (including reporting the results). 
+For each, there's specific code examples using survey data. 
+
 
 
 
