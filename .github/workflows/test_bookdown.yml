@@ -1,0 +1,30 @@
+on:
+  push:
+     branches:
+       - test
+
+permissions:
+  contents: write
+  packages: read # Grant permission to read private container images
+
+name: Render book and do not deploy
+
+jobs:
+  bookdown:
+        name: Compile rmarkdown
+        runs-on: ubuntu-latest
+        steps:
+          - name: Check out the repo
+            uses: actions/checkout@v2
+
+
+          - name: Run the build process with Docker
+            run: docker run --rm  --user "$(id -u):$(id -g)" -v ${{ github.workspace }}:/doc ghcr.io/kleuveld/koentainr:0.3.r_cheatsheet index.Rmd
+
+          # - name: Deploy to GitHub Pages
+          #   uses: Cecilapp/GitHub-Pages-deploy@v3
+          #   env:
+          #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          #   with:
+          #    email: koen.leuveld@outlook.com
+          #    build_dir: output/
