@@ -11,33 +11,33 @@ name: Render book and do not deploy
 
 jobs:
   bookdown:
-        name: Compile rmarkdown
-        runs-on: ubuntu-latest
-        steps:
-          - name: Check out the repo
-            uses: actions/checkout@v2
+    name: Compile rmarkdown
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
 
+      - name: Render book (explicit command)
+        timeout-minutes: 20
+        run: |
+          set -euxo pipefail
+          docker version
+          docker info
 
-          - name: Render book (explicit command)
-            timeout-minutes: 20
-            run: |
+          docker run --rm \
+            --user "$(id -u):$(id -g)" \
+            -v "${{ github.workspace }}:/doc" \
+            -w /doc \
+            ghcr.io/kleuveld/koentainr:0.3.r_cheatsheet \
+            bash -lc '
               set -euxo pipefail
-              docker version
-              docker info
+              echo "Container id:"; id
+              echo "pwd:"; pwd
+              echo "list /doc:"; ls -la /doc
+              R -q -e "bookdown::render_book(\"index.Rmd\", quiet = FALSE)"
+            '
 
-              docker run --rm \
-                --user "$(id -u):$(id -g)" \
-                -v "${{ github.workspace }}:/doc" \
-                -w /doc \
-                ghcr.io/kleuveld/koentainr:0.3.r_cheatsheet \
-                bash -lc '
-                  set -euxo pipefail
-                  echo "Container id:"; id
-                  echo "pwd:"; pwd
-                  echo "list /doc:"; ls -la /doc
-                  R -q -e "bookdown::render_book(\"index.Rmd\", quiet = FALSE)"
-
-          # - name: Deploy to GitHub Pages
+      # - name: Deploy to GitHub Pages
           #   uses: Cecilapp/GitHub-Pages-deploy@v3
           #   env:
           #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
