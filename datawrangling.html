@@ -4,26 +4,26 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4. Data Cleaning | Reproducible and reusable social science with R: a field guide</title>
+  <title>5. Data Cleaning | Reproducible and reusable social science with R: a field guide</title>
   <meta name="description" content="This page contains tips to make your R code reproducible." />
   <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4. Data Cleaning | Reproducible and reusable social science with R: a field guide" />
+  <meta property="og:title" content="5. Data Cleaning | Reproducible and reusable social science with R: a field guide" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This page contains tips to make your R code reproducible." />
   <meta name="github-repo" content="kleuveld/r_cheatsheet" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4. Data Cleaning | Reproducible and reusable social science with R: a field guide" />
+  <meta name="twitter:title" content="5. Data Cleaning | Reproducible and reusable social science with R: a field guide" />
   
   <meta name="twitter:description" content="This page contains tips to make your R code reproducible." />
   
 
-<meta name="author" content="Koen" />
+<meta name="author" content="Koen Leuveld-Postma" />
 
 
-<meta name="date" content="2026-02-20" />
+<meta name="date" content="2026-04-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -154,25 +154,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a>
 <ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about"><i class="fa fa-check"></i>About</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#setup"><i class="fa fa-check"></i>Setting up</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#why-reproducibility"><i class="fa fa-check"></i>Why reproducibility?</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#packages-used-in-this-site"><i class="fa fa-check"></i>Packages used in this site</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#road-map"><i class="fa fa-check"></i>Road map</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="reproducible-workflows.html"><a href="reproducible-workflows.html"><i class="fa fa-check"></i>1. Reproducible Workflows</a>
+<li class="part"><span><b>Part 1: Best practices</b></span></li>
+<li class="chapter" data-level="" data-path="project-oriented-workflows.html"><a href="project-oriented-workflows.html"><i class="fa fa-check"></i>1. Project-Oriented Workflows</a>
 <ul>
-<li class="chapter" data-level="" data-path="reproducible-workflows.html"><a href="reproducible-workflows.html#introduction-1"><i class="fa fa-check"></i>Introduction</a></li>
-<li class="chapter" data-level="" data-path="reproducible-workflows.html"><a href="reproducible-workflows.html#projects"><i class="fa fa-check"></i>Projects</a>
+<li class="chapter" data-level="" data-path="project-oriented-workflows.html"><a href="project-oriented-workflows.html#project-folders"><i class="fa fa-check"></i>Project folders</a>
 <ul>
-<li class="chapter" data-level="" data-path="reproducible-workflows.html"><a href="reproducible-workflows.html#here"><i class="fa fa-check"></i>Here</a></li>
-<li class="chapter" data-level="" data-path="reproducible-workflows.html"><a href="reproducible-workflows.html#using-machine-specific-paths"><i class="fa fa-check"></i>Using machine-specific paths</a></li>
+<li class="chapter" data-level="" data-path="project-oriented-workflows.html"><a href="project-oriented-workflows.html#here"><i class="fa fa-check"></i>Here</a></li>
+<li class="chapter" data-level="" data-path="project-oriented-workflows.html"><a href="project-oriented-workflows.html#using-machine-specific-paths"><i class="fa fa-check"></i>Using machine-specific paths</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="reproducible-workflows.html"><a href="reproducible-workflows.html#renv"><i class="fa fa-check"></i>renv</a>
+<li class="chapter" data-level="" data-path="project-oriented-workflows.html"><a href="project-oriented-workflows.html#renv"><i class="fa fa-check"></i>renv</a>
 <ul>
-<li class="chapter" data-level="" data-path="reproducible-workflows.html"><a href="reproducible-workflows.html#starting-a-project-with-renv"><i class="fa fa-check"></i>Starting a project with Renv</a></li>
-<li class="chapter" data-level="" data-path="reproducible-workflows.html"><a href="reproducible-workflows.html#installing-new-packages-with-renv"><i class="fa fa-check"></i>Installing new packages with Renv</a></li>
-<li class="chapter" data-level="" data-path="reproducible-workflows.html"><a href="reproducible-workflows.html#restoring-a-project"><i class="fa fa-check"></i>Restoring a project</a></li>
+<li class="chapter" data-level="" data-path="project-oriented-workflows.html"><a href="project-oriented-workflows.html#starting-a-project-with-renv"><i class="fa fa-check"></i>Starting a project with Renv</a></li>
+<li class="chapter" data-level="" data-path="project-oriented-workflows.html"><a href="project-oriented-workflows.html#installing-new-packages-with-renv"><i class="fa fa-check"></i>Installing new packages with Renv</a></li>
+<li class="chapter" data-level="" data-path="project-oriented-workflows.html"><a href="project-oriented-workflows.html#restoring-a-project"><i class="fa fa-check"></i>Restoring a project</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="programming.html"><a href="programming.html"><i class="fa fa-check"></i>2. Programming with R</a>
+<li class="chapter" data-level="" data-path="rmarkdown.html"><a href="rmarkdown.html"><i class="fa fa-check"></i>2. RMarkdown</a>
+<ul>
+<li class="chapter" data-level="" data-path="rmarkdown.html"><a href="rmarkdown.html#how-to-get-started-with-rmarkdown"><i class="fa fa-check"></i>How to get started with RMarkdown</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="programming.html"><a href="programming.html"><i class="fa fa-check"></i>3. Programming with R</a>
 <ul>
 <li class="chapter" data-level="" data-path="programming.html"><a href="programming.html#loops"><i class="fa fa-check"></i>Loops</a></li>
 <li class="chapter" data-level="" data-path="programming.html"><a href="programming.html#functions"><i class="fa fa-check"></i>Functions</a>
@@ -184,7 +189,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="programming.html"><a href="programming.html#other-variants-of-map"><i class="fa fa-check"></i>Other variants of <code>map()</code></a></li>
 <li class="chapter" data-level="" data-path="programming.html"><a href="programming.html#making-functions-re-usable-with-box"><i class="fa fa-check"></i>Making functions re-usable with box</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="declaredesign.html"><a href="declaredesign.html"><i class="fa fa-check"></i>3. Power Analysis using DeclareDesign</a>
+<li class="part"><span><b>Part 2: phases of your research</b></span></li>
+<li class="chapter" data-level="" data-path="declaredesign.html"><a href="declaredesign.html"><i class="fa fa-check"></i>4. Design</a>
 <ul>
 <li class="chapter" data-level="" data-path="declaredesign.html"><a href="declaredesign.html#simple-power-calculation"><i class="fa fa-check"></i>Simple Power Calculation</a>
 <ul>
@@ -200,7 +206,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="declaredesign.html"><a href="declaredesign.html#power"><i class="fa fa-check"></i>Power</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="datawrangling.html"><a href="datawrangling.html"><i class="fa fa-check"></i>4. Data Cleaning</a>
+<li class="chapter" data-level="" data-path="datawrangling.html"><a href="datawrangling.html"><i class="fa fa-check"></i>5. Data Cleaning</a>
 <ul>
 <li class="chapter" data-level="" data-path="datawrangling.html"><a href="datawrangling.html#the-basic-pattern"><i class="fa fa-check"></i>The basic pattern</a></li>
 <li class="chapter" data-level="" data-path="datawrangling.html"><a href="datawrangling.html#using-plots-to-identify-data-issues-reproducibly"><i class="fa fa-check"></i>Using plots to identify data issues reproducibly</a></li>
@@ -222,7 +228,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="datawrangling.html"><a href="datawrangling.html#seperate_longer"><i class="fa fa-check"></i>Splitting multi-response variable into dummies</a></li>
 <li class="chapter" data-level="" data-path="datawrangling.html"><a href="datawrangling.html#cleaning-rmd"><i class="fa fa-check"></i>Structure of a cleaning Rmarkdown doc with multi-level data</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="reporting.html"><a href="reporting.html"><i class="fa fa-check"></i>5. Estimating and reporting</a>
+<li class="chapter" data-level="" data-path="reporting.html"><a href="reporting.html"><i class="fa fa-check"></i>6. Estimating and reporting</a>
 <ul>
 <li class="chapter" data-level="" data-path="reporting.html"><a href="reporting.html#generating-some-fake-data"><i class="fa fa-check"></i>Generating some fake data</a></li>
 <li class="chapter" data-level="" data-path="reporting.html"><a href="reporting.html#making-a-table-of-summary-statistics"><i class="fa fa-check"></i>Making a table of summary statistics</a>
@@ -241,7 +247,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="reporting.html"><a href="reporting.html#plots"><i class="fa fa-check"></i>Plots</a>
 <ul>
 <li class="chapter" data-level="" data-path="reporting.html"><a href="reporting.html#faceting"><i class="fa fa-check"></i>Faceting</a></li>
-<li class="chapter" data-level="" data-path="reporting.html"><a href="reporting.html#stacked-bar-plots-in-wur-style"><i class="fa fa-check"></i>Stacked bar plots in WUR style</a></li>
+<li class="chapter" data-level="" data-path="reporting.html"><a href="reporting.html#stacked-bar-plots"><i class="fa fa-check"></i>Stacked bar plots</a></li>
 <li class="chapter" data-level="" data-path="reporting.html"><a href="reporting.html#lollipop-plot"><i class="fa fa-check"></i>Lollipop plot</a></li>
 <li class="chapter" data-level="" data-path="reporting.html"><a href="reporting.html#maps"><i class="fa fa-check"></i>Maps</a></li>
 </ul></li>
@@ -267,7 +273,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="datawrangling" class="section level1 hasAnchor">
-<h1>4. Data Cleaning<a href="datawrangling.html#datawrangling" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<h1>5. Data Cleaning<a href="datawrangling.html#datawrangling" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Data from the field never quite comes in the form you want,
 and the form you want your data in changes depending on what you want to do with it.
 So for every project, you’ll likely do a substantial amount of data wrangling.</p>
@@ -282,7 +288,7 @@ This chapter will provide examples of common data wrangling patterns,
 as well as how they can fit it into a reproducible data cleaning
 RMarkdown file.</p>
 <p>Make sure you have the <code>tidyverse</code> installed, and the SAFI data set
-downloaded to your data folder by running the code from the <a href="index.html#setup">Set-up section</a></p>
+downloaded to your data folder by running the code from the <a href="#setup">Set-up section</a></p>
 <div id="the-basic-pattern" class="section level2 hasAnchor">
 <h2>The basic pattern<a href="datawrangling.html#the-basic-pattern" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Below is an example R Script,
@@ -315,54 +321,63 @@ that document how, when, and by whom data were collected;
 here the paradata object serves as a central reference to which all other data are joined.
 By doing the filter in a specific object,
 near the top of your script, you make sure this is done transparently.</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="datawrangling.html#cb87-1" tabindex="-1"></a><span class="co"># loading packages</span></span>
-<span id="cb87-2"><a href="datawrangling.html#cb87-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb87-3"><a href="datawrangling.html#cb87-3" tabindex="-1"></a><span class="fu">library</span>(here)</span>
-<span id="cb87-4"><a href="datawrangling.html#cb87-4" tabindex="-1"></a></span>
-<span id="cb87-5"><a href="datawrangling.html#cb87-5" tabindex="-1"></a><span class="co"># loading raw data</span></span>
-<span id="cb87-6"><a href="datawrangling.html#cb87-6" tabindex="-1"></a>raw_data <span class="ot">&lt;-</span> </span>
-<span id="cb87-7"><a href="datawrangling.html#cb87-7" tabindex="-1"></a>  <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">&quot;data/SAFI_clean.csv&quot;</span>), <span class="at">na =</span> <span class="st">&quot;NULL&quot;</span>) </span>
-<span id="cb87-8"><a href="datawrangling.html#cb87-8" tabindex="-1"></a></span>
-<span id="cb87-9"><a href="datawrangling.html#cb87-9" tabindex="-1"></a><span class="co"># Paradata </span></span>
-<span id="cb87-10"><a href="datawrangling.html#cb87-10" tabindex="-1"></a>paradata <span class="ot">&lt;-</span> </span>
-<span id="cb87-11"><a href="datawrangling.html#cb87-11" tabindex="-1"></a>  raw_data <span class="sc">%&gt;%</span> </span>
-<span id="cb87-12"><a href="datawrangling.html#cb87-12" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">day =</span> <span class="fu">day</span>(interview_date),</span>
-<span id="cb87-13"><a href="datawrangling.html#cb87-13" tabindex="-1"></a>         <span class="at">month =</span> <span class="fu">month</span>(interview_date),</span>
-<span id="cb87-14"><a href="datawrangling.html#cb87-14" tabindex="-1"></a>         <span class="at">year =</span> <span class="fu">year</span>(interview_date)) <span class="sc">%&gt;%</span> </span>
-<span id="cb87-15"><a href="datawrangling.html#cb87-15" tabindex="-1"></a>  <span class="fu">filter</span>(village <span class="sc">==</span> <span class="st">&quot;Chirodzo&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb87-16"><a href="datawrangling.html#cb87-16" tabindex="-1"></a>  <span class="fu">filter</span>(interview_date <span class="sc">&gt;</span> <span class="st">&quot;2016-11-16&quot;</span> <span class="sc">&amp;</span> interview_date <span class="sc">&lt;</span> <span class="st">&quot;2017-01-01&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb87-17"><a href="datawrangling.html#cb87-17" tabindex="-1"></a>  <span class="fu">select</span>(key_ID, interview_date, day, month, year, village)</span>
-<span id="cb87-18"><a href="datawrangling.html#cb87-18" tabindex="-1"></a></span>
-<span id="cb87-19"><a href="datawrangling.html#cb87-19" tabindex="-1"></a><span class="co"># housing</span></span>
-<span id="cb87-20"><a href="datawrangling.html#cb87-20" tabindex="-1"></a>housing <span class="ot">&lt;-</span> </span>
-<span id="cb87-21"><a href="datawrangling.html#cb87-21" tabindex="-1"></a>  raw_data <span class="sc">%&gt;%</span> </span>
-<span id="cb87-22"><a href="datawrangling.html#cb87-22" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">people_per_room =</span> no_membrs <span class="sc">/</span> rooms,</span>
-<span id="cb87-23"><a href="datawrangling.html#cb87-23" tabindex="-1"></a>         <span class="at">respondent_wall_type =</span> <span class="fu">as_factor</span>(respondent_wall_type),</span>
-<span id="cb87-24"><a href="datawrangling.html#cb87-24" tabindex="-1"></a>         <span class="at">respondent_wall_type =</span> <span class="fu">fct_recode</span>(respondent_wall_type, </span>
-<span id="cb87-25"><a href="datawrangling.html#cb87-25" tabindex="-1"></a>                                           <span class="st">&quot;Burned bricks&quot;</span> <span class="ot">=</span> <span class="st">&quot;burntbricks&quot;</span>,</span>
-<span id="cb87-26"><a href="datawrangling.html#cb87-26" tabindex="-1"></a>                                           <span class="st">&quot;Mud Daub&quot;</span> <span class="ot">=</span> <span class="st">&quot;muddaub&quot;</span>,</span>
-<span id="cb87-27"><a href="datawrangling.html#cb87-27" tabindex="-1"></a>                                           <span class="st">&quot;Sun bricks&quot;</span> <span class="ot">=</span> <span class="st">&quot;sunbricks&quot;</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb87-28"><a href="datawrangling.html#cb87-28" tabindex="-1"></a>  <span class="fu">select</span>(key_ID, no_membrs, rooms, people_per_room, respondent_wall_type)</span>
-<span id="cb87-29"><a href="datawrangling.html#cb87-29" tabindex="-1"></a>      </span>
-<span id="cb87-30"><a href="datawrangling.html#cb87-30" tabindex="-1"></a><span class="co"># conflict</span></span>
-<span id="cb87-31"><a href="datawrangling.html#cb87-31" tabindex="-1"></a>conflict <span class="ot">&lt;-</span> </span>
-<span id="cb87-32"><a href="datawrangling.html#cb87-32" tabindex="-1"></a>  raw_data <span class="sc">%&gt;%</span> </span>
-<span id="cb87-33"><a href="datawrangling.html#cb87-33" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">conflict_yn =</span> <span class="fu">case_when</span>(affect_conflicts <span class="sc">==</span> <span class="st">&quot;frequently&quot;</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
-<span id="cb87-34"><a href="datawrangling.html#cb87-34" tabindex="-1"></a>                                 affect_conflicts <span class="sc">==</span> <span class="st">&quot;more_once&quot;</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
-<span id="cb87-35"><a href="datawrangling.html#cb87-35" tabindex="-1"></a>                                 affect_conflicts <span class="sc">==</span> <span class="st">&quot;once&quot;</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
-<span id="cb87-36"><a href="datawrangling.html#cb87-36" tabindex="-1"></a>                                 affect_conflicts <span class="sc">==</span> <span class="st">&quot;never&quot;</span> <span class="sc">~</span> <span class="dv">0</span>,</span>
-<span id="cb87-37"><a href="datawrangling.html#cb87-37" tabindex="-1"></a>                                 <span class="at">.default =</span> <span class="cn">NA</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb87-38"><a href="datawrangling.html#cb87-38" tabindex="-1"></a>  <span class="fu">select</span>(key_ID, conflict_yn)</span>
-<span id="cb87-39"><a href="datawrangling.html#cb87-39" tabindex="-1"></a></span>
-<span id="cb87-40"><a href="datawrangling.html#cb87-40" tabindex="-1"></a></span>
-<span id="cb87-41"><a href="datawrangling.html#cb87-41" tabindex="-1"></a><span class="co"># join data</span></span>
-<span id="cb87-42"><a href="datawrangling.html#cb87-42" tabindex="-1"></a>clean_data <span class="ot">&lt;-</span></span>
-<span id="cb87-43"><a href="datawrangling.html#cb87-43" tabindex="-1"></a>  paradata <span class="sc">%&gt;%</span> </span>
-<span id="cb87-44"><a href="datawrangling.html#cb87-44" tabindex="-1"></a>  <span class="fu">left_join</span>(housing) <span class="sc">%&gt;%</span> </span>
-<span id="cb87-45"><a href="datawrangling.html#cb87-45" tabindex="-1"></a>  <span class="fu">left_join</span>(conflict)</span>
-<span id="cb87-46"><a href="datawrangling.html#cb87-46" tabindex="-1"></a></span>
-<span id="cb87-47"><a href="datawrangling.html#cb87-47" tabindex="-1"></a><span class="co"># saving clean data for later use</span></span>
-<span id="cb87-48"><a href="datawrangling.html#cb87-48" tabindex="-1"></a>clean_data <span class="sc">%&gt;%</span> <span class="fu">saveRDS</span>(<span class="fu">here</span>(<span class="st">&quot;data/SAFI_cleaner.rds&quot;</span>)) </span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="datawrangling.html#cb88-1" tabindex="-1"></a><span class="co"># loading packages</span></span>
+<span id="cb88-2"><a href="datawrangling.html#cb88-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb88-3"><a href="datawrangling.html#cb88-3" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb88-4"><a href="datawrangling.html#cb88-4" tabindex="-1"></a></span>
+<span id="cb88-5"><a href="datawrangling.html#cb88-5" tabindex="-1"></a><span class="co"># loading raw data</span></span>
+<span id="cb88-6"><a href="datawrangling.html#cb88-6" tabindex="-1"></a>raw_data <span class="ot">&lt;-</span> </span>
+<span id="cb88-7"><a href="datawrangling.html#cb88-7" tabindex="-1"></a>  <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">&quot;data/SAFI_clean.csv&quot;</span>), <span class="at">na =</span> <span class="st">&quot;NULL&quot;</span>) </span>
+<span id="cb88-8"><a href="datawrangling.html#cb88-8" tabindex="-1"></a></span>
+<span id="cb88-9"><a href="datawrangling.html#cb88-9" tabindex="-1"></a><span class="co"># Paradata </span></span>
+<span id="cb88-10"><a href="datawrangling.html#cb88-10" tabindex="-1"></a>paradata <span class="ot">&lt;-</span> </span>
+<span id="cb88-11"><a href="datawrangling.html#cb88-11" tabindex="-1"></a>  raw_data <span class="sc">%&gt;%</span> </span>
+<span id="cb88-12"><a href="datawrangling.html#cb88-12" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb88-13"><a href="datawrangling.html#cb88-13" tabindex="-1"></a>    <span class="at">day =</span> <span class="fu">day</span>(interview_date),</span>
+<span id="cb88-14"><a href="datawrangling.html#cb88-14" tabindex="-1"></a>    <span class="at">month =</span> <span class="fu">month</span>(interview_date),</span>
+<span id="cb88-15"><a href="datawrangling.html#cb88-15" tabindex="-1"></a>    <span class="at">year =</span> <span class="fu">year</span>(interview_date)</span>
+<span id="cb88-16"><a href="datawrangling.html#cb88-16" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb88-17"><a href="datawrangling.html#cb88-17" tabindex="-1"></a>  <span class="fu">filter</span>(village <span class="sc">==</span> <span class="st">&quot;Chirodzo&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb88-18"><a href="datawrangling.html#cb88-18" tabindex="-1"></a>  <span class="fu">filter</span>(interview_date <span class="sc">&gt;</span> <span class="st">&quot;2016-11-16&quot;</span> <span class="sc">&amp;</span> interview_date <span class="sc">&lt;</span> <span class="st">&quot;2017-01-01&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb88-19"><a href="datawrangling.html#cb88-19" tabindex="-1"></a>  <span class="fu">select</span>(key_ID, interview_date, day, month, year, village)</span>
+<span id="cb88-20"><a href="datawrangling.html#cb88-20" tabindex="-1"></a></span>
+<span id="cb88-21"><a href="datawrangling.html#cb88-21" tabindex="-1"></a><span class="co"># housing</span></span>
+<span id="cb88-22"><a href="datawrangling.html#cb88-22" tabindex="-1"></a>housing <span class="ot">&lt;-</span> </span>
+<span id="cb88-23"><a href="datawrangling.html#cb88-23" tabindex="-1"></a>  raw_data <span class="sc">%&gt;%</span> </span>
+<span id="cb88-24"><a href="datawrangling.html#cb88-24" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb88-25"><a href="datawrangling.html#cb88-25" tabindex="-1"></a>    <span class="at">people_per_room =</span> no_membrs <span class="sc">/</span> rooms,</span>
+<span id="cb88-26"><a href="datawrangling.html#cb88-26" tabindex="-1"></a>    <span class="at">respondent_wall_type =</span> <span class="fu">as_factor</span>(respondent_wall_type),</span>
+<span id="cb88-27"><a href="datawrangling.html#cb88-27" tabindex="-1"></a>    <span class="at">respondent_wall_type =</span> <span class="fu">fct_recode</span>(</span>
+<span id="cb88-28"><a href="datawrangling.html#cb88-28" tabindex="-1"></a>      respondent_wall_type,</span>
+<span id="cb88-29"><a href="datawrangling.html#cb88-29" tabindex="-1"></a>      <span class="st">&quot;Burned bricks&quot;</span> <span class="ot">=</span> <span class="st">&quot;burntbricks&quot;</span>,</span>
+<span id="cb88-30"><a href="datawrangling.html#cb88-30" tabindex="-1"></a>      <span class="st">&quot;Mud Daub&quot;</span> <span class="ot">=</span> <span class="st">&quot;muddaub&quot;</span>,</span>
+<span id="cb88-31"><a href="datawrangling.html#cb88-31" tabindex="-1"></a>      <span class="st">&quot;Sun bricks&quot;</span> <span class="ot">=</span> <span class="st">&quot;sunbricks&quot;</span></span>
+<span id="cb88-32"><a href="datawrangling.html#cb88-32" tabindex="-1"></a>    )</span>
+<span id="cb88-33"><a href="datawrangling.html#cb88-33" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb88-34"><a href="datawrangling.html#cb88-34" tabindex="-1"></a>  <span class="fu">select</span>(key_ID, no_membrs, rooms, people_per_room, respondent_wall_type)</span>
+<span id="cb88-35"><a href="datawrangling.html#cb88-35" tabindex="-1"></a></span>
+<span id="cb88-36"><a href="datawrangling.html#cb88-36" tabindex="-1"></a><span class="co"># conflict</span></span>
+<span id="cb88-37"><a href="datawrangling.html#cb88-37" tabindex="-1"></a>conflict <span class="ot">&lt;-</span> </span>
+<span id="cb88-38"><a href="datawrangling.html#cb88-38" tabindex="-1"></a>  raw_data <span class="sc">%&gt;%</span> </span>
+<span id="cb88-39"><a href="datawrangling.html#cb88-39" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb88-40"><a href="datawrangling.html#cb88-40" tabindex="-1"></a>    <span class="at">conflict_yn =</span> <span class="fu">case_when</span>(</span>
+<span id="cb88-41"><a href="datawrangling.html#cb88-41" tabindex="-1"></a>    affect_conflicts <span class="sc">==</span> <span class="st">&quot;frequently&quot;</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb88-42"><a href="datawrangling.html#cb88-42" tabindex="-1"></a>    affect_conflicts <span class="sc">==</span> <span class="st">&quot;more_once&quot;</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb88-43"><a href="datawrangling.html#cb88-43" tabindex="-1"></a>    affect_conflicts <span class="sc">==</span> <span class="st">&quot;once&quot;</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb88-44"><a href="datawrangling.html#cb88-44" tabindex="-1"></a>    affect_conflicts <span class="sc">==</span> <span class="st">&quot;never&quot;</span> <span class="sc">~</span> <span class="dv">0</span>,</span>
+<span id="cb88-45"><a href="datawrangling.html#cb88-45" tabindex="-1"></a>    <span class="at">.default =</span> <span class="cn">NA</span>)</span>
+<span id="cb88-46"><a href="datawrangling.html#cb88-46" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb88-47"><a href="datawrangling.html#cb88-47" tabindex="-1"></a>  <span class="fu">select</span>(key_ID, conflict_yn)</span>
+<span id="cb88-48"><a href="datawrangling.html#cb88-48" tabindex="-1"></a></span>
+<span id="cb88-49"><a href="datawrangling.html#cb88-49" tabindex="-1"></a></span>
+<span id="cb88-50"><a href="datawrangling.html#cb88-50" tabindex="-1"></a><span class="co"># join data</span></span>
+<span id="cb88-51"><a href="datawrangling.html#cb88-51" tabindex="-1"></a>clean_data <span class="ot">&lt;-</span></span>
+<span id="cb88-52"><a href="datawrangling.html#cb88-52" tabindex="-1"></a>  paradata <span class="sc">%&gt;%</span> </span>
+<span id="cb88-53"><a href="datawrangling.html#cb88-53" tabindex="-1"></a>  <span class="fu">left_join</span>(housing) <span class="sc">%&gt;%</span></span>
+<span id="cb88-54"><a href="datawrangling.html#cb88-54" tabindex="-1"></a>  <span class="fu">left_join</span>(conflict)</span>
+<span id="cb88-55"><a href="datawrangling.html#cb88-55" tabindex="-1"></a></span>
+<span id="cb88-56"><a href="datawrangling.html#cb88-56" tabindex="-1"></a><span class="co"># saving clean data for later use</span></span>
+<span id="cb88-57"><a href="datawrangling.html#cb88-57" tabindex="-1"></a>clean_data <span class="sc">%&gt;%</span> <span class="fu">saveRDS</span>(<span class="fu">here</span>(<span class="st">&quot;data/SAFI_cleaner.rds&quot;</span>))</span></code></pre></div>
 <p>Throughout this chapter, we will add things to this sctructure,
 until we end up with a <a href="datawrangling.html#cleaning-rmd">basic .Rmd file</a> that is easy to work with.
 First we will info on how to include plots,
@@ -377,19 +392,23 @@ inspecting summary statistics, or tabulating values.
 In R, this is easy to do in a reproducible way using <code>ggplot2</code>.
 For example, to identify outliers in the <code>years_liv</code> variable,
 we can make a boxplot:</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="datawrangling.html#cb88-1" tabindex="-1"></a>raw_data <span class="sc">%&gt;%</span> </span>
-<span id="cb88-2"><a href="datawrangling.html#cb88-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> years_liv)) <span class="sc">+</span> </span>
-<span id="cb88-3"><a href="datawrangling.html#cb88-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="datawrangling.html#cb89-1" tabindex="-1"></a>raw_data <span class="sc">%&gt;%</span> </span>
+<span id="cb89-2"><a href="datawrangling.html#cb89-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> years_liv)) <span class="sc">+</span></span>
+<span id="cb89-3"><a href="datawrangling.html#cb89-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
 <p><img src="_main_files/figure-html/%7D%7B-1.png" width="672" /></p>
 <p>From the boxplot, we can see that there’s no super unplausible numbers.
 But let’s say we are worried, and want to winsorize this variable at 95%,
 just so that the few high values don’t affect our analysis too much.</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="datawrangling.html#cb89-1" tabindex="-1"></a>years_liv_clean <span class="ot">&lt;-</span></span>
-<span id="cb89-2"><a href="datawrangling.html#cb89-2" tabindex="-1"></a>  raw_data <span class="sc">%&gt;%</span></span>
-<span id="cb89-3"><a href="datawrangling.html#cb89-3" tabindex="-1"></a>  <span class="fu">select</span>(key_ID, years_liv) <span class="sc">%&gt;%</span> </span>
-<span id="cb89-4"><a href="datawrangling.html#cb89-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">years_liv =</span> <span class="fu">if_else</span>(years_liv <span class="sc">&gt;</span> <span class="fu">quantile</span>(years_liv, <span class="fl">0.95</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb89-5"><a href="datawrangling.html#cb89-5" tabindex="-1"></a>                             <span class="fu">quantile</span>(years_liv, <span class="fl">0.95</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb89-6"><a href="datawrangling.html#cb89-6" tabindex="-1"></a>                             years_liv))</span></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="datawrangling.html#cb90-1" tabindex="-1"></a>years_liv_clean <span class="ot">&lt;-</span></span>
+<span id="cb90-2"><a href="datawrangling.html#cb90-2" tabindex="-1"></a>  raw_data <span class="sc">%&gt;%</span></span>
+<span id="cb90-3"><a href="datawrangling.html#cb90-3" tabindex="-1"></a>  <span class="fu">select</span>(key_ID, years_liv) <span class="sc">%&gt;%</span> </span>
+<span id="cb90-4"><a href="datawrangling.html#cb90-4" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb90-5"><a href="datawrangling.html#cb90-5" tabindex="-1"></a>    <span class="at">years_liv =</span> <span class="fu">if_else</span>(</span>
+<span id="cb90-6"><a href="datawrangling.html#cb90-6" tabindex="-1"></a>      years_liv <span class="sc">&gt;</span> <span class="fu">quantile</span>(years_liv, <span class="fl">0.95</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb90-7"><a href="datawrangling.html#cb90-7" tabindex="-1"></a>      <span class="fu">quantile</span>(years_liv, <span class="fl">0.95</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb90-8"><a href="datawrangling.html#cb90-8" tabindex="-1"></a>      years_liv</span>
+<span id="cb90-9"><a href="datawrangling.html#cb90-9" tabindex="-1"></a>    )</span>
+<span id="cb90-10"><a href="datawrangling.html#cb90-10" tabindex="-1"></a>  )</span></code></pre></div>
 <p>I’ve saved the cleaned variable as a new object,
 ready to be merged into the clean data in the <a href="datawrangling.html#cleaning-rmd">final .Rmd file</a>.</p>
 <p>If find this to be a very useful pattern to repeat across my data cleaning scripts:</p>
@@ -416,41 +435,47 @@ for each household that is equal to the household size, and has two
 randomly generated variables: <code>female</code> and <code>age</code>.
 Note that <code>age</code> may
 be <code>-99</code>, which should be considered missing.</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="datawrangling.html#cb90-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb90-2"><a href="datawrangling.html#cb90-2" tabindex="-1"></a>long_data <span class="ot">&lt;-</span> </span>
-<span id="cb90-3"><a href="datawrangling.html#cb90-3" tabindex="-1"></a>    <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">&quot;data/SAFI_clean.csv&quot;</span>), <span class="at">na =</span> <span class="st">&quot;NULL&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb90-4"><a href="datawrangling.html#cb90-4" tabindex="-1"></a>    <span class="fu">select</span>(key_ID,no_membrs ) <span class="sc">%&gt;%</span></span>
-<span id="cb90-5"><a href="datawrangling.html#cb90-5" tabindex="-1"></a>    <span class="fu">uncount</span>(no_membrs) <span class="sc">%&gt;%</span></span>
-<span id="cb90-6"><a href="datawrangling.html#cb90-6" tabindex="-1"></a>    <span class="fu">group_by</span>(key_ID) <span class="sc">%&gt;%</span> </span>
-<span id="cb90-7"><a href="datawrangling.html#cb90-7" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">member_ID =</span> <span class="fu">row_number</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb90-8"><a href="datawrangling.html#cb90-8" tabindex="-1"></a>    <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb90-9"><a href="datawrangling.html#cb90-9" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">female =</span> <span class="fu">sample</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>,<span class="dv">1</span>),</span>
-<span id="cb90-10"><a href="datawrangling.html#cb90-10" tabindex="-1"></a>           <span class="at">age =</span> <span class="fu">case_when</span>(member_ID <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="fu">sample</span>(<span class="dv">18</span><span class="sc">:</span><span class="dv">86</span>,<span class="dv">1</span>),</span>
-<span id="cb90-11"><a href="datawrangling.html#cb90-11" tabindex="-1"></a>                          <span class="at">.default =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">86</span>,<span class="sc">-</span><span class="dv">99</span>),<span class="dv">1</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb90-12"><a href="datawrangling.html#cb90-12" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span>
-<span id="cb90-13"><a href="datawrangling.html#cb90-13" tabindex="-1"></a></span>
-<span id="cb90-14"><a href="datawrangling.html#cb90-14" tabindex="-1"></a>long_data <span class="sc">%&gt;%</span> <span class="fu">glimpse</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="datawrangling.html#cb91-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb91-2"><a href="datawrangling.html#cb91-2" tabindex="-1"></a>long_data <span class="ot">&lt;-</span> </span>
+<span id="cb91-3"><a href="datawrangling.html#cb91-3" tabindex="-1"></a>  <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">&quot;data/SAFI_clean.csv&quot;</span>), <span class="at">na =</span> <span class="st">&quot;NULL&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb91-4"><a href="datawrangling.html#cb91-4" tabindex="-1"></a>  <span class="fu">select</span>(key_ID,no_membrs ) <span class="sc">%&gt;%</span></span>
+<span id="cb91-5"><a href="datawrangling.html#cb91-5" tabindex="-1"></a>  <span class="fu">uncount</span>(no_membrs) <span class="sc">%&gt;%</span></span>
+<span id="cb91-6"><a href="datawrangling.html#cb91-6" tabindex="-1"></a>  <span class="fu">group_by</span>(key_ID) <span class="sc">%&gt;%</span> </span>
+<span id="cb91-7"><a href="datawrangling.html#cb91-7" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">member_ID =</span> <span class="fu">row_number</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb91-8"><a href="datawrangling.html#cb91-8" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb91-9"><a href="datawrangling.html#cb91-9" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb91-10"><a href="datawrangling.html#cb91-10" tabindex="-1"></a>    <span class="at">female =</span> <span class="fu">sample</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>,<span class="dv">1</span>),</span>
+<span id="cb91-11"><a href="datawrangling.html#cb91-11" tabindex="-1"></a>    <span class="at">age =</span> <span class="fu">case_when</span>(</span>
+<span id="cb91-12"><a href="datawrangling.html#cb91-12" tabindex="-1"></a>      member_ID <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="fu">sample</span>(<span class="dv">18</span><span class="sc">:</span><span class="dv">86</span>,<span class="dv">1</span>),</span>
+<span id="cb91-13"><a href="datawrangling.html#cb91-13" tabindex="-1"></a>      <span class="at">.default =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">86</span>,<span class="sc">-</span><span class="dv">99</span>),<span class="dv">1</span>)</span>
+<span id="cb91-14"><a href="datawrangling.html#cb91-14" tabindex="-1"></a>    )</span>
+<span id="cb91-15"><a href="datawrangling.html#cb91-15" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb91-16"><a href="datawrangling.html#cb91-16" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb91-17"><a href="datawrangling.html#cb91-17" tabindex="-1"></a></span>
+<span id="cb91-18"><a href="datawrangling.html#cb91-18" tabindex="-1"></a>long_data <span class="sc">%&gt;%</span> <span class="fu">glimpse</span>()</span></code></pre></div>
 <pre><code>## Rows: 942
 ## Columns: 4
 ## $ key_ID    &lt;dbl&gt; 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, …
 ## $ member_ID &lt;int&gt; 1, 2, 3, 1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,…
 ## $ female    &lt;int&gt; 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, …
 ## $ age       &lt;dbl&gt; 18, 68, 81, 51, 12, 3, 47, 25, 47, 5, 71, 66, 13, 76, 28, 68…</code></pre>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="datawrangling.html#cb92-1" tabindex="-1"></a><span class="co"># I save the data as a CSV</span></span>
-<span id="cb92-2"><a href="datawrangling.html#cb92-2" tabindex="-1"></a>long_data <span class="sc">%&gt;%</span> <span class="fu">write_csv</span>(<span class="fu">here</span>(<span class="st">&quot;data/raw/SAFI_roster.csv&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="datawrangling.html#cb93-1" tabindex="-1"></a><span class="co"># I save the data as a CSV</span></span>
+<span id="cb93-2"><a href="datawrangling.html#cb93-2" tabindex="-1"></a>long_data <span class="sc">%&gt;%</span> <span class="fu">write_csv</span>(<span class="fu">here</span>(<span class="st">&quot;data/raw/SAFI_roster.csv&quot;</span>))</span></code></pre></div>
 <div id="pivoting-long-to-wide" class="section level3 hasAnchor">
 <h3>Pivoting long to wide<a href="datawrangling.html#pivoting-long-to-wide" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>To merge this roster data to our household data,
 we need to make sure we have one row per household.
 We do this by making <code>age</code> and <code>female</code> variables for each household member (age_1, age_2, etc.),
 For this, we use the <code>pivot_wider()</code> function (in Stata this would be called reshaping ).</p>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="datawrangling.html#cb93-1" tabindex="-1"></a>wide_data <span class="ot">&lt;-</span></span>
-<span id="cb93-2"><a href="datawrangling.html#cb93-2" tabindex="-1"></a>    long_data <span class="sc">%&gt;%</span> </span>
-<span id="cb93-3"><a href="datawrangling.html#cb93-3" tabindex="-1"></a>    <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> member_ID,</span>
-<span id="cb93-4"><a href="datawrangling.html#cb93-4" tabindex="-1"></a>                <span class="at">values_from =</span> <span class="sc">!</span><span class="fu">ends_with</span>(<span class="st">&quot;_ID&quot;</span>),</span>
-<span id="cb93-5"><a href="datawrangling.html#cb93-5" tabindex="-1"></a>                <span class="at">names_vary =</span> <span class="st">&quot;slowest&quot;</span>) </span>
-<span id="cb93-6"><a href="datawrangling.html#cb93-6" tabindex="-1"></a></span>
-<span id="cb93-7"><a href="datawrangling.html#cb93-7" tabindex="-1"></a>wide_data <span class="sc">%&gt;%</span> <span class="fu">glimpse</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="datawrangling.html#cb94-1" tabindex="-1"></a>wide_data <span class="ot">&lt;-</span></span>
+<span id="cb94-2"><a href="datawrangling.html#cb94-2" tabindex="-1"></a>  long_data <span class="sc">%&gt;%</span> </span>
+<span id="cb94-3"><a href="datawrangling.html#cb94-3" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb94-4"><a href="datawrangling.html#cb94-4" tabindex="-1"></a>    <span class="at">names_from =</span> member_ID,</span>
+<span id="cb94-5"><a href="datawrangling.html#cb94-5" tabindex="-1"></a>    <span class="at">values_from =</span> <span class="sc">!</span><span class="fu">ends_with</span>(<span class="st">&quot;_ID&quot;</span>),</span>
+<span id="cb94-6"><a href="datawrangling.html#cb94-6" tabindex="-1"></a>    <span class="at">names_vary =</span> <span class="st">&quot;slowest&quot;</span></span>
+<span id="cb94-7"><a href="datawrangling.html#cb94-7" tabindex="-1"></a>  ) </span>
+<span id="cb94-8"><a href="datawrangling.html#cb94-8" tabindex="-1"></a></span>
+<span id="cb94-9"><a href="datawrangling.html#cb94-9" tabindex="-1"></a>wide_data <span class="sc">%&gt;%</span> <span class="fu">glimpse</span>()</span></code></pre></div>
 <pre><code>## Rows: 131
 ## Columns: 39
 ## $ key_ID    &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 1…
@@ -513,9 +538,9 @@ then all variables for member 2, etc.</li>
 <h3>Pivoting wide to long<a href="datawrangling.html#pivoting-wide-to-long" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>If we had started with wide data, and had wanted to transform to
 long data, we’d have to use <code>pivot_longer()</code>:</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="datawrangling.html#cb95-1" tabindex="-1"></a>wide_data <span class="sc">%&gt;%</span> </span>
-<span id="cb95-2"><a href="datawrangling.html#cb95-2" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">!</span>key_ID, <span class="at">names_to =</span> <span class="st">&quot;name&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb95-3"><a href="datawrangling.html#cb95-3" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="datawrangling.html#cb96-1" tabindex="-1"></a>wide_data <span class="sc">%&gt;%</span> </span>
+<span id="cb96-2"><a href="datawrangling.html#cb96-2" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">!</span>key_ID, <span class="at">names_to =</span> <span class="st">&quot;name&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;value&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb96-3"><a href="datawrangling.html#cb96-3" tabindex="-1"></a>  <span class="fu">glimpse</span>()</span></code></pre></div>
 <pre><code>## Rows: 4,978
 ## Columns: 3
 ## $ key_ID &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, …
@@ -534,12 +559,14 @@ for each household, but most households are smaller than that.</li>
 at all.
 I can do all of this within the <code>pivot_longer()</code> call by using the <code>names_to</code>
 and <code>names_sep</code> options:</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="datawrangling.html#cb97-1" tabindex="-1"></a>wide_data <span class="sc">%&gt;%</span></span>
-<span id="cb97-2"><a href="datawrangling.html#cb97-2" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(<span class="sc">!</span>key_ID,</span>
-<span id="cb97-3"><a href="datawrangling.html#cb97-3" tabindex="-1"></a>                 <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">&quot;.value&quot;</span>, <span class="st">&quot;member_ID&quot;</span>),</span>
-<span id="cb97-4"><a href="datawrangling.html#cb97-4" tabindex="-1"></a>                 <span class="at">names_sep =</span> <span class="st">&quot;_&quot;</span>,</span>
-<span id="cb97-5"><a href="datawrangling.html#cb97-5" tabindex="-1"></a>                 <span class="at">values_drop_na =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb97-6"><a href="datawrangling.html#cb97-6" tabindex="-1"></a>                 <span class="at">names_transform =</span> <span class="fu">list</span>(<span class="at">member_ID =</span> as.integer))</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="datawrangling.html#cb98-1" tabindex="-1"></a>wide_data <span class="sc">%&gt;%</span></span>
+<span id="cb98-2"><a href="datawrangling.html#cb98-2" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb98-3"><a href="datawrangling.html#cb98-3" tabindex="-1"></a>    <span class="at">cols =</span> <span class="sc">!</span>key_ID,</span>
+<span id="cb98-4"><a href="datawrangling.html#cb98-4" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">&quot;.value&quot;</span>, <span class="st">&quot;member_ID&quot;</span>),</span>
+<span id="cb98-5"><a href="datawrangling.html#cb98-5" tabindex="-1"></a>    <span class="at">names_sep =</span> <span class="st">&quot;_&quot;</span>,</span>
+<span id="cb98-6"><a href="datawrangling.html#cb98-6" tabindex="-1"></a>    <span class="at">values_drop_na =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb98-7"><a href="datawrangling.html#cb98-7" tabindex="-1"></a>    <span class="at">names_transform =</span> <span class="fu">list</span>(<span class="at">member_ID =</span> as.integer)</span>
+<span id="cb98-8"><a href="datawrangling.html#cb98-8" tabindex="-1"></a>  )</span></code></pre></div>
 <pre><code>## # A tibble: 942 × 4
 ##    key_ID member_ID female   age
 ##     &lt;dbl&gt;     &lt;int&gt;  &lt;int&gt; &lt;dbl&gt;
@@ -606,15 +633,17 @@ rows that are only in <code>x</code> (area A) or only in <code>y</code> (area C)
 <li><code>full_join(x,y)</code> will keep areas A, B, and C.</li>
 </ul>
 <p>There’s also filtering joins:</p>
-<pre><code>- `semi_join(x,y)` will only keep area B, but won&#39;t add columns to X
-- `anti_join(x,y)`, will only keep area A, and won&#39;t add columns to X.</code></pre>
+<ul>
+<li><code>semi_join(x,y)</code> will only keep area B, but won’t add columns to X</li>
+<li><code>anti_join(x,y)</code>, will only keep area A, and won’t add columns to X.</li>
+</ul>
 <p>In our case, the data sets match perfectly, i.e. we only have an area B,
 so there is no practical difference between the four regular joins.
 I chose <code>left_join()</code> so the number of
 observations in my household survey is guaranteed to remain the same.
 To merge the roster to the household data, we use the join_by function:</p>
 <div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="datawrangling.html#cb100-1" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">&quot;data/SAFI_clean.csv&quot;</span>), <span class="at">na =</span> <span class="st">&quot;NULL&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb100-2"><a href="datawrangling.html#cb100-2" tabindex="-1"></a><span class="fu">left_join</span>(wide_data)</span></code></pre></div>
+<span id="cb100-2"><a href="datawrangling.html#cb100-2" tabindex="-1"></a>  <span class="fu">left_join</span>(wide_data)</span></code></pre></div>
 <pre><code>## Rows: 131 Columns: 14
 ## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
@@ -730,26 +759,27 @@ For example, we need to make sure we update <code>-99</code> to <code>NA</code> 
 in our wide data.</p>
 <p>We could write this:</p>
 <div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="datawrangling.html#cb108-1" tabindex="-1"></a>wide_data <span class="sc">%&gt;%</span></span>
-<span id="cb108-2"><a href="datawrangling.html#cb108-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">age_1 =</span> <span class="fu">if_else</span>(age_1 <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>,<span class="cn">NA</span>,age_1),</span>
-<span id="cb108-3"><a href="datawrangling.html#cb108-3" tabindex="-1"></a>          <span class="at">age_2 =</span> <span class="fu">if_else</span>(age_2 <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>,<span class="cn">NA</span>,age_2),</span>
-<span id="cb108-4"><a href="datawrangling.html#cb108-4" tabindex="-1"></a>          <span class="at">age_3 =</span> <span class="fu">if_else</span>(age_3 <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>,<span class="cn">NA</span>,age_3),</span>
-<span id="cb108-5"><a href="datawrangling.html#cb108-5" tabindex="-1"></a>          <span class="at">age_4 =</span> <span class="fu">if_else</span>(age_4 <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>,<span class="cn">NA</span>,age_4),</span>
-<span id="cb108-6"><a href="datawrangling.html#cb108-6" tabindex="-1"></a>          <span class="at">age_5 =</span> <span class="fu">if_else</span>(age_5 <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>,<span class="cn">NA</span>,age_5),</span>
-<span id="cb108-7"><a href="datawrangling.html#cb108-7" tabindex="-1"></a>          <span class="at">age_6 =</span> <span class="fu">if_else</span>(age_6 <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>,<span class="cn">NA</span>,age_6),</span>
-<span id="cb108-8"><a href="datawrangling.html#cb108-8" tabindex="-1"></a>          <span class="at">age_7 =</span> <span class="fu">if_else</span>(age_7 <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>,<span class="cn">NA</span>,age_7),</span>
-<span id="cb108-9"><a href="datawrangling.html#cb108-9" tabindex="-1"></a>          <span class="at">age_8 =</span> <span class="fu">if_else</span>(age_8 <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>,<span class="cn">NA</span>,age_8),</span>
-<span id="cb108-10"><a href="datawrangling.html#cb108-10" tabindex="-1"></a>          <span class="at">age_9 =</span> <span class="fu">if_else</span>(age_9 <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>,<span class="cn">NA</span>,age_9),</span>
-<span id="cb108-11"><a href="datawrangling.html#cb108-11" tabindex="-1"></a>          <span class="at">age_10 =</span> <span class="fu">if_else</span>(age_10 <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>,<span class="cn">NA</span>,age_10),</span>
-<span id="cb108-12"><a href="datawrangling.html#cb108-12" tabindex="-1"></a>          <span class="at">age_11 =</span> <span class="fu">if_else</span>(age_11 <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>,<span class="cn">NA</span>,age_11),</span>
-<span id="cb108-13"><a href="datawrangling.html#cb108-13" tabindex="-1"></a>          <span class="at">age_12 =</span> <span class="fu">if_else</span>(age_12 <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>,<span class="cn">NA</span>,age_12),</span>
-<span id="cb108-14"><a href="datawrangling.html#cb108-14" tabindex="-1"></a>          <span class="at">age_13 =</span> <span class="fu">if_else</span>(age_13 <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>,<span class="cn">NA</span>,age_13),</span>
-<span id="cb108-15"><a href="datawrangling.html#cb108-15" tabindex="-1"></a>          <span class="at">age_14 =</span> <span class="fu">if_else</span>(age_14 <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>,<span class="cn">NA</span>,age_14),</span>
-<span id="cb108-16"><a href="datawrangling.html#cb108-16" tabindex="-1"></a>          <span class="at">age_15 =</span> <span class="fu">if_else</span>(age_15 <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>,<span class="cn">NA</span>,age_15),</span>
-<span id="cb108-17"><a href="datawrangling.html#cb108-17" tabindex="-1"></a>          <span class="at">age_16 =</span> <span class="fu">if_else</span>(age_16 <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>,<span class="cn">NA</span>,age_16),</span>
-<span id="cb108-18"><a href="datawrangling.html#cb108-18" tabindex="-1"></a>          <span class="at">age_17 =</span> <span class="fu">if_else</span>(age_17 <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>,<span class="cn">NA</span>,age_17),</span>
-<span id="cb108-19"><a href="datawrangling.html#cb108-19" tabindex="-1"></a>          <span class="at">age_18 =</span> <span class="fu">if_else</span>(age_18 <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>,<span class="cn">NA</span>,age_18),</span>
-<span id="cb108-20"><a href="datawrangling.html#cb108-20" tabindex="-1"></a>          <span class="at">age_19 =</span> <span class="fu">if_else</span>(age_19 <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>,<span class="cn">NA</span>,age_19)</span>
-<span id="cb108-21"><a href="datawrangling.html#cb108-21" tabindex="-1"></a>  )</span></code></pre></div>
+<span id="cb108-2"><a href="datawrangling.html#cb108-2" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb108-3"><a href="datawrangling.html#cb108-3" tabindex="-1"></a>    <span class="at">age_1 =</span> <span class="fu">if_else</span>(age_1 <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>, <span class="cn">NA</span>, age_1),</span>
+<span id="cb108-4"><a href="datawrangling.html#cb108-4" tabindex="-1"></a>    <span class="at">age_2 =</span> <span class="fu">if_else</span>(age_2 <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>, <span class="cn">NA</span>, age_2),</span>
+<span id="cb108-5"><a href="datawrangling.html#cb108-5" tabindex="-1"></a>    <span class="at">age_3 =</span> <span class="fu">if_else</span>(age_3 <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>, <span class="cn">NA</span>, age_3),</span>
+<span id="cb108-6"><a href="datawrangling.html#cb108-6" tabindex="-1"></a>    <span class="at">age_4 =</span> <span class="fu">if_else</span>(age_4 <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>, <span class="cn">NA</span>, age_4),</span>
+<span id="cb108-7"><a href="datawrangling.html#cb108-7" tabindex="-1"></a>    <span class="at">age_5 =</span> <span class="fu">if_else</span>(age_5 <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>, <span class="cn">NA</span>, age_5),</span>
+<span id="cb108-8"><a href="datawrangling.html#cb108-8" tabindex="-1"></a>    <span class="at">age_6 =</span> <span class="fu">if_else</span>(age_6 <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>, <span class="cn">NA</span>, age_6),</span>
+<span id="cb108-9"><a href="datawrangling.html#cb108-9" tabindex="-1"></a>    <span class="at">age_7 =</span> <span class="fu">if_else</span>(age_7 <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>, <span class="cn">NA</span>, age_7),</span>
+<span id="cb108-10"><a href="datawrangling.html#cb108-10" tabindex="-1"></a>    <span class="at">age_8 =</span> <span class="fu">if_else</span>(age_8 <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>, <span class="cn">NA</span>, age_8),</span>
+<span id="cb108-11"><a href="datawrangling.html#cb108-11" tabindex="-1"></a>    <span class="at">age_9 =</span> <span class="fu">if_else</span>(age_9 <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>, <span class="cn">NA</span>, age_9),</span>
+<span id="cb108-12"><a href="datawrangling.html#cb108-12" tabindex="-1"></a>    <span class="at">age_10 =</span> <span class="fu">if_else</span>(age_10 <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>, <span class="cn">NA</span>, age_10),</span>
+<span id="cb108-13"><a href="datawrangling.html#cb108-13" tabindex="-1"></a>    <span class="at">age_11 =</span> <span class="fu">if_else</span>(age_11 <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>, <span class="cn">NA</span>, age_11),</span>
+<span id="cb108-14"><a href="datawrangling.html#cb108-14" tabindex="-1"></a>    <span class="at">age_12 =</span> <span class="fu">if_else</span>(age_12 <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>, <span class="cn">NA</span>, age_12),</span>
+<span id="cb108-15"><a href="datawrangling.html#cb108-15" tabindex="-1"></a>    <span class="at">age_13 =</span> <span class="fu">if_else</span>(age_13 <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>, <span class="cn">NA</span>, age_13),</span>
+<span id="cb108-16"><a href="datawrangling.html#cb108-16" tabindex="-1"></a>    <span class="at">age_14 =</span> <span class="fu">if_else</span>(age_14 <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>, <span class="cn">NA</span>, age_14),</span>
+<span id="cb108-17"><a href="datawrangling.html#cb108-17" tabindex="-1"></a>    <span class="at">age_15 =</span> <span class="fu">if_else</span>(age_15 <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>, <span class="cn">NA</span>, age_15),</span>
+<span id="cb108-18"><a href="datawrangling.html#cb108-18" tabindex="-1"></a>    <span class="at">age_16 =</span> <span class="fu">if_else</span>(age_16 <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>, <span class="cn">NA</span>, age_16),</span>
+<span id="cb108-19"><a href="datawrangling.html#cb108-19" tabindex="-1"></a>    <span class="at">age_17 =</span> <span class="fu">if_else</span>(age_17 <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>, <span class="cn">NA</span>, age_17),</span>
+<span id="cb108-20"><a href="datawrangling.html#cb108-20" tabindex="-1"></a>    <span class="at">age_18 =</span> <span class="fu">if_else</span>(age_18 <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>, <span class="cn">NA</span>, age_18),</span>
+<span id="cb108-21"><a href="datawrangling.html#cb108-21" tabindex="-1"></a>    <span class="at">age_19 =</span> <span class="fu">if_else</span>(age_19 <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>, <span class="cn">NA</span>, age_19)</span>
+<span id="cb108-22"><a href="datawrangling.html#cb108-22" tabindex="-1"></a>  )</span></code></pre></div>
 <pre><code>## # A tibble: 131 × 39
 ##    key_ID female_1 age_1 female_2 age_2 female_3 age_3 female_4 age_4 female_5
 ##     &lt;dbl&gt;    &lt;int&gt; &lt;dbl&gt;    &lt;int&gt; &lt;dbl&gt;    &lt;int&gt; &lt;dbl&gt;    &lt;int&gt; &lt;dbl&gt;    &lt;int&gt;
@@ -784,8 +814,12 @@ syntax), and a <a href="programming.html#functions">function</a>. It will then a
 <span id="cb110-4"><a href="datawrangling.html#cb110-4" tabindex="-1"></a></span>
 <span id="cb110-5"><a href="datawrangling.html#cb110-5" tabindex="-1"></a></span>
 <span id="cb110-6"><a href="datawrangling.html#cb110-6" tabindex="-1"></a>wide_data <span class="sc">%&gt;%</span></span>
-<span id="cb110-7"><a href="datawrangling.html#cb110-7" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">starts_with</span>(<span class="st">&quot;age_&quot;</span>),</span>
-<span id="cb110-8"><a href="datawrangling.html#cb110-8" tabindex="-1"></a>                <span class="at">.fns =</span> cleanmissing))</span></code></pre></div>
+<span id="cb110-7"><a href="datawrangling.html#cb110-7" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb110-8"><a href="datawrangling.html#cb110-8" tabindex="-1"></a>    <span class="fu">across</span>(</span>
+<span id="cb110-9"><a href="datawrangling.html#cb110-9" tabindex="-1"></a>      <span class="at">.cols =</span> <span class="fu">starts_with</span>(<span class="st">&quot;age_&quot;</span>),</span>
+<span id="cb110-10"><a href="datawrangling.html#cb110-10" tabindex="-1"></a>      <span class="at">.fns =</span> cleanmissing</span>
+<span id="cb110-11"><a href="datawrangling.html#cb110-11" tabindex="-1"></a>    )</span>
+<span id="cb110-12"><a href="datawrangling.html#cb110-12" tabindex="-1"></a>  )</span></code></pre></div>
 <pre><code>## # A tibble: 131 × 39
 ##    key_ID female_1 age_1 female_2 age_2 female_3 age_3 female_4 age_4 female_5
 ##     &lt;dbl&gt;    &lt;int&gt; &lt;dbl&gt;    &lt;int&gt; &lt;dbl&gt;    &lt;int&gt; &lt;dbl&gt;    &lt;int&gt; &lt;dbl&gt;    &lt;int&gt;
@@ -816,8 +850,12 @@ section on <a href="reporting.html#faceting">faceting</a> for an example.</li>
 <p>You can also define the function in line, if you don’t plan on using the function
 anywhere else:</p>
 <div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="datawrangling.html#cb112-1" tabindex="-1"></a>wide_data <span class="sc">%&gt;%</span></span>
-<span id="cb112-2"><a href="datawrangling.html#cb112-2" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">starts_with</span>(<span class="st">&quot;age_&quot;</span>),</span>
-<span id="cb112-3"><a href="datawrangling.html#cb112-3" tabindex="-1"></a>                  <span class="at">.fns =</span> <span class="cf">function</span>(var) <span class="fu">if_else</span>(var <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>,<span class="cn">NA</span>, var)))</span></code></pre></div>
+<span id="cb112-2"><a href="datawrangling.html#cb112-2" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb112-3"><a href="datawrangling.html#cb112-3" tabindex="-1"></a>    <span class="fu">across</span>(</span>
+<span id="cb112-4"><a href="datawrangling.html#cb112-4" tabindex="-1"></a>      <span class="at">.cols =</span> <span class="fu">starts_with</span>(<span class="st">&quot;age_&quot;</span>),</span>
+<span id="cb112-5"><a href="datawrangling.html#cb112-5" tabindex="-1"></a>      <span class="at">.fns =</span> <span class="cf">function</span>(var) <span class="fu">if_else</span>(var <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>,<span class="cn">NA</span>, var)</span>
+<span id="cb112-6"><a href="datawrangling.html#cb112-6" tabindex="-1"></a>    )</span>
+<span id="cb112-7"><a href="datawrangling.html#cb112-7" tabindex="-1"></a>  )</span></code></pre></div>
 <pre><code>## # A tibble: 131 × 39
 ##    key_ID female_1 age_1 female_2 age_2 female_3 age_3 female_4 age_4 female_5
 ##     &lt;dbl&gt;    &lt;int&gt; &lt;dbl&gt;    &lt;int&gt; &lt;dbl&gt;    &lt;int&gt; &lt;dbl&gt;    &lt;int&gt; &lt;dbl&gt;    &lt;int&gt;
@@ -929,14 +967,14 @@ and then use <code>factor()</code> to convert them to factors with labels “no�
 it would have been possible to pivot the data to long first,
 so that we have one <code>age</code> variable, and no need to use across.</p>
 <div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="datawrangling.html#cb120-1" tabindex="-1"></a>wide_data <span class="sc">%&gt;%</span></span>
-<span id="cb120-2"><a href="datawrangling.html#cb120-2" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(</span>
+<span id="cb120-2"><a href="datawrangling.html#cb120-2" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
 <span id="cb120-3"><a href="datawrangling.html#cb120-3" tabindex="-1"></a>    <span class="sc">!</span>key_ID,</span>
 <span id="cb120-4"><a href="datawrangling.html#cb120-4" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">&quot;.value&quot;</span>, <span class="st">&quot;member_ID&quot;</span>),</span>
 <span id="cb120-5"><a href="datawrangling.html#cb120-5" tabindex="-1"></a>    <span class="at">names_sep =</span> <span class="st">&quot;_&quot;</span>,</span>
 <span id="cb120-6"><a href="datawrangling.html#cb120-6" tabindex="-1"></a>    <span class="at">values_drop_na =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb120-7"><a href="datawrangling.html#cb120-7" tabindex="-1"></a>    <span class="at">names_transform =</span> <span class="fu">list</span>(<span class="at">member_ID =</span> as.integer)</span>
 <span id="cb120-8"><a href="datawrangling.html#cb120-8" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb120-9"><a href="datawrangling.html#cb120-9" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">age =</span> <span class="fu">if_else</span>(age <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>,<span class="cn">NA</span>,age))  <span class="sc">%&gt;%</span> </span>
+<span id="cb120-9"><a href="datawrangling.html#cb120-9" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">age =</span> <span class="fu">if_else</span>(age <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>,<span class="cn">NA</span>,age)) <span class="sc">%&gt;%</span></span>
 <span id="cb120-10"><a href="datawrangling.html#cb120-10" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> member_ID,</span>
 <span id="cb120-11"><a href="datawrangling.html#cb120-11" tabindex="-1"></a>              <span class="at">values_from =</span> <span class="sc">!</span><span class="fu">ends_with</span>(<span class="st">&quot;_ID&quot;</span>),</span>
 <span id="cb120-12"><a href="datawrangling.html#cb120-12" tabindex="-1"></a>              <span class="at">names_vary =</span> <span class="st">&quot;slowest&quot;</span>) </span></code></pre></div>
@@ -971,9 +1009,11 @@ Let’s say we have a bunch of related variables, such as expenditures on inputs
 <span id="cb122-4"><a href="datawrangling.html#cb122-4" tabindex="-1"></a>  <span class="fu">select</span>(key_ID) <span class="sc">%&gt;%</span></span>
 <span id="cb122-5"><a href="datawrangling.html#cb122-5" tabindex="-1"></a></span>
 <span id="cb122-6"><a href="datawrangling.html#cb122-6" tabindex="-1"></a>  <span class="co"># generate some repeated questions</span></span>
-<span id="cb122-7"><a href="datawrangling.html#cb122-7" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">expenditures_fertilizer =</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="fu">nrow</span>(.)),</span>
-<span id="cb122-8"><a href="datawrangling.html#cb122-8" tabindex="-1"></a>         <span class="at">expenditures_seeds =</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="fu">nrow</span>(.)),</span>
-<span id="cb122-9"><a href="datawrangling.html#cb122-9" tabindex="-1"></a>         <span class="at">expenditures_tools =</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="fu">nrow</span>(.))) </span></code></pre></div>
+<span id="cb122-7"><a href="datawrangling.html#cb122-7" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb122-8"><a href="datawrangling.html#cb122-8" tabindex="-1"></a>    <span class="at">expenditures_fertilizer =</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="fu">nrow</span>(.)),</span>
+<span id="cb122-9"><a href="datawrangling.html#cb122-9" tabindex="-1"></a>    <span class="at">expenditures_seeds =</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="fu">nrow</span>(.)),</span>
+<span id="cb122-10"><a href="datawrangling.html#cb122-10" tabindex="-1"></a>    <span class="at">expenditures_tools =</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="fu">nrow</span>(.))</span>
+<span id="cb122-11"><a href="datawrangling.html#cb122-11" tabindex="-1"></a>  ) </span></code></pre></div>
 <p>These variabes all contain the same type of information,
 and should be dealth with in the same way.</p>
 <p>We could plot and clean each variable separately,
@@ -991,7 +1031,7 @@ since <code>ggplot2</code> expects long data.</p>
 <span id="cb123-9"><a href="datawrangling.html#cb123-9" tabindex="-1"></a>expenditures_long <span class="sc">%&gt;%</span> </span>
 <span id="cb123-10"><a href="datawrangling.html#cb123-10" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> expenditure_type, <span class="at">y =</span> amount)) <span class="sc">+</span></span>
 <span id="cb123-11"><a href="datawrangling.html#cb123-11" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-84-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-85-1.png" width="672" /></p>
 <p>We now have one plot that we can look at, and one variable to clean.
 Following the pattern of plotting, documenting and cleaning,
 we notice negative values of expenditures here.
@@ -1017,15 +1057,21 @@ But in Stata you would probably use some sort of
 <code>egen</code> function, so that may come natural.
 To compute means and sums across rows in R, use <code>rowSums()</code> and <code>rowMeans()</code>:</p>
 <div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="datawrangling.html#cb125-1" tabindex="-1"></a>wide_data <span class="sc">%&gt;%</span></span>
-<span id="cb125-2"><a href="datawrangling.html#cb125-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">starts_with</span>(<span class="st">&quot;age_&quot;</span>),</span>
-<span id="cb125-3"><a href="datawrangling.html#cb125-3" tabindex="-1"></a>                <span class="at">.fn   =</span> <span class="sc">~</span><span class="fu">if_else</span>(.x <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>,<span class="cn">NA</span>,.x))) <span class="sc">%&gt;%</span></span>
-<span id="cb125-4"><a href="datawrangling.html#cb125-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mean_age =</span> <span class="fu">rowMeans</span>(<span class="fu">across</span>(<span class="fu">starts_with</span>(<span class="st">&quot;age_&quot;</span>)),</span>
-<span id="cb125-5"><a href="datawrangling.html#cb125-5" tabindex="-1"></a>                          <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb125-6"><a href="datawrangling.html#cb125-6" tabindex="-1"></a>         <span class="at">num_women =</span>  <span class="fu">rowSums</span>(<span class="fu">across</span>(<span class="fu">starts_with</span>(<span class="st">&quot;female_&quot;</span>)),</span>
-<span id="cb125-7"><a href="datawrangling.html#cb125-7" tabindex="-1"></a>                              <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb125-8"><a href="datawrangling.html#cb125-8" tabindex="-1"></a>         <span class="at">hh_size =</span> <span class="fu">rowSums</span>(<span class="sc">!</span><span class="fu">is.na</span>(<span class="fu">across</span>(<span class="fu">starts_with</span>(<span class="st">&quot;female_&quot;</span>))))) <span class="sc">%&gt;%</span></span>
-<span id="cb125-9"><a href="datawrangling.html#cb125-9" tabindex="-1"></a>  <span class="fu">select</span>(key_ID,hh_size,num_women, mean_age) <span class="sc">%&gt;%</span></span>
-<span id="cb125-10"><a href="datawrangling.html#cb125-10" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code></pre></div>
+<span id="cb125-2"><a href="datawrangling.html#cb125-2" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb125-3"><a href="datawrangling.html#cb125-3" tabindex="-1"></a>    <span class="fu">across</span>(</span>
+<span id="cb125-4"><a href="datawrangling.html#cb125-4" tabindex="-1"></a>      <span class="at">.cols =</span> <span class="fu">starts_with</span>(<span class="st">&quot;age_&quot;</span>),</span>
+<span id="cb125-5"><a href="datawrangling.html#cb125-5" tabindex="-1"></a>      <span class="at">.fn   =</span> <span class="sc">~</span><span class="fu">if_else</span>(.x <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>, <span class="cn">NA</span>, .x)</span>
+<span id="cb125-6"><a href="datawrangling.html#cb125-6" tabindex="-1"></a>    )</span>
+<span id="cb125-7"><a href="datawrangling.html#cb125-7" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb125-8"><a href="datawrangling.html#cb125-8" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb125-9"><a href="datawrangling.html#cb125-9" tabindex="-1"></a>    <span class="at">mean_age =</span> <span class="fu">rowMeans</span>(<span class="fu">across</span>(<span class="fu">starts_with</span>(<span class="st">&quot;age_&quot;</span>)),</span>
+<span id="cb125-10"><a href="datawrangling.html#cb125-10" tabindex="-1"></a>                          <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb125-11"><a href="datawrangling.html#cb125-11" tabindex="-1"></a>    <span class="at">num_women =</span>  <span class="fu">rowSums</span>(<span class="fu">across</span>(<span class="fu">starts_with</span>(<span class="st">&quot;female_&quot;</span>)),</span>
+<span id="cb125-12"><a href="datawrangling.html#cb125-12" tabindex="-1"></a>                        <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
+<span id="cb125-13"><a href="datawrangling.html#cb125-13" tabindex="-1"></a>    <span class="at">hh_size =</span> <span class="fu">rowSums</span>(<span class="sc">!</span><span class="fu">is.na</span>(<span class="fu">across</span>(<span class="fu">starts_with</span>(<span class="st">&quot;female_&quot;</span>))))</span>
+<span id="cb125-14"><a href="datawrangling.html#cb125-14" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb125-15"><a href="datawrangling.html#cb125-15" tabindex="-1"></a>  <span class="fu">select</span>(key_ID,hh_size,num_women, mean_age) <span class="sc">%&gt;%</span></span>
+<span id="cb125-16"><a href="datawrangling.html#cb125-16" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code></pre></div>
 <pre><code>## # A tibble: 131 × 4
 ##    key_ID hh_size num_women mean_age
 ##     &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
@@ -1041,37 +1087,93 @@ To compute means and sums across rows in R, use <code>rowSums()</code> and <code
 ## 10     10      12         8     29.2
 ## # ℹ 121 more rows</code></pre>
 <p>If you want to compute something other than means or sums,
-you can use <code>rowwise()</code> and<code>c_across()</code>
+you can either use <code>rowwise()</code> and<code>c_across()</code>,
+or – if speed is a concern – <code>pmap()</code>
 to get a bunch of variables into any function you want:</p>
 <div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="datawrangling.html#cb127-1" tabindex="-1"></a>wide_data <span class="sc">%&gt;%</span></span>
-<span id="cb127-2"><a href="datawrangling.html#cb127-2" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">starts_with</span>(<span class="st">&quot;age_&quot;</span>),</span>
-<span id="cb127-3"><a href="datawrangling.html#cb127-3" tabindex="-1"></a>                  <span class="at">.fn =</span> <span class="sc">~</span><span class="fu">if_else</span>(.x <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>,<span class="cn">NA</span>,.x))) <span class="sc">%&gt;%</span></span>
-<span id="cb127-4"><a href="datawrangling.html#cb127-4" tabindex="-1"></a>    <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb127-5"><a href="datawrangling.html#cb127-5" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">max_age =</span> <span class="fu">max</span>(<span class="fu">c_across</span>(<span class="fu">starts_with</span>(<span class="st">&quot;age_&quot;</span>)),</span>
-<span id="cb127-6"><a href="datawrangling.html#cb127-6" tabindex="-1"></a>                           <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb127-7"><a href="datawrangling.html#cb127-7" tabindex="-1"></a>           <span class="at">sd_age =</span>  <span class="fu">sd</span>(<span class="fu">c_across</span>(<span class="fu">starts_with</span>(<span class="st">&quot;age_&quot;</span>)),</span>
-<span id="cb127-8"><a href="datawrangling.html#cb127-8" tabindex="-1"></a>                            <span class="at">na.rm=</span><span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb127-9"><a href="datawrangling.html#cb127-9" tabindex="-1"></a>    <span class="fu">select</span>(key_ID,max_age,sd_age) <span class="sc">%&gt;%</span></span>
-<span id="cb127-10"><a href="datawrangling.html#cb127-10" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span></code></pre></div>
-<pre><code>## # A tibble: 131 × 3
-##    key_ID max_age sd_age
-##     &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;
-##  1      1      81   33.3
-##  2      2      51   21.1
-##  3      3      83   28.0
-##  4      4      85   28.3
-##  5      5      69   21.2
-##  6      6      38   18.1
-##  7      7      80   31.1
-##  8      8      83   20.4
-##  9      9      82   25.8
-## 10     10      65   19.6
-## # ℹ 121 more rows</code></pre>
+<span id="cb127-2"><a href="datawrangling.html#cb127-2" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb127-3"><a href="datawrangling.html#cb127-3" tabindex="-1"></a>    <span class="fu">across</span>(</span>
+<span id="cb127-4"><a href="datawrangling.html#cb127-4" tabindex="-1"></a>      <span class="at">.cols =</span> <span class="fu">starts_with</span>(<span class="st">&quot;age_&quot;</span>),</span>
+<span id="cb127-5"><a href="datawrangling.html#cb127-5" tabindex="-1"></a>      <span class="at">.fn =</span> <span class="sc">~</span><span class="fu">if_else</span>(.x <span class="sc">==</span> <span class="sc">-</span><span class="dv">99</span>, <span class="cn">NA</span>, .x)</span>
+<span id="cb127-6"><a href="datawrangling.html#cb127-6" tabindex="-1"></a>    )</span>
+<span id="cb127-7"><a href="datawrangling.html#cb127-7" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb127-8"><a href="datawrangling.html#cb127-8" tabindex="-1"></a></span>
+<span id="cb127-9"><a href="datawrangling.html#cb127-9" tabindex="-1"></a>  <span class="co"># compute the max using rowwise and c_across</span></span>
+<span id="cb127-10"><a href="datawrangling.html#cb127-10" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb127-11"><a href="datawrangling.html#cb127-11" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb127-12"><a href="datawrangling.html#cb127-12" tabindex="-1"></a>    <span class="at">max_age =</span> <span class="fu">max</span>(</span>
+<span id="cb127-13"><a href="datawrangling.html#cb127-13" tabindex="-1"></a>      <span class="fu">c_across</span>(<span class="fu">starts_with</span>(<span class="st">&quot;age_&quot;</span>)),</span>
+<span id="cb127-14"><a href="datawrangling.html#cb127-14" tabindex="-1"></a>      <span class="at">na.rm=</span><span class="cn">TRUE</span></span>
+<span id="cb127-15"><a href="datawrangling.html#cb127-15" tabindex="-1"></a>    )</span>
+<span id="cb127-16"><a href="datawrangling.html#cb127-16" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb127-17"><a href="datawrangling.html#cb127-17" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb127-18"><a href="datawrangling.html#cb127-18" tabindex="-1"></a></span>
+<span id="cb127-19"><a href="datawrangling.html#cb127-19" tabindex="-1"></a>  <span class="co"># compute the sd using pmap and an anonymous function</span></span>
+<span id="cb127-20"><a href="datawrangling.html#cb127-20" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb127-21"><a href="datawrangling.html#cb127-21" tabindex="-1"></a>    <span class="at">sd_age =</span> <span class="fu">pmap_dbl</span>(</span>
+<span id="cb127-22"><a href="datawrangling.html#cb127-22" tabindex="-1"></a>      <span class="fu">pick</span>(<span class="fu">starts_with</span>(<span class="st">&quot;age_&quot;</span>)),</span>
+<span id="cb127-23"><a href="datawrangling.html#cb127-23" tabindex="-1"></a>      \(...) <span class="fu">sd</span>(<span class="fu">c</span>(...), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb127-24"><a href="datawrangling.html#cb127-24" tabindex="-1"></a>    )</span>
+<span id="cb127-25"><a href="datawrangling.html#cb127-25" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb127-26"><a href="datawrangling.html#cb127-26" tabindex="-1"></a>  <span class="fu">str</span>()</span></code></pre></div>
+<pre><code>## tibble [131 × 41] (S3: tbl_df/tbl/data.frame)
+##  $ key_ID   : num [1:131] 1 2 3 4 5 6 7 8 9 10 ...
+##  $ female_1 : int [1:131] 0 0 0 0 0 0 0 1 0 1 ...
+##  $ age_1    : num [1:131] 18 51 71 79 30 38 21 30 42 20 ...
+##  $ female_2 : int [1:131] 1 1 0 0 0 0 1 1 1 1 ...
+##  $ age_2    : num [1:131] 68 12 66 81 69 32 9 7 31 61 ...
+##  $ female_3 : int [1:131] 0 0 0 0 1 1 1 1 1 1 ...
+##  $ age_3    : num [1:131] 81 3 13 84 23 4 1 61 79 22 ...
+##  $ female_4 : int [1:131] NA 0 0 0 1 NA 1 1 1 1 ...
+##  $ age_4    : num [1:131] NA 47 76 22 32 NA 57 72 82 27 ...
+##  $ female_5 : int [1:131] NA 0 0 0 1 NA 1 1 0 0 ...
+##  $ age_5    : num [1:131] NA 25 28 28 11 NA 80 57 47 22 ...
+##  $ female_6 : int [1:131] NA 1 1 0 0 NA 0 0 0 1 ...
+##  $ age_6    : num [1:131] NA 47 68 85 42 NA 53 54 73 17 ...
+##  $ female_7 : int [1:131] NA 1 1 1 1 NA NA 0 1 1 ...
+##  $ age_7    : num [1:131] NA 5 83 85 5 NA NA 38 15 65 ...
+##  $ female_8 : int [1:131] NA NA 1 NA NA NA NA 1 1 1 ...
+##  $ age_8    : num [1:131] NA NA 76 NA NA NA NA 57 NA 11 ...
+##  $ female_9 : int [1:131] NA NA 1 NA NA NA NA 0 NA 1 ...
+##  $ age_9    : num [1:131] NA NA 39 NA NA NA NA 83 NA 55 ...
+##  $ female_10: int [1:131] NA NA 0 NA NA NA NA 1 NA 0 ...
+##  $ age_10   : num [1:131] NA NA 9 NA NA NA NA 56 NA 22 ...
+##  $ female_11: int [1:131] NA NA NA NA NA NA NA 1 NA 0 ...
+##  $ age_11   : num [1:131] NA NA NA NA NA NA NA 58 NA 22 ...
+##  $ female_12: int [1:131] NA NA NA NA NA NA NA 0 NA 0 ...
+##  $ age_12   : num [1:131] NA NA NA NA NA NA NA 71 NA 7 ...
+##  $ female_13: int [1:131] NA NA NA NA NA NA NA NA NA NA ...
+##  $ age_13   : num [1:131] NA NA NA NA NA NA NA NA NA NA ...
+##  $ female_14: int [1:131] NA NA NA NA NA NA NA NA NA NA ...
+##  $ age_14   : num [1:131] NA NA NA NA NA NA NA NA NA NA ...
+##  $ female_15: int [1:131] NA NA NA NA NA NA NA NA NA NA ...
+##  $ age_15   : num [1:131] NA NA NA NA NA NA NA NA NA NA ...
+##  $ female_16: int [1:131] NA NA NA NA NA NA NA NA NA NA ...
+##  $ age_16   : num [1:131] NA NA NA NA NA NA NA NA NA NA ...
+##  $ female_17: int [1:131] NA NA NA NA NA NA NA NA NA NA ...
+##  $ age_17   : num [1:131] NA NA NA NA NA NA NA NA NA NA ...
+##  $ female_18: int [1:131] NA NA NA NA NA NA NA NA NA NA ...
+##  $ age_18   : num [1:131] NA NA NA NA NA NA NA NA NA NA ...
+##  $ female_19: int [1:131] NA NA NA NA NA NA NA NA NA NA ...
+##  $ age_19   : num [1:131] NA NA NA NA NA NA NA NA NA NA ...
+##  $ max_age  : num [1:131] 81 51 83 85 69 38 80 83 82 65 ...
+##  $ sd_age   : num [1:131] 33.3 21.1 28 28.3 21.2 ...</code></pre>
+<p>Above, I compute max_age using <code>rowwise()</code> and <code>c_across()</code>, and standard deviation using <code>pmap()</code>.</p>
 <p><code>rowwise()</code> ensures all summaries are computed per row, and <code>c_across()</code>
-allows you to use <a href="https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html">tidy select</a> syntax within any function.</p>
-<p>Do note that while this is very flexible, it can be EXTREMELY slow,
-as all computations are done row by row.
-If you have a large dataset, it’s probably faster to pivot the data to long first.</p>
+allows you to use <a href="https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html">tidy select</a> syntax within any function.
+Do note that while this is very flexible, it can be EXTREMELY slow,
+as all computations are done row by row.</p>
+<p><code>pmap()</code> is vectorized, so may be faster, but less easy to read.
+Note that <code>pmap_dbl()</code> outputs a vector of numbers (doubles) has two arguments:</p>
+<ul>
+<li>The first is the iterabe object, in this case the current data frame
+with only the age variables selected.
+Within dplyr verbs such as mutate, you can use <code>pick()</code> to create such a dataframe.</li>
+<li>The second is an anonymous function (here we use the <code>\</code> shorthand to declare one),
+which takes all the variabes in the data frame as its arguments using <code>(...)</code>.</li>
+</ul>
+<p>Another useful way to compute row-wise summary statistics,
+is to pivot to long first, and then just use plain-old <code>summarize()</code>.</p>
 </div>
 <div id="renaming-many-variables" class="section level3 hasAnchor">
 <h3>Renaming many variables<a href="datawrangling.html#renaming-many-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -1474,7 +1576,7 @@ gitbook.start({
     "size": 2
   },
   "edit": {
-    "link": "https://github.com/kleuveld/r_cheatsheet/edit/main/chapters/04-datawrangling.Rmd",
+    "link": "https://github.com/kleuveld/r_cheatsheet/edit/main/chapters/05-datawrangling.Rmd",
     "text": "Edit"
   },
   "history": {
