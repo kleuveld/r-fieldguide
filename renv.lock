@@ -4,7 +4,7 @@
     "Repositories": [
       {
         "Name": "CRAN",
-        "URL": "https://p3m.dev/cran/2026-01-16"
+        "URL": "https://packagemanager.posit.co/cran/2026-11-15"
       }
     ]
   },
@@ -80,7 +80,7 @@
       "NeedsCompilation": "yes",
       "Author": "Brantly Callaway [aut, cre]",
       "Maintainer": "Brantly Callaway <brantly.callaway@uga.edu>",
-      "Repository": "CRAN"
+      "Repository": "https://p3m.dev/cran/2026-01-16"
     },
     "DBI": {
       "Package": "DBI",
@@ -172,7 +172,7 @@
       "NeedsCompilation": "yes",
       "Author": "Pedro H. C. Sant'Anna [aut, cre, cph], Jun Zhao [aut]",
       "Maintainer": "Pedro H. C. Sant'Anna <pedrohcgs@gmail.com>",
-      "Repository": "CRAN"
+      "Repository": "https://p3m.dev/cran/2026-01-16"
     },
     "DeclareDesign": {
       "Package": "DeclareDesign",
@@ -230,7 +230,7 @@
       "NeedsCompilation": "no",
       "Author": "Graeme Blair [aut] (ORCID: <https://orcid.org/0000-0001-9164-2102>), Jasper Cooper [aut] (ORCID: <https://orcid.org/0000-0002-8639-3188>), Alexander Coppock [aut, cre] (ORCID: <https://orcid.org/0000-0002-5733-2386>), Macartan Humphreys [aut] (ORCID: <https://orcid.org/0000-0001-7029-2326>), Neal Fultz [aut]",
       "Maintainer": "Alexander Coppock <acoppock@gmail.com>",
-      "Repository": "CRAN"
+      "Repository": "https://p3m.dev/cran/2026-01-16"
     },
     "Formula": {
       "Package": "Formula",
@@ -376,7 +376,7 @@
       "NeedsCompilation": "yes",
       "Author": "Daniel Ho [aut] (ORCID: <https://orcid.org/0000-0002-2195-5469>), Kosuke Imai [aut] (ORCID: <https://orcid.org/0000-0002-2748-1022>), Gary King [aut] (ORCID: <https://orcid.org/0000-0002-5327-7631>), Elizabeth Stuart [aut] (ORCID: <https://orcid.org/0000-0002-9042-8611>), Alex Whitworth [ctb], Noah Greifer [cre, aut] (ORCID: <https://orcid.org/0000-0003-3067-7154>)",
       "Maintainer": "Noah Greifer <noah.greifer@gmail.com>",
-      "Repository": "CRAN"
+      "Repository": "https://p3m.dev/cran/2026-01-16"
     },
     "Matrix": {
       "Package": "Matrix",
@@ -451,7 +451,7 @@
       "NeedsCompilation": "yes",
       "Author": "Tyler Hunt [aut, cre]",
       "Maintainer": "Tyler Hunt <thunt@snapfinance.com>",
-      "Repository": "CRAN"
+      "Repository": "https://p3m.dev/cran/2026-01-16"
     },
     "R.cache": {
       "Package": "R.cache",
@@ -800,7 +800,7 @@
       "Author": "Ravi Varadhan",
       "Maintainer": "Ravi Varadhan <ravi.varadhan@jhu.edu>",
       "URL": "https://coah.jhu.edu/people/Faculty_personal_Pages/Varadhan.html",
-      "Repository": "CRAN",
+      "Repository": "https://p3m.dev/cran/2026-01-16",
       "NeedsCompilation": "no",
       "Encoding": "UTF-8"
     },
@@ -992,7 +992,7 @@
       "NeedsCompilation": "yes",
       "Author": "Michael J. Kane [aut, cre] (<https://orcid.org/0000-0003-1899-6662>), John W. Emerson [aut], Peter Haverty [aut], Charles Determan [aut]",
       "Maintainer": "Michael J. Kane <bigmemoryauthors@gmail.com>",
-      "Repository": "CRAN"
+      "Repository": "https://p3m.dev/cran/2026-01-16"
     },
     "bigmemory.sri": {
       "Package": "bigmemory.sri",
@@ -1015,7 +1015,7 @@
       "NeedsCompilation": "no",
       "Author": "Michael J. Kane [aut, cre] (<https://orcid.org/0000-0003-1899-6662>)",
       "Maintainer": "Michael J. Kane <bigmemoryauthors@gmail.com>",
-      "Repository": "CRAN"
+      "Repository": "https://p3m.dev/cran/2026-01-16"
     },
     "bit": {
       "Package": "bit",
@@ -1170,7 +1170,7 @@
       "VignetteBuilder": "knitr",
       "NeedsCompilation": "no",
       "Author": "Yihui Xie [aut, cre] (ORCID: <https://orcid.org/0000-0003-0645-5666>), Christophe Dervieux [ctb] (ORCID: <https://orcid.org/0000-0003-4474-2498>), JJ Allaire [ctb], Albert Kim [ctb], Alessandro Samuel-Rosa [ctb], Andrzej Oles [ctb], Atsushi Yasumoto [ctb] (ORCID: <https://orcid.org/0000-0002-8335-495X>), Aust Frederik [ctb] (ORCID: <https://orcid.org/0000-0003-4900-788X>), Bastiaan Quast [ctb], Ben Marwick [ctb], Chester Ismay [ctb], Clifton Franklund [ctb], Daniel Emaasit [ctb], David Shuman [ctb], Dean Attali [ctb], Drew Tyre [ctb], Ellis Valentiner [ctb], Frans van Dunne [ctb], Hadley Wickham [ctb], Jeff Allen [ctb], Jennifer Bryan [ctb], Jonathan McPhers [ctb], JooYoung Seo [ctb] (ORCID: <https://orcid.org/0000-0002-4064-6012>), Joyce Robbins [ctb], Junwen Huang [ctb], Kevin Cheung [ctb], Kevin Ushey [ctb], Kim Seonghyun [ctb], Kirill Muller [ctb], Luciano Selzer [ctb], Matthew Lincoln [ctb], Maximilian Held [ctb], Michael Sachs [ctb], Michal Bojanowski [ctb], Nathan Werth [ctb], Noam Ross [ctb], Peter Hickey [ctb], Pedro Rafael D. Marinho [ctb] (ORCID: <https://orcid.org/0000-0003-1591-8300>), Romain Lesur [ctb] (ORCID: <https://orcid.org/0000-0002-0721-5595>), Sahir Bhatnagar [ctb], Shir Dekel [ctb] (ORCID: <https://orcid.org/0000-0003-1773-2446>), Steve Simpson [ctb], Thierry Onkelinx [ctb] (ORCID: <https://orcid.org/0000-0001-8804-4216>), Vincent Fulco [ctb], Yixuan Qiu [ctb], Zhuoer Dong [ctb], Posit Software, PBC [cph, fnd], Bartek Szopka [ctb] (The jQuery Highlight plugin), Zeno Rocha [cph] (clipboard.js library), MathQuill contributors [ctb] (The MathQuill library; authors listed in inst/resources/AUTHORS), FriendCode Inc [cph, ctb] (The gitbook style, with modifications)",
-      "Repository": "CRAN"
+      "Repository": "https://p3m.dev/cran/2026-01-16"
     },
     "box": {
       "Package": "box",
@@ -1549,7 +1549,7 @@
       "NeedsCompilation": "yes",
       "Author": "Max Kuhn [aut, cre] (<https://orcid.org/0000-0003-2402-136X>), Jed Wing [ctb], Steve Weston [ctb], Andre Williams [ctb], Chris Keefer [ctb], Allan Engelhardt [ctb], Tony Cooper [ctb], Zachary Mayer [ctb], Brenton Kenkel [ctb], R Core Team [ctb], Michael Benesty [ctb], Reynald Lescarbeau [ctb], Andrew Ziem [ctb], Luca Scrucca [ctb], Yuan Tang [ctb], Can Candan [ctb], Tyler Hunt [ctb]",
       "Maintainer": "Max Kuhn <mxkuhn@gmail.com>",
-      "Repository": "CRAN"
+      "Repository": "https://p3m.dev/cran/2026-01-16"
     },
     "cellranger": {
       "Package": "cellranger",
@@ -1850,7 +1850,7 @@
       "NeedsCompilation": "yes",
       "Author": "Davis Vaughan [aut, cre], Posit Software, PBC [cph, fnd]",
       "Maintainer": "Davis Vaughan <davis@posit.co>",
-      "Repository": "CRAN"
+      "Repository": "https://p3m.dev/cran/2026-01-16"
     },
     "clubSandwich": {
       "Package": "clubSandwich",
@@ -1957,7 +1957,7 @@
       "NeedsCompilation": "no",
       "Author": "Noah Greifer [aut, cre] (ORCID: <https://orcid.org/0000-0003-3067-7154>)",
       "Maintainer": "Noah Greifer <noah.greifer@gmail.com>",
-      "Repository": "CRAN"
+      "Repository": "https://p3m.dev/cran/2026-01-16"
     },
     "codetools": {
       "Package": "codetools",
@@ -2421,7 +2421,7 @@
       "License": "GPL (>= 2)",
       "LazyData": "yes",
       "NeedsCompilation": "no",
-      "Repository": "CRAN",
+      "Repository": "https://p3m.dev/cran/2026-01-16",
       "Encoding": "UTF-8"
     },
     "did": {
@@ -2464,7 +2464,7 @@
       "NeedsCompilation": "no",
       "Author": "Brantly Callaway [aut, cre], Pedro H. C. Sant'Anna [aut]",
       "Maintainer": "Brantly Callaway <brantly.callaway@uga.edu>",
-      "Repository": "CRAN"
+      "Repository": "https://p3m.dev/cran/2026-01-16"
     },
     "digest": {
       "Package": "digest",
@@ -2625,7 +2625,7 @@
       "NeedsCompilation": "no",
       "Author": "Laurent Berge [aut, cre]",
       "Maintainer": "Laurent Berge <laurent.berge@u-bordeaux.fr>",
-      "Repository": "CRAN"
+      "Repository": "https://p3m.dev/cran/2026-01-16"
     },
     "dtplyr": {
       "Package": "dtplyr",
@@ -2756,7 +2756,7 @@
       "NeedsCompilation": "yes",
       "Author": "Graeme Blair [aut, cre], Jasper Cooper [aut], Alexander Coppock [aut], Macartan Humphreys [aut], Luke Sonnet [aut], Neal Fultz [ctb], Lily Medina [ctb], Russell Lenth [ctb], Molly Offer-Westort [ctb]",
       "Maintainer": "Graeme Blair <graeme.blair@gmail.com>",
-      "Repository": "CRAN"
+      "Repository": "https://p3m.dev/cran/2026-01-16"
     },
     "evaluate": {
       "Package": "evaluate",
@@ -2882,7 +2882,7 @@
       "VignetteBuilder": "knitr",
       "NeedsCompilation": "yes",
       "Author": "Jared Huling [aut, cre], Douglas Bates [cph], Dirk Eddelbuettel [cph], Romain Francois [cph], Yixuan Qiu [cph]",
-      "Repository": "CRAN"
+      "Repository": "https://p3m.dev/cran/2026-01-16"
     },
     "fastmap": {
       "Package": "fastmap",
@@ -3203,7 +3203,7 @@
       "NeedsCompilation": "no",
       "Author": "Folashade Daniel [cre], Hong Ooi [ctb], Rich Calaway [ctb], Microsoft [aut, cph], Steve Weston [aut]",
       "Maintainer": "Folashade Daniel <fdaniel@microsoft.com>",
-      "Repository": "CRAN",
+      "Repository": "https://p3m.dev/cran/2026-01-16",
       "Encoding": "UTF-8"
     },
     "fs": {
@@ -3285,7 +3285,7 @@
       "NeedsCompilation": "no",
       "Author": "Henrik Bengtsson [aut, cre, cph] (ORCID: <https://orcid.org/0000-0002-7579-5165>)",
       "Maintainer": "Henrik Bengtsson <henrikb@braju.com>",
-      "Repository": "CRAN"
+      "Repository": "https://p3m.dev/cran/2026-01-16"
     },
     "future.apply": {
       "Package": "future.apply",
@@ -3322,7 +3322,7 @@
       "NeedsCompilation": "no",
       "Author": "Henrik Bengtsson [aut, cre, cph] (ORCID: <https://orcid.org/0000-0002-7579-5165>), R Core Team [cph, ctb]",
       "Maintainer": "Henrik Bengtsson <henrikb@braju.com>",
-      "Repository": "CRAN"
+      "Repository": "https://p3m.dev/cran/2026-01-16"
     },
     "gargle": {
       "Package": "gargle",
@@ -3442,6 +3442,47 @@
       "Maintainer": "Hadley Wickham <hadley@posit.co>",
       "Repository": "https://packagemanager.posit.co/cran/latest"
     },
+    "ggauto": {
+      "Package": "ggauto",
+      "Version": "0.0.1",
+      "Source": "Repository",
+      "Title": "Automatically Create and Style 'ggplot2' Charts",
+      "Authors@R": "person(\"Nicola\", \"Rennie\", , \"nrennie.research@gmail.com\", role = c(\"aut\", \"cre\", \"cph\"))",
+      "Description": "Automatically choose an appropriate chart type based on the types and values in the data. Apply more accessible default styling and colours to 'ggplot2' charts.",
+      "License": "MIT + file LICENSE",
+      "Depends": [
+        "R (>= 4.1)"
+      ],
+      "Imports": [
+        "dplyr",
+        "ggdist",
+        "ggforce",
+        "gghighlight",
+        "ggplot2",
+        "ggrepel",
+        "ggtext",
+        "glue",
+        "khroma",
+        "lemon",
+        "lubridate",
+        "rlang",
+        "scales",
+        "stringr"
+      ],
+      "Suggests": [
+        "knitr",
+        "rmarkdown"
+      ],
+      "Encoding": "UTF-8",
+      "RoxygenNote": "7.3.3",
+      "Config/Needs/website": "nrennie/nrenniepkgdown",
+      "URL": "https://nrennie.rbind.io/ggauto/, http://nrennie.rbind.io/ggauto/",
+      "BugReports": "https://github.com/nrennie/ggauto/issues",
+      "NeedsCompilation": "no",
+      "Author": "Nicola Rennie [aut, cre, cph]",
+      "Maintainer": "Nicola Rennie <nrennie.research@gmail.com>",
+      "Repository": "https://packagemanager.posit.co/cran/2026-04-21"
+    },
     "ggdist": {
       "Package": "ggdist",
       "Version": "3.3.3",
@@ -3508,6 +3549,100 @@
       "NeedsCompilation": "yes",
       "Author": "Matthew Kay [aut, cre], Brenton M. Wiernik [ctb]",
       "Repository": "CRAN"
+    },
+    "ggforce": {
+      "Package": "ggforce",
+      "Version": "0.5.0",
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "Accelerating 'ggplot2'",
+      "Authors@R": "c(person(given = \"Thomas Lin\", family = \"Pedersen\", role = c(\"cre\", \"aut\"), email = \"thomasp85@gmail.com\", comment = c(ORCID = \"0000-0002-5147-4711\")), person(\"RStudio\", role = \"cph\"))",
+      "Maintainer": "Thomas Lin Pedersen <thomasp85@gmail.com>",
+      "Description": "The aim of 'ggplot2' is to aid in visual data investigations. This focus has led to a lack of facilities for composing specialised plots. 'ggforce' aims to be a collection of mainly new stats and geoms that fills this gap. All additional functionality is aimed to come through the official extension system so using 'ggforce' should be a stable experience.",
+      "URL": "https://ggforce.data-imaginist.com, https://github.com/thomasp85/ggforce",
+      "BugReports": "https://github.com/thomasp85/ggforce/issues",
+      "License": "MIT + file LICENSE",
+      "Encoding": "UTF-8",
+      "Depends": [
+        "ggplot2 (>= 3.5.0)",
+        "R (>= 3.3.0)"
+      ],
+      "Imports": [
+        "grid",
+        "scales",
+        "MASS",
+        "tweenr (>= 0.1.5)",
+        "gtable",
+        "rlang",
+        "polyclip",
+        "stats",
+        "grDevices",
+        "tidyselect",
+        "withr",
+        "utils",
+        "lifecycle",
+        "cli",
+        "vctrs",
+        "systemfonts"
+      ],
+      "RoxygenNote": "7.3.2",
+      "LinkingTo": [
+        "cpp11"
+      ],
+      "Suggests": [
+        "sessioninfo",
+        "deldir",
+        "latex2exp",
+        "reshape2",
+        "units (>= 0.8.0)",
+        "covr"
+      ],
+      "Collate": "'aaa.R' 'shape.R' 'arc_bar.R' 'arc.R' 'autodensity.R' 'autohistogram.R' 'autopoint.R' 'bezier.R' 'bspline.R' 'bspline_closed.R' 'circle.R' 'concaveman.R' 'cpp11.R' 'diagonal.R' 'diagonal_wide.R' 'ellipse.R' 'errorbar.R' 'facet_grid_paginate.R' 'facet_matrix.R' 'facet_row.R' 'facet_stereo.R' 'facet_wrap_paginate.R' 'facet_zoom.R' 'ggforce-package.R' 'ggproto-classes.R' 'interpolate.R' 'labeller.R' 'link.R' 'mark_circle.R' 'mark_ellipse.R' 'mark_hull.R' 'mark_label.R' 'mark_rect.R' 'parallel_sets.R' 'position-jitternormal.R' 'position_auto.R' 'position_floatstack.R' 'regon.R' 'scale-depth.R' 'scale-unit.R' 'sina.R' 'spiro.R' 'themes.R' 'trans.R' 'trans_linear.R' 'utilities.R' 'voronoi.R' 'zzz.R'",
+      "NeedsCompilation": "yes",
+      "Author": "Thomas Lin Pedersen [cre, aut] (ORCID: <https://orcid.org/0000-0002-5147-4711>), RStudio [cph]",
+      "Repository": "https://packagemanager.posit.co/cran/2026-04-21"
+    },
+    "gghighlight": {
+      "Package": "gghighlight",
+      "Version": "0.5.0",
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "Highlight Lines and Points in 'ggplot2'",
+      "Authors@R": "person(given = \"Hiroaki\", family = \"Yutani\", role = c(\"aut\", \"cre\"), email = \"yutani.ini@gmail.com\", comment = c(ORCID = \"0000-0002-3385-7233\"))",
+      "Description": "Make it easier to explore data with highlights.",
+      "License": "MIT + file LICENSE",
+      "URL": "https://yutannihilation.github.io/gghighlight/, https://github.com/yutannihilation/gghighlight",
+      "BugReports": "https://github.com/yutannihilation/gghighlight/issues",
+      "Depends": [
+        "ggplot2 (>= 3.3.6)",
+        "R (>= 3.4.0)"
+      ],
+      "Imports": [
+        "dplyr (>= 1.0.4)",
+        "ggrepel",
+        "lifecycle",
+        "purrr",
+        "rlang",
+        "tibble",
+        "scales",
+        "grDevices"
+      ],
+      "Suggests": [
+        "geomtextpath",
+        "knitr",
+        "rmarkdown",
+        "sf",
+        "testthat",
+        "vdiffr (>= 0.3.0)"
+      ],
+      "VignetteBuilder": "knitr",
+      "Encoding": "UTF-8",
+      "RoxygenNote": "7.3.2",
+      "Config/testthat/edition": "3",
+      "NeedsCompilation": "no",
+      "Author": "Hiroaki Yutani [aut, cre] (ORCID: <https://orcid.org/0000-0002-3385-7233>)",
+      "Maintainer": "Hiroaki Yutani <yutani.ini@gmail.com>",
+      "Repository": "https://packagemanager.posit.co/cran/2026-04-21"
     },
     "ggplot2": {
       "Package": "ggplot2",
@@ -3582,6 +3717,97 @@
       "Maintainer": "Thomas Lin Pedersen <thomas.pedersen@posit.co>",
       "Repository": "https://packagemanager.posit.co/cran/latest"
     },
+    "ggrepel": {
+      "Package": "ggrepel",
+      "Version": "0.9.8",
+      "Source": "Repository",
+      "Authors@R": "c( person(\"Kamil\", \"Slowikowski\", email = \"kslowikowski@gmail.com\", role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0000-0002-2843-6370\")), person(\"Teun\", \"van den Brand\", role = \"ctb\", comment = c(ORCID = \"0000-0002-9335-7468\")), person(\"Alicia\", \"Schep\", role = \"ctb\", comment = c(ORCID = \"0000-0002-3915-0618\")), person(\"Sean\", \"Hughes\", role = \"ctb\", comment = c(ORCID = \"0000-0002-9409-9405\")), person(\"Trung Kien\", \"Dang\", role = \"ctb\", comment = c(ORCID = \"0000-0001-7562-6495\")), person(\"Saulius\", \"Lukauskas\", role = \"ctb\"), person(\"Jean-Olivier\", \"Irisson\", role = \"ctb\", comment = c(ORCID = \"0000-0003-4920-3880\")), person(\"Zhian N\", \"Kamvar\", role = \"ctb\", comment = c(ORCID = \"0000-0003-1458-7108\")), person(\"Thompson\", \"Ryan\", role = \"ctb\", comment = c(ORCID = \"0000-0002-0450-8181\")), person(\"Dervieux\", \"Christophe\", role = \"ctb\", comment = c(ORCID = \"0000-0003-4474-2498\")), person(\"Yutani\", \"Hiroaki\", role = \"ctb\"), person(\"Pierre\", \"Gramme\", role = \"ctb\"), person(\"Amir Masoud\", \"Abdol\", role = \"ctb\"), person(\"Malcolm\", \"Barrett\", role = \"ctb\", comment = c(ORCID = \"0000-0003-0299-5825\")), person(\"Robrecht\", \"Cannoodt\", role = \"ctb\", comment = c(ORCID = \"0000-0003-3641-729X\")), person(\"Michał\", \"Krassowski\", role = \"ctb\", comment = c(ORCID = \"0000-0002-9638-7785\")), person(\"Michael\", \"Chirico\", role = \"ctb\", comment = c(ORCID = \"0000-0003-0787-087X\")), person(\"Pedro\", \"Aphalo\", role = \"ctb\", comment = c(ORCID = \"0000-0003-3385-972X\")), person(\"Francis\", \"Barton\", role = \"ctb\") )",
+      "Title": "Automatically Position Non-Overlapping Text Labels with 'ggplot2'",
+      "Description": "Provides text and label geoms for 'ggplot2' that help to avoid overlapping text labels. Labels repel away from each other and away from the data points.",
+      "Depends": [
+        "R (>= 4.1.0)",
+        "ggplot2 (>= 3.5.2)"
+      ],
+      "Imports": [
+        "grid",
+        "Rcpp",
+        "rlang (>= 1.1.6)",
+        "S7",
+        "scales (>= 1.4.0)",
+        "withr (>= 3.0.2)"
+      ],
+      "Suggests": [
+        "knitr",
+        "rmarkdown",
+        "testthat",
+        "svglite",
+        "vdiffr",
+        "gridExtra",
+        "ggpp",
+        "patchwork",
+        "devtools",
+        "prettydoc",
+        "ggbeeswarm",
+        "dplyr",
+        "magrittr",
+        "readr",
+        "stringr",
+        "marquee",
+        "rsvg",
+        "sf"
+      ],
+      "VignetteBuilder": "knitr",
+      "License": "GPL-3 | file LICENSE",
+      "URL": "https://ggrepel.slowkow.com/, https://github.com/slowkow/ggrepel",
+      "BugReports": "https://github.com/slowkow/ggrepel/issues",
+      "RoxygenNote": "7.3.3",
+      "LinkingTo": [
+        "Rcpp"
+      ],
+      "Encoding": "UTF-8",
+      "NeedsCompilation": "yes",
+      "Author": "Kamil Slowikowski [aut, cre] (ORCID: <https://orcid.org/0000-0002-2843-6370>), Teun van den Brand [ctb] (ORCID: <https://orcid.org/0000-0002-9335-7468>), Alicia Schep [ctb] (ORCID: <https://orcid.org/0000-0002-3915-0618>), Sean Hughes [ctb] (ORCID: <https://orcid.org/0000-0002-9409-9405>), Trung Kien Dang [ctb] (ORCID: <https://orcid.org/0000-0001-7562-6495>), Saulius Lukauskas [ctb], Jean-Olivier Irisson [ctb] (ORCID: <https://orcid.org/0000-0003-4920-3880>), Zhian N Kamvar [ctb] (ORCID: <https://orcid.org/0000-0003-1458-7108>), Thompson Ryan [ctb] (ORCID: <https://orcid.org/0000-0002-0450-8181>), Dervieux Christophe [ctb] (ORCID: <https://orcid.org/0000-0003-4474-2498>), Yutani Hiroaki [ctb], Pierre Gramme [ctb], Amir Masoud Abdol [ctb], Malcolm Barrett [ctb] (ORCID: <https://orcid.org/0000-0003-0299-5825>), Robrecht Cannoodt [ctb] (ORCID: <https://orcid.org/0000-0003-3641-729X>), Michał Krassowski [ctb] (ORCID: <https://orcid.org/0000-0002-9638-7785>), Michael Chirico [ctb] (ORCID: <https://orcid.org/0000-0003-0787-087X>), Pedro Aphalo [ctb] (ORCID: <https://orcid.org/0000-0003-3385-972X>), Francis Barton [ctb]",
+      "Maintainer": "Kamil Slowikowski <kslowikowski@gmail.com>",
+      "Repository": "https://packagemanager.posit.co/cran/2026-04-21"
+    },
+    "ggtext": {
+      "Package": "ggtext",
+      "Version": "0.1.2",
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "Improved Text Rendering Support for 'ggplot2'",
+      "Authors@R": "c( person( given = \"Claus O.\", family = \"Wilke\", role = c(\"aut\"), email = \"wilke@austin.utexas.edu\", comment = c(ORCID = \"0000-0002-7470-9261\") ), person( given = \"Brenton M.\", family = \"Wiernik\", role = c(\"aut\", \"cre\"), email = \"brenton@wiernik.org\", comment = c(ORCID = \"0000-0001-9560-6336\", Twitter = \"@bmwiernik\") ) )",
+      "Description": "A 'ggplot2' extension that enables the rendering of complex formatted plot labels (titles, subtitles, facet labels, axis labels, etc.). Text boxes with automatic word wrap are also supported.",
+      "URL": "https://wilkelab.org/ggtext/",
+      "BugReports": "https://github.com/wilkelab/ggtext/issues",
+      "License": "GPL-2",
+      "Depends": [
+        "R (>= 3.5)"
+      ],
+      "Imports": [
+        "ggplot2 (>= 3.3.0)",
+        "grid",
+        "gridtext",
+        "rlang",
+        "scales"
+      ],
+      "Suggests": [
+        "cowplot",
+        "dplyr",
+        "glue",
+        "knitr",
+        "rmarkdown",
+        "testthat",
+        "vdiffr"
+      ],
+      "Encoding": "UTF-8",
+      "RoxygenNote": "7.1.1",
+      "VignetteBuilder": "knitr",
+      "NeedsCompilation": "no",
+      "Author": "Claus O. Wilke [aut] (<https://orcid.org/0000-0002-7470-9261>), Brenton M. Wiernik [aut, cre] (<https://orcid.org/0000-0001-9560-6336>, @bmwiernik)",
+      "Maintainer": "Brenton M. Wiernik <brenton@wiernik.org>",
+      "Repository": "https://packagemanager.posit.co/cran/latest"
+    },
     "globals": {
       "Package": "globals",
       "Version": "0.18.0",
@@ -3606,7 +3832,7 @@
       "NeedsCompilation": "no",
       "Author": "Henrik Bengtsson [aut, cre, cph], Davis Vaughan [ctb]",
       "Maintainer": "Henrik Bengtsson <henrikb@braju.com>",
-      "Repository": "CRAN"
+      "Repository": "https://p3m.dev/cran/2026-01-16"
     },
     "glue": {
       "Package": "glue",
@@ -3767,7 +3993,7 @@
       "RoxygenNote": "7.3.2",
       "NeedsCompilation": "yes",
       "Author": "Mark van der Loo [aut, cre], David Turner [ctb]",
-      "Repository": "CRAN",
+      "Repository": "https://p3m.dev/cran/2026-01-16",
       "Encoding": "UTF-8"
     },
     "gridExtra": {
@@ -3800,6 +4026,49 @@
       "Maintainer": "Baptiste Auguie <baptiste.auguie@gmail.com>",
       "Repository": "https://packagemanager.posit.co/cran/latest",
       "Encoding": "UTF-8"
+    },
+    "gridtext": {
+      "Package": "gridtext",
+      "Version": "0.1.6",
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "Improved Text Rendering Support for 'Grid' Graphics",
+      "Authors@R": "c( person( given = \"Claus O.\", family = \"Wilke\", role = c(\"aut\"), email = \"wilke@austin.utexas.edu\", comment = c(ORCID = \"0000-0002-7470-9261\") ), person( given = \"Brenton M.\", family = \"Wiernik\", role = c(\"aut\", \"cre\"), email = \"brenton@wiernik.org\", comment = c(ORCID = \"0000-0001-9560-6336\", Twitter = \"@bmwiernik\") ) )",
+      "Description": "Provides support for rendering of formatted text using 'grid' graphics. Text can be formatted via a minimal subset of 'Markdown', 'HTML', and inline 'CSS' directives, and it can be rendered both with and without word wrap.",
+      "URL": "https://wilkelab.org/gridtext/",
+      "BugReports": "https://github.com/wilkelab/gridtext/issues",
+      "License": "MIT + file LICENSE",
+      "Depends": [
+        "R (>= 3.5)"
+      ],
+      "Imports": [
+        "curl",
+        "grid",
+        "grDevices",
+        "markdown",
+        "rlang",
+        "Rcpp",
+        "png",
+        "jpeg",
+        "stringr",
+        "xml2"
+      ],
+      "Suggests": [
+        "covr",
+        "knitr",
+        "rmarkdown",
+        "testthat",
+        "vdiffr"
+      ],
+      "LinkingTo": [
+        "Rcpp"
+      ],
+      "Encoding": "UTF-8",
+      "RoxygenNote": "7.1.1",
+      "NeedsCompilation": "yes",
+      "Author": "Claus O. Wilke [aut] (ORCID: <https://orcid.org/0000-0002-7470-9261>), Brenton M. Wiernik [aut, cre] (ORCID: <https://orcid.org/0000-0001-9560-6336>, Twitter: @bmwiernik)",
+      "Maintainer": "Brenton M. Wiernik <brenton@wiernik.org>",
+      "Repository": "https://packagemanager.posit.co/cran/2026-04-21"
     },
     "gtable": {
       "Package": "gtable",
@@ -3886,7 +4155,7 @@
       "NeedsCompilation": "no",
       "Author": "Hannah Frick [aut, cre] (ORCID: <https://orcid.org/0000-0002-6049-5258>), Davis Vaughan [aut], Max Kuhn [aut], Posit Software, PBC [cph, fnd] (ROR: <https://ror.org/03wc8by49>)",
       "Maintainer": "Hannah Frick <hannah@posit.co>",
-      "Repository": "CRAN"
+      "Repository": "https://p3m.dev/cran/2026-01-16"
     },
     "haven": {
       "Package": "haven",
@@ -4041,14 +4310,14 @@
     },
     "hrbrthemes": {
       "Package": "hrbrthemes",
-      "Version": "0.9.5",
-      "Source": "GitHub",
+      "Version": "0.9.3",
+      "Source": "Repository",
       "Type": "Package",
       "Title": "Additional Themes, Theme Components and Utilities for 'ggplot2'",
-      "Date": "2026-10-16",
-      "Authors@R": "c( person(\"Bob\", \"Rudis\", email = \"bob@rud.is\", role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0000-0001-5670-2640\")), person(\"Patrick\", \"Kennedy\", role=c(\"ctb\")), person(\"Philipp\", \"Reiner\", role = c(\"ctb\")), person(\"Dan\", \"Wilson\", email = \"dan@thedatacollective.com.au\", role = c(\"ctb\"), comment = c(\"Secondary axis support\")), person(\"Xavier\", \"Adam\", role = c(\"ctb\")), person(\"Google\", comment = \"Roboto Condensed\", role = c(\"cph\")), person(\"IBM\", comment = \"Plex Sans Font\", role = c(\"cph\")), person(\"Goldman Sachs\", comment = \"Goldman Sans Font\", role = c(\"cph\")), person(\"Impallari Type\", comment = \"Public Sans Font\", role = c(\"cph\")), person(\"Jacob\", \"Barnett\", email = \"jacob.r.barnett@gmail.com\", role = c(\"ctb\")), person(\"Thomas J.\", \"Leeper\", role = c(\"ctb\"), email = \"thosjleeper@gmail.com\", comment = c(ORCID = \"0000-0003-4097-6326\")), person(\"Joris\", \"Meys\", email = \"Joris.Meys@UGent.be\", role = c(\"ctb\")), person(\"Steph\", \"Ango\", role = c(\"ctb\"), comment = \"Flexoki creator\"), person(\"Vercel, Inc.\", role = c(\"cph\"), comment = \"Geist Font\") )",
+      "Date": "2026-04-19",
+      "Authors@R": "c( person(\"Bob\", \"Rudis\", email = \"bob@rud.is\", role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0000-0001-5670-2640\")), person(\"Patrick\", \"Kennedy\", role=c(\"ctb\")), person(\"Philipp\", \"Reiner\", role = c(\"ctb\")), person(\"Dan\", \"Wilson\", email = \"dan@thedatacollective.com.au\", role = c(\"ctb\"), comment = c(\"Secondary axis support\")), person(\"Xavier\", \"Adam\", role = c(\"ctb\")), person(\"Google\", comment = \"Roboto Condensed\", role = c(\"cph\")), person(\"IBM\", comment = \"Plex Sans Font\", role = c(\"cph\")), person(\"Goldman Sachs\", comment = \"Goldman Sans Font\", role = c(\"cph\")), person(\"Impallari Type\", comment = \"Public Sans Font\", role = c(\"cph\")), person(\"Jacob\", \"Barnett\", email = \"jacob.r.barnett@gmail.com\", role = c(\"ctb\")), person(\"Thomas J.\", \"Leeper\", role = c(\"ctb\"), email = \"thosjleeper@gmail.com\", comment = c(ORCID = \"0000-0003-4097-6326\")), person(\"Joris\", \"Meys\", email = \"Joris.Meys@UGent.be\", role = c(\"ctb\")), person(\"Steph\", \"Ango\", role = c(\"ctb\"), comment = \"Flexoki creator\") )",
       "Maintainer": "Bob Rudis <bob@rud.is>",
-      "Description": "A compilation of extra 'ggplot2' themes, scales and utilities, including a spell check function for plot label fields and an overall emphasis on typography. Copies of the 'Google' font 'Roboto Condensed' and the 'Vercel' font 'Geist' are also included.",
+      "Description": "A compilation of extra 'ggplot2' themes, scales and utilities, including a spell check function for plot label fields and an overall emphasis on typography. A copy of the 'Google' font 'Roboto Condensed' is also included.",
       "Copyright": "file inst/COPYRIGHTS",
       "License": "MIT + file LICENSE",
       "Encoding": "UTF-8",
@@ -4075,15 +4344,10 @@
         "magrittr",
         "utils"
       ],
-      "RoxygenNote": "7.3.3",
-      "Roxygen": "list(markdown = TRUE)",
-      "Author": "Bob Rudis [aut, cre] (<https://orcid.org/0000-0001-5670-2640>), Patrick Kennedy [ctb], Philipp Reiner [ctb], Dan Wilson [ctb] (Secondary axis support), Xavier Adam [ctb], Google [cph] (Roboto Condensed), IBM [cph] (Plex Sans Font), Goldman Sachs [cph] (Goldman Sans Font), Impallari Type [cph] (Public Sans Font), Jacob Barnett [ctb], Thomas J. Leeper [ctb] (<https://orcid.org/0000-0003-4097-6326>), Joris Meys [ctb], Steph Ango [ctb] (Flexoki creator), Vercel, Inc. [cph] (Geist Font)",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteUsername": "hrbrmstr",
-      "RemoteRepo": "hrbrthemes",
-      "RemoteRef": "main",
-      "RemoteSha": "c43d64c65f74b5a33f8cc7888702c22dc49add6c"
+      "RoxygenNote": "7.3.2",
+      "NeedsCompilation": "no",
+      "Author": "Bob Rudis [aut, cre] (ORCID: <https://orcid.org/0000-0001-5670-2640>), Patrick Kennedy [ctb], Philipp Reiner [ctb], Dan Wilson [ctb] (Secondary axis support), Xavier Adam [ctb], Google [cph] (Roboto Condensed), IBM [cph] (Plex Sans Font), Goldman Sachs [cph] (Goldman Sans Font), Impallari Type [cph] (Public Sans Font), Jacob Barnett [ctb], Thomas J. Leeper [ctb] (ORCID: <https://orcid.org/0000-0003-4097-6326>), Joris Meys [ctb], Steph Ango [ctb] (Flexoki creator)",
+      "Repository": "RSPM"
     },
     "htmltools": {
       "Package": "htmltools",
@@ -4469,7 +4733,7 @@
       "NeedsCompilation": "yes",
       "Author": "Andrea Peters [aut], Torsten Hothorn [aut, cre], Brian D. Ripley [ctb], Terry Therneau [ctb], Beth Atkinson [ctb]",
       "Maintainer": "Torsten Hothorn <Torsten.Hothorn@R-project.org>",
-      "Repository": "CRAN",
+      "Repository": "https://p3m.dev/cran/2026-01-16",
       "Encoding": "UTF-8"
     },
     "isoband": {
@@ -4535,7 +4799,27 @@
       "NeedsCompilation": "no",
       "Author": "Folashade Daniel [cre], Revolution Analytics [aut, cph], Steve Weston [aut]",
       "Maintainer": "Folashade Daniel <fdaniel@microsoft.com>",
-      "Repository": "CRAN",
+      "Repository": "https://p3m.dev/cran/2026-01-16",
+      "Encoding": "UTF-8"
+    },
+    "jpeg": {
+      "Package": "jpeg",
+      "Version": "0.1-11",
+      "Source": "Repository",
+      "Title": "Read and write JPEG images",
+      "Author": "Simon Urbanek [aut, cre, cph] (https://urbanek.org, <https://orcid.org/0000-0003-2297-1732>)",
+      "Authors@R": "person(\"Simon\", \"Urbanek\", role=c(\"aut\",\"cre\",\"cph\"), email=\"Simon.Urbanek@r-project.org\", comment=c(\"https://urbanek.org\", ORCID=\"0000-0003-2297-1732\"))",
+      "Maintainer": "Simon Urbanek <Simon.Urbanek@r-project.org>",
+      "Depends": [
+        "R (>= 2.9.0)"
+      ],
+      "Description": "This package provides an easy and simple way to read, write and display bitmap images stored in the JPEG format. It can read and write both files and in-memory raw vectors.",
+      "License": "GPL-2 | GPL-3",
+      "SystemRequirements": "libjpeg",
+      "URL": "https://www.rforge.net/jpeg/",
+      "BugReports": "https://github.com/s-u/jpeg/issues",
+      "NeedsCompilation": "yes",
+      "Repository": "https://packagemanager.posit.co/cran/latest",
       "Encoding": "UTF-8"
     },
     "jquerylib": {
@@ -4589,6 +4873,50 @@
       "NeedsCompilation": "yes",
       "Author": "Jeroen Ooms [aut, cre] (<https://orcid.org/0000-0002-4035-0289>), Duncan Temple Lang [ctb], Lloyd Hilaiel [cph] (author of bundled libyajl)",
       "Repository": "https://packagemanager.posit.co/cran/2025-07-31"
+    },
+    "khroma": {
+      "Package": "khroma",
+      "Version": "1.17.0",
+      "Source": "Repository",
+      "Title": "Colour Schemes for Scientific Data Visualization",
+      "Authors@R": "c( person(\"Nicolas\", \"Frerebeau\", , \"nicolas.frerebeau@u-bordeaux-montaigne.fr\", role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0000-0001-5759-4944\")), person(\"Brice\", \"Lebrun\", role = \"art\", comment = c(ORCID = \"0000-0001-7503-8685\", \"Logo designer\")), person(\"Vincent\", \"Arel-Bundock\", , \"vincent.arel-bundock@umontreal.ca\", role = \"ctb\", comment = c(ORCID = \"0000-0003-2042-7063\")), person(\"Ulrik\", \"Stervbo\", , \"ulrik.stervbo@gmail.com\", role = \"ctb\", comment = c(ORCID = \"0000-0002-2831-8868\")), person(\"Université Bordeaux Montaigne\", role = \"fnd\", comment = c(ROR = \"03pbgwk21\")), person(\"CNRS\", role = \"fnd\", comment = c(ROR = \"02feahw73\")) )",
+      "Description": "Color schemes ready for each type of data (qualitative, diverging or sequential), with colors that are distinct for all people, including color-blind readers. This package provides an implementation of Paul Tol (2018) and Fabio Crameri (2018) <doi:10.5194/gmd-11-2541-2018> color schemes for use with 'graphics' or 'ggplot2'. It provides tools to simulate color-blindness and to test how well the colors of any palette are identifiable. Several scientific thematic schemes (geologic timescale, land cover, FAO soils, etc.) are also implemented.",
+      "License": "GPL (>= 3)",
+      "URL": "https://codeberg.org/tesselle/khroma, https://packages.tesselle.org/khroma/, https://tesselle.r-universe.dev/khroma",
+      "BugReports": "https://codeberg.org/tesselle/khroma/issues",
+      "Depends": [
+        "R (>= 3.5.0)"
+      ],
+      "Imports": [
+        "graphics",
+        "grDevices",
+        "grid",
+        "stats",
+        "utils"
+      ],
+      "Suggests": [
+        "fontquiver",
+        "ggplot2",
+        "ggraph",
+        "knitr",
+        "markdown",
+        "rsvg",
+        "scales",
+        "spacesXYZ",
+        "svglite",
+        "tinysnapshot (>= 0.2.0)",
+        "tinytest"
+      ],
+      "VignetteBuilder": "knitr",
+      "Encoding": "UTF-8",
+      "RoxygenNote": "7.3.3",
+      "X-schema.org-isPartOf": "https://www.tesselle.org",
+      "X-schema.org-keywords": "data-visualization, colour-schemes, accessibility, r-package",
+      "Collate": "'change.R' 'color.R' 'compare.R' 'info.R' 'khroma-defunct.R' 'khroma-deprecated.R' 'khroma-internal.R' 'khroma-package.R' 'palettes.R' 'plot.R' 'plot_map.R' 'plot_scheme.R' 'plot_scheme_colorblind.R' 'plot_tiles.R' 'print.R' 'scale_colour_crameri.R' 'scale_colour_okabeito.R' 'scale_colour_picker.R' 'scale_colour_science.R' 'scale_colour_tol.R'",
+      "NeedsCompilation": "no",
+      "Author": "Nicolas Frerebeau [aut, cre] (ORCID: <https://orcid.org/0000-0001-5759-4944>), Brice Lebrun [art] (ORCID: <https://orcid.org/0000-0001-7503-8685>, Logo designer), Vincent Arel-Bundock [ctb] (ORCID: <https://orcid.org/0000-0003-2042-7063>), Ulrik Stervbo [ctb] (ORCID: <https://orcid.org/0000-0002-2831-8868>), Université Bordeaux Montaigne [fnd] (ROR: <https://ror.org/03pbgwk21>), CNRS [fnd] (ROR: <https://ror.org/02feahw73>)",
+      "Maintainer": "Nicolas Frerebeau <nicolas.frerebeau@u-bordeaux-montaigne.fr>",
+      "Repository": "https://packagemanager.posit.co/cran/2026-04-21"
     },
     "knitr": {
       "Package": "knitr",
@@ -4827,7 +5155,7 @@
       "Encoding": "UTF-8",
       "RoxygenNote": "7.3.3",
       "NeedsCompilation": "no",
-      "Repository": "CRAN"
+      "Repository": "https://p3m.dev/cran/2026-01-16"
     },
     "lazyeval": {
       "Package": "lazyeval",
@@ -4944,6 +5272,48 @@
       "NeedsCompilation": "no",
       "Author": "Leslie Huang [aut], Barret Schloerke [ctb, cre] (ORCID: <https://orcid.org/0000-0001-9986-114X>), Leaflet Providers contributors [ctb, cph] (Leaflet Providers plugin), Posit Software, PBC [cph, fnd] (ROR: <https://ror.org/03wc8by49>)",
       "Maintainer": "Barret Schloerke <barret@posit.co>",
+      "Repository": "https://packagemanager.posit.co/cran/2026-04-21"
+    },
+    "lemon": {
+      "Package": "lemon",
+      "Version": "0.5.2",
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "Freshing Up your 'ggplot2' Plots",
+      "URL": "https://github.com/stefanedwards/lemon",
+      "BugReports": "https://github.com/stefanedwards/lemon/issues",
+      "Authors@R": "c( person('Stefan McKinnon', 'Edwards', email='sme@iysik.com', comment=c(ORCID='0000-0002-4628-8148'), role=c('aut','ctb','cre')), person('Baptiste','Auguie', role='ctb', comment='For g_legend and grid_arrange_shared_legend'), person('Shaun','Jackman', role='ctb', comment='For grid_arrange_shared_legend'), person(\"Hadley\", \"Wickham\", , \"hadley@rstudio.com\", \"ctb\", comment='ggplot2 functions'), person(\"Winston\", \"Chang\", , \"winston@rstudio.com\", \"ctb\", comment='ggplot2 functions') )",
+      "Description": "Functions for working with legends and axis lines of 'ggplot2', facets that repeat axis lines on all panels, and some 'knitr' extensions.",
+      "Depends": [
+        "R (>= 3.1.0)"
+      ],
+      "Imports": [
+        "ggplot2 (>= 3.4.2)",
+        "plyr",
+        "grid",
+        "gridExtra",
+        "gtable",
+        "knitr (>= 1.12)",
+        "lattice",
+        "scales"
+      ],
+      "License": "GPL-3",
+      "Encoding": "UTF-8",
+      "RoxygenNote": "7.3.2",
+      "Collate": "'ggplot2.r' 'lemon-plot.r' 'axis-annotation.r' 'brackets.R' 'coord-flex.r' 'coord-capped.r' 'dot.r' 'facet-rep-lab.r' 'facet-wrap.r' 'geom-pointline.r' 'lemon_print.r' 'geom-siderange.r' 'grob_utils.r' 'gtable_show-.r' 'guides-axis.r' 'legends.r' 'lemon.r' 'scale-symmetric.r'",
+      "Suggests": [
+        "rmarkdown",
+        "stringr",
+        "ggh4x",
+        "dplyr",
+        "testthat",
+        "vdiffr",
+        "diffviewer"
+      ],
+      "VignetteBuilder": "knitr",
+      "NeedsCompilation": "no",
+      "Author": "Stefan McKinnon Edwards [aut, ctb, cre] (ORCID: <https://orcid.org/0000-0002-4628-8148>), Baptiste Auguie [ctb] (For g_legend and grid_arrange_shared_legend), Shaun Jackman [ctb] (For grid_arrange_shared_legend), Hadley Wickham [ctb] (ggplot2 functions), Winston Chang [ctb] (ggplot2 functions)",
+      "Maintainer": "Stefan McKinnon Edwards <sme@iysik.com>",
       "Repository": "https://packagemanager.posit.co/cran/2026-04-21"
     },
     "lifecycle": {
@@ -5066,8 +5436,40 @@
       "NeedsCompilation": "no",
       "Author": "Henrik Bengtsson [aut, cre, cph]",
       "Maintainer": "Henrik Bengtsson <henrikb@braju.com>",
-      "Repository": "CRAN",
+      "Repository": "https://p3m.dev/cran/2026-01-16",
       "Encoding": "UTF-8"
+    },
+    "litedown": {
+      "Package": "litedown",
+      "Version": "0.9",
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "A Lightweight Version of R Markdown",
+      "Authors@R": "c( person(\"Yihui\", \"Xie\", role = c(\"aut\", \"cre\"), email = \"xie@yihui.name\", comment = c(ORCID = \"0000-0003-0645-5666\", URL = \"https://yihui.org\")), person(\"Tim\", \"Taylor\", role = \"ctb\", comment = c(ORCID = \"0000-0002-8587-7113\")), person() )",
+      "Description": "Render R Markdown to Markdown (without using 'knitr'), and Markdown to lightweight HTML or 'LaTeX' documents with the 'commonmark' package (instead of 'Pandoc'). Some missing Markdown features in 'commonmark' are also supported, such as raw HTML or 'LaTeX' blocks, 'LaTeX' math, superscripts, subscripts, footnotes, element attributes, and appendices, but not all 'Pandoc' Markdown features are (or will be) supported. With additional JavaScript and CSS, you can also create HTML slides and articles. This package can be viewed as a trimmed-down version of R Markdown and 'knitr'. It does not aim at rich Markdown features or a large variety of output formats (the primary formats are HTML and 'LaTeX'). Book and website projects of multiple input documents are also supported.",
+      "Depends": [
+        "R (>= 3.2.0)"
+      ],
+      "Imports": [
+        "utils",
+        "commonmark (>= 2.0.0)",
+        "xfun (>= 0.55)"
+      ],
+      "Suggests": [
+        "rbibutils",
+        "rstudioapi",
+        "tinytex"
+      ],
+      "License": "MIT + file LICENSE",
+      "URL": "https://github.com/yihui/litedown",
+      "BugReports": "https://github.com/yihui/litedown/issues",
+      "VignetteBuilder": "litedown",
+      "RoxygenNote": "7.3.3",
+      "Encoding": "UTF-8",
+      "NeedsCompilation": "no",
+      "Author": "Yihui Xie [aut, cre] (ORCID: <https://orcid.org/0000-0003-0645-5666>, URL: https://yihui.org), Tim Taylor [ctb] (ORCID: <https://orcid.org/0000-0002-8587-7113>)",
+      "Maintainer": "Yihui Xie <xie@yihui.name>",
+      "Repository": "https://packagemanager.posit.co/cran/2026-04-21"
     },
     "lmtest": {
       "Package": "lmtest",
@@ -5365,6 +5767,38 @@
       "Author": "Vincent Arel-Bundock [aut, cre, cph] (ORCID: <https://orcid.org/0000-0003-2042-7063>), Noah Greifer [ctb] (ORCID: <https://orcid.org/0000-0003-3067-7154>), Etienne Bacher [ctb] (ORCID: <https://orcid.org/0000-0002-9271-5075>), Grant McDermott [ctb] (ORCID: <https://orcid.org/0000-0001-7883-8573>), Andrew Heiss [ctb] (ORCID: <https://orcid.org/0000-0002-3948-3914>)",
       "Maintainer": "Vincent Arel-Bundock <vincent.arel-bundock@umontreal.ca>",
       "Repository": "https://packagemanager.posit.co/cran/2026-04-21"
+    },
+    "markdown": {
+      "Package": "markdown",
+      "Version": "2.0",
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "Render Markdown with 'commonmark'",
+      "Authors@R": "c( person(\"Yihui\", \"Xie\", role = c(\"aut\", \"cre\"), email = \"xie@yihui.name\", comment = c(ORCID = \"0000-0003-0645-5666\")), person(\"JJ\", \"Allaire\", role = \"aut\"), person(\"Jeffrey\", \"Horner\", role = \"aut\"), person(\"Henrik\", \"Bengtsson\", role = \"ctb\"), person(\"Jim\", \"Hester\", role = \"ctb\"), person(\"Yixuan\", \"Qiu\", role = \"ctb\"), person(\"Kohske\", \"Takahashi\", role = \"ctb\"), person(\"Adam\", \"November\", role = \"ctb\"), person(\"Nacho\", \"Caballero\", role = \"ctb\"), person(\"Jeroen\", \"Ooms\", role = \"ctb\"), person(\"Thomas\", \"Leeper\", role = \"ctb\"), person(\"Joe\", \"Cheng\", role = \"ctb\"), person(\"Andrzej\", \"Oles\", role = \"ctb\"), person(given = \"Posit Software, PBC\", role = c(\"cph\", \"fnd\")) )",
+      "Description": "Render Markdown to full and lightweight HTML/LaTeX documents with the 'commonmark' package. This package has been superseded by 'litedown'.",
+      "Depends": [
+        "R (>= 2.11.1)"
+      ],
+      "Imports": [
+        "utils",
+        "xfun",
+        "litedown (>= 0.6)"
+      ],
+      "Suggests": [
+        "knitr",
+        "rmarkdown (>= 2.18)",
+        "yaml",
+        "RCurl"
+      ],
+      "License": "MIT + file LICENSE",
+      "URL": "https://github.com/rstudio/markdown",
+      "BugReports": "https://github.com/rstudio/markdown/issues",
+      "RoxygenNote": "7.3.2",
+      "Encoding": "UTF-8",
+      "NeedsCompilation": "no",
+      "Author": "Yihui Xie [aut, cre] (<https://orcid.org/0000-0003-0645-5666>), JJ Allaire [aut], Jeffrey Horner [aut], Henrik Bengtsson [ctb], Jim Hester [ctb], Yixuan Qiu [ctb], Kohske Takahashi [ctb], Adam November [ctb], Nacho Caballero [ctb], Jeroen Ooms [ctb], Thomas Leeper [ctb], Joe Cheng [ctb], Andrzej Oles [ctb], Posit Software, PBC [cph, fnd]",
+      "Maintainer": "Yihui Xie <xie@yihui.name>",
+      "Repository": "https://packagemanager.posit.co/cran/latest"
     },
     "memoise": {
       "Package": "memoise",
@@ -5787,7 +6221,7 @@
       "NeedsCompilation": "yes",
       "Author": "Xavier Robin [cre, aut] (ORCID: <https://orcid.org/0000-0002-6813-3200>), Natacha Turck [aut], Alexandre Hainard [aut], Natalia Tiberti [aut], Frédérique Lisacek [aut], Jean-Charles Sanchez [aut], Markus Müller [aut], Stefan Siegert [ctb] (Fast DeLong code), Matthias Doering [ctb] (Hand & Till Multiclass), Zane Billings [ctb] (DeLong paired test CI)",
       "Maintainer": "Xavier Robin <pROC-cran@xavier.robin.name>",
-      "Repository": "CRAN"
+      "Repository": "https://p3m.dev/cran/2026-01-16"
     },
     "parallelly": {
       "Package": "parallelly",
@@ -5817,7 +6251,7 @@
       "NeedsCompilation": "yes",
       "Author": "Henrik Bengtsson [aut, cre, cph] (ORCID: <https://orcid.org/0000-0002-7579-5165>), Mike Cheng [ctb]",
       "Maintainer": "Henrik Bengtsson <henrikb@braju.com>",
-      "Repository": "CRAN"
+      "Repository": "https://p3m.dev/cran/2026-01-16"
     },
     "parameters": {
       "Package": "parameters",
@@ -6019,7 +6453,7 @@
       "BugReports": "https://github.com/psolymos/pbapply/issues",
       "NeedsCompilation": "no",
       "Author": "Peter Solymos [aut, cre] (ORCID: <https://orcid.org/0000-0001-7337-1740>), Zygmunt Zawadzki [aut], Henrik Bengtsson [ctb], R Core Team [cph, ctb]",
-      "Repository": "CRAN",
+      "Repository": "https://p3m.dev/cran/2026-01-16",
       "Encoding": "UTF-8"
     },
     "performance": {
@@ -6361,6 +6795,28 @@
       "Repository": "https://packagemanager.posit.co/cran/2026-04-21",
       "Encoding": "UTF-8"
     },
+    "polyclip": {
+      "Package": "polyclip",
+      "Version": "1.10-7",
+      "Source": "Repository",
+      "Date": "2024-07-23",
+      "Title": "Polygon Clipping",
+      "Authors@R": "c(person(\"Angus\", \"Johnson\", role = \"aut\",  comment=\"C++ original, http://www.angusj.com/delphi/clipper.php\"), person(\"Adrian\", \"Baddeley\", role = c(\"aut\", \"trl\", \"cre\"), email = \"Adrian.Baddeley@curtin.edu.au\"), person(\"Kurt\", \"Hornik\", role = \"ctb\"), person(c(\"Brian\", \"D.\"), \"Ripley\", role = \"ctb\"), person(\"Elliott\", \"Sales de Andrade\", role=\"ctb\"), person(\"Paul\", \"Murrell\", role = \"ctb\"), person(\"Ege\", \"Rubak\", role=\"ctb\"), person(\"Mark\", \"Padgham\", role=\"ctb\"))",
+      "Maintainer": "Adrian Baddeley <Adrian.Baddeley@curtin.edu.au>",
+      "Depends": [
+        "R (>= 3.5.0)"
+      ],
+      "Description": "R port of Angus Johnson's open source library 'Clipper'. Performs polygon clipping operations (intersection, union, set minus, set difference) for polygonal regions of arbitrary complexity, including holes. Computes offset polygons (spatial buffer zones, morphological dilations, Minkowski dilations) for polygonal regions and polygonal lines. Computes Minkowski Sum of general polygons. There is a function for removing self-intersections from polygon data.",
+      "License": "BSL",
+      "URL": "https://www.angusj.com, https://sourceforge.net/projects/polyclipping, https://github.com/baddstats/polyclip",
+      "BugReports": "https://github.com/baddstats/polyclip/issues",
+      "ByteCompile": "true",
+      "Note": "built from Clipper C++ version 6.4.0",
+      "NeedsCompilation": "yes",
+      "Author": "Angus Johnson [aut] (C++ original, http://www.angusj.com/delphi/clipper.php), Adrian Baddeley [aut, trl, cre], Kurt Hornik [ctb], Brian D. Ripley [ctb], Elliott Sales de Andrade [ctb], Paul Murrell [ctb], Ege Rubak [ctb], Mark Padgham [ctb]",
+      "Repository": "https://packagemanager.posit.co/cran/2026-04-21",
+      "Encoding": "UTF-8"
+    },
     "prettyunits": {
       "Package": "prettyunits",
       "Version": "1.2.0",
@@ -6464,7 +6920,7 @@
       "RoxygenNote": "7.3.2",
       "NeedsCompilation": "yes",
       "Author": "Thomas A. Gerds [aut, cre]",
-      "Repository": "CRAN",
+      "Repository": "https://p3m.dev/cran/2026-01-16",
       "Encoding": "UTF-8"
     },
     "progress": {
@@ -6988,7 +7444,7 @@
       "NeedsCompilation": "no",
       "Author": "Max Kuhn [aut, cre], Hadley Wickham [aut], Emil Hvitfeldt [aut], Posit Software, PBC [cph, fnd] (ROR: <https://ror.org/03wc8by49>)",
       "Maintainer": "Max Kuhn <max@posit.co>",
-      "Repository": "CRAN"
+      "Repository": "https://p3m.dev/cran/2026-01-16"
     },
     "rematch": {
       "Package": "rematch",
@@ -7175,7 +7631,7 @@
       "NeedsCompilation": "yes",
       "Author": "Hadley Wickham [aut, cre]",
       "Maintainer": "Hadley Wickham <hadley@posit.co>",
-      "Repository": "CRAN"
+      "Repository": "https://p3m.dev/cran/2026-01-16"
     },
     "rex": {
       "Package": "rex",
@@ -7804,7 +8260,7 @@
       "Description": "Functions for plotting graphical shapes such as ellipses, circles, cylinders, arrows, ...",
       "License": "GPL (>= 3)",
       "NeedsCompilation": "no",
-      "Repository": "CRAN",
+      "Repository": "https://p3m.dev/cran/2026-01-16",
       "Encoding": "UTF-8"
     },
     "sp": {
@@ -7885,7 +8341,7 @@
       "NeedsCompilation": "yes",
       "Author": "Emil Hvitfeldt [aut, cre] (ORCID: <https://orcid.org/0000-0002-0679-1945>), Davis Vaughan [ctb], Posit Software, PBC [cph, fnd] (ROR: <https://ror.org/03wc8by49>)",
       "Maintainer": "Emil Hvitfeldt <emil.hvitfeldt@posit.co>",
-      "Repository": "CRAN"
+      "Repository": "https://p3m.dev/cran/2026-01-16"
     },
     "stringi": {
       "Package": "stringi",
@@ -7947,7 +8403,7 @@
       "NeedsCompilation": "yes",
       "Author": "Laurent R Berge [aut, cre] (<https://orcid.org/0000-0003-2736-1917>), Morgan Jacob [ctb]",
       "Maintainer": "Laurent R Berge <laurent.berge@u-bordeaux.fr>",
-      "Repository": "CRAN"
+      "Repository": "https://p3m.dev/cran/2026-01-16"
     },
     "stringr": {
       "Package": "stringr",
@@ -8550,7 +9006,7 @@
       "NeedsCompilation": "no",
       "Author": "Diethelm Wuertz [aut] (original code), Tobias Setz [aut], Yohan Chalabi [aut], Martin Maechler [ctb] (ORCID: <https://orcid.org/0000-0002-8685-9910>), Joe W. Byers [ctb], Georgi N. Boshnakov [cre, aut] (ORCID: <https://orcid.org/0000-0003-2839-346X>)",
       "Maintainer": "Georgi N. Boshnakov <georgi.boshnakov@manchester.ac.uk>",
-      "Repository": "CRAN"
+      "Repository": "https://p3m.dev/cran/2026-01-16"
     },
     "timechange": {
       "Package": "timechange",
@@ -8679,8 +9135,42 @@
       "License": "MIT + file LICENSE",
       "URL": "http://www.stat.umn.edu/geyer/trust/",
       "NeedsCompilation": "no",
-      "Repository": "CRAN",
+      "Repository": "https://p3m.dev/cran/2026-01-16",
       "Encoding": "UTF-8"
+    },
+    "tweenr": {
+      "Package": "tweenr",
+      "Version": "2.0.3",
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "Interpolate Data for Smooth Animations",
+      "Authors@R": "c(person(given = \"Thomas Lin\", family = \"Pedersen\", role = c(\"aut\", \"cre\"), email = \"thomasp85@gmail.com\", comment = c(ORCID = \"0000-0002-5147-4711\")))",
+      "Maintainer": "Thomas Lin Pedersen <thomasp85@gmail.com>",
+      "Description": "In order to create smooth animation between states of data, tweening is necessary. This package provides a range of functions for creating tweened data that can be used as basis for animation. Furthermore  it adds a number of vectorized interpolaters for common R data  types such as numeric, date and colour.",
+      "URL": "https://github.com/thomasp85/tweenr",
+      "BugReports": "https://github.com/thomasp85/tweenr/issues",
+      "License": "MIT + file LICENSE",
+      "Encoding": "UTF-8",
+      "Depends": [
+        "R (>= 3.2.0)"
+      ],
+      "Imports": [
+        "farver",
+        "magrittr",
+        "rlang",
+        "vctrs"
+      ],
+      "LinkingTo": [
+        "cpp11 (>= 0.4.2)"
+      ],
+      "RoxygenNote": "7.2.3",
+      "Suggests": [
+        "testthat",
+        "covr"
+      ],
+      "NeedsCompilation": "yes",
+      "Author": "Thomas Lin Pedersen [aut, cre] (<https://orcid.org/0000-0002-5147-4711>)",
+      "Repository": "https://packagemanager.posit.co/cran/2026-04-21"
     },
     "tzdb": {
       "Package": "tzdb",
