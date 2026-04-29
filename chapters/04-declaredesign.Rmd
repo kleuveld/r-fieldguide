@@ -35,21 +35,20 @@ Read at least the slides before going forward!
 
 This chapter covers power calculations in three designs: 
 a simple comparison of means, a diff-in-diff design, and a matching design.
+
+## Generating data
+
 To start of, we need example data. 
-You can simulate this, but I prefer using existing data.
-Here we use Rhomis data.
+You can either use existing data, or simulate data; 
+or use a combination of the two, which is what I do here.
 
-## Simple Power Calculation
+We use the `fabricatr` package to generate data,
+which is part of the DeclareDesign ecosystem.
 
-The first design we consider is simply a comparison of means.
-We are interested in the effects of a project on the input of fertilizers.
-
-
-### Loading data
-
-Here we take the Rhomis data, and add some variables. 
-(For example, village codes: I create fake ones based on y-cooridnates.)
-
+As a starting-off point, I use [RHoMIS](https://www.rhomis.org/) data,
+which is a large dataset on agricultural households in several countries.
+Here I use Burundi, 
+simply because I used it for a project, and this chapter is based on that work.
 
 ```{r}
 
@@ -58,67 +57,93 @@ library(DeclareDesign)
 library(here)
 
 
-n_clusters = 18
+rhomis_raw <-
+  read_csv(
+    'https://github.com/kleuveld/r-fieldguide/raw/refs/heads/main/data/RHoMIS_Indicators.csv'
+  ) %>%
+  filter(Country == "Burundi") |>
+  filter(!is.na(GPS_LAT)) |> 
+  arrange(GPS_LAT)
+
+```
+
+Now, we just start fabricating! 
+
+For now, we pull columns from the raw data,
+with each new variable of our new data supplied as an argument to `fabricate()`.
+We do some light recoding,
+but we don't actually fabricate data yet:
+that will come once we need a second round of data collection.
+Also note that `fabricatr` comes with
+[a lot of functions](https://declaredesign.org/r/fabricatr/reference/index.html) 
+to generate data from scratch.
+
+
+```{r}
 
 rhomis <-
-  read_csv(here("data/RHoMIS_Indicators.csv")) %>% #names()
-  filter(Country == "Burundi") %>% #count(Livestock_Orientation)
+  fabricate(
+    # first define N (or we could have stated a data frame here)
+    N = nrow(rhomis_raw),
 
-  # split the sample in villages, by lattitude
-  filter(!is.na(GPS_LAT)) %>%
-  arrange(GPS_LAT) %>%
-  mutate(
-    village = rep(
-      1:n_clusters,
-      each = nrow(.) / n_clusters,
-      length.out =  nrow(.)
-    )
-  ) %>%
-  # create some variables
-  mutate(
-    HFIAS_status = factor(
-      HFIAS_status, 
-      levels = c("FoodSecure", "MildlyFI", "ModeratelyFI", "SeverelyFI")
+    # then list all the variables you want!
+    # all these should be vectors of length N
+
+    # village id is just the 18 groups of equal size
+    village = rep(1:18, each = N / 18, length.out = N),
+    hh = 1:N,
+    # food secure and educated are recoded to be binary
+    food_secure =recode_values(
+      rhomis_raw$HFIAS_status,
+      c("FoodSecure", "MildlyFI", "ModeratelyFI") ~ 1,
+      "SeverelyFI"  ~ 0,
+      NA ~ 0
     ),
-    food_secure = 1 * (as.numeric(HFIAS_status) <= 3),
-    educated = 1*(Head_EducationLevel != "No_school"),
-    female = 1* (HouseholdType == "woman_single")
-  ) %>%
-  mutate(hh = row_number()) %>%
-  select(!HFIAS_status) %>%
+    educated = recode_values(
+      rhomis_raw$Head_EducationLevel,
+      "No_school" ~ 0,
+      NA ~0,
+      default = 1
+    ),
+    NFertInput = if_else(
+      is.na(rhomis_raw$NFertInput), 0, rhomis_raw$NFertInput
+    ),
+    LivestockHoldings = rhomis_raw$LivestockHoldings
+  ) |> 
+  as_tibble() # I like tibbles because the print output is nicer
 
-  # there are too many missings in my data;
-  # these seem reasonable to assume to be 0 when missing:
-  mutate(
-    across(
-      c(LandOwned, NFertInput, educated),
-      ~if_else(is.na(.x), 0, .x)
-    )
-  ) %>%
-  select(village, hh, NFertInput, food_secure, educated, LivestockHoldings)
+
 
 
 ```
+
+## Simple Power Calculation
+
+The first design we consider is simply a comparison of means.
+We are interested in the effects of a project on the input of fertilizers.
+
 
 ### Declare Design 
 
 Now it's time to start declaring our design. The first element of the 
 design is the model, using `declare_model()` which essentially is my data.
-`declare_model()` follows the syntax of `fabricate()`: 
-a package that is part of the DeclareDesign ecosystem that allows you to generate fake data.
-In this syntax, instead of using `mutate()` we can just supply new variables 
-after a comma. 
-In this case, I add potential outcomes, using `potential_outcomes()`:
+`declare_model()` follows the syntax of `fabricate()`.
+Note that here I start of with my `rhomis` data object, 
+and not with `N = ...` as before,
+since I already have a data frame with the properties I want.
 
 ```{r}
 
 effect_size_simple <- 70
 
-model_simple <-
-  declare_model(
-    rhomis %>% select(village, NFertInput),
-    potential_outcomes(Y ~ NFertInput + Z * effect_size_simple)
+
+model_simple <- declare_model(
+  rhomis %>% select(village, NFertInput),
+  effect_size = effect_size_simple,
+  potential_outcomes(Y ~ NFertInput + Z * effect_size)
 )
+
+
 
 ```
 
@@ -262,13 +287,15 @@ For this I filter the tibble I created, and pipe it into `ggplot()`:
 
 ```{r}
 
+#options(device = "windows") # On Windows
+
 diagnosis_simple %>%
   filter(diagnosand == "power") %>%
   select(effect_size_simple,power = estimate) %>%
   ggplot(aes(x = effect_size_simple, y = power)) +
     geom_line() +
     geom_point() +
-    geom_hline(yintercept=0.8,linetype=2) 
+    geom_hline(yintercept=0.8,linetype=2)
 
 ```
 
@@ -290,7 +317,6 @@ by a coefficient that we can vary so we can investigate the properties of our de
 
 Here's what I've got (so far), a function that takes a vector,
 converts it to normal space, generates something correlated and maps it back:
-
 
 ```{r}
 
@@ -321,37 +347,60 @@ correlate_var <- function(x, rho) {
 
 
 
-I update my design accordingly, by generating the second year.
-For that, I prefer to use `dplyr`, 
-but it should be possible with `fabricate()` as well.
-I first rename all our time-variant varaible to have `_0` at the end, 
-create a  correlated varaible with `_1` at the end, and then `pivot_longer`.
+So now we have to add a year to our design. 
+This means our model changes: in `fabricatr` terms, we have two levels:
+households and years.
 
+The household level, I create as wide version of our two-year dataset:
+with  `NFertInput_0` based on what we already have,
+and then `NFertInput_1` using `correlate_var()`.
+
+The year level is simply, it just has two values, 0 and 1.
+
+Finally, we create the final data set by crossing these two levels,
+and creating a variable `NFertInput` that takes the value of `NFertInput_0` or `NFertInput_1` depending on the year.
 
 ```{r}
+
 effect_size_dd <- 70
-sd_dd <- 100
 rho_dd <- 0.7
+
 model_dd <- declare_model(
 
-  rhomis %>%
-    select(village, NFertInput) %>%
-    # add one more year
-    rename_with(~ paste0(., "_0"), -village) %>%
-    mutate(
-      NFertInput_1 = correlate_var(NFertInput_0, rho_dd)
-    ) %>%
-    pivot_longer(
-      ends_with(c("_0","_1")), 
-      names_to = c(".value", "t"),
-      names_pattern = "(.*)_([0-9]+)$",
-      values_drop_na = TRUE,
-      names_transform = list(t = as.integer)
+  # first add the household level
+  # including variables for year 0 and 1
+  hh = add_level(
+    N = nrow(rhomis),
+    village = rhomis$village, 
+    NFertInput_0 = rhomis$NFertInput,
+    NFertInput_1 = correlate_var(rhomis$NFertInput, rho_dd)
+  ),
+
+  # then create the year
+  survey_round = add_level(N = 2, nest = FALSE, t = 0:1),
+
+  # and now cross them to create the final data set
+  obs = cross_levels(
+    by = join_using(hh, t),
+    # outcome based on the year
+    NFertInput = if_else(
+      t == 0,
+      NFertInput_0,
+      NFertInput_1
     ),
-    potential_outcomes(Y ~ NFertInput + Z * effect_size_dd)
+    potential_outcomes(Y ~ NFertInput + Z * effect_size_dd),
 
-
+    # then we drop unwanted variables (optional of course)
+    NFertInput_0 = NULL,
+    NFertInput_1 = NULL,
+    obs = NULL,
+    survey_round = NULL
+  )
 )
+
+
+
+
 
 ```
 
@@ -485,11 +534,13 @@ more households than are in my original data set.
 ### Declare Design
 
 The first novel thing is the binary outcome.
-We want an easy to interpret effect size:
+We want an easy-to-interpret effect size:
 a percentage point increase in food secure households.
 This is a bit tricky: before we just added the effect size to everyone. 
 But for binary variables,
-we only change a 0 to a 1 for a certain share of the population.
+we only change a 0 to a 1 for a certain share of the treated population.
+This means the number of 0s we need to flip to 1s depends on the current 
+number of units and the share of 1s in the treatment group.
 Let's just work out how to do that first.
 The function below flips a certain number of 0s to 1, 
 so that the proportion of 1s increases by the effect size.
@@ -507,7 +558,7 @@ flip_zeroes <- function(x, Z, effect) {
   p_target  <- p_current + effect
   n_target_ones  <- round(p_target * sum(Z == 1))
 
-  # figure out which zeros to flip
+  # figure out how many zeros to flip
   n_to_flip <- n_target_ones - n_current_ones
   
   # If nothing to flip, return x
@@ -566,12 +617,16 @@ assignment_matching <- declare_assignment(
 ```
 
 Then we take an extra step: re-sampling.
+This allows us to set an arbitrary sample size, 
+even one that's larger than the original rhomis data, 
+by sampling with replacement from the original data set.
 
-Some notes:
+For this I define a custom step `resampling_matching` that uses a handler function 
+`resample_hhs()`, which does the re-sampling.
+This function is quite complex, and uses some more advanced `tidyverse` functions,
+which are covered in more detail in the data cleaning chapter.
+But the idea of this sampling is that:
 
-- We use `resample_data()` to sample more households than are in our original data set.
-The resulting data set will thus follow the same distribution as our original data, 
-but with more observations.
 - In treatment communities, we only sample from treated households. 
 In control communities, we don't know who would have been treated, 
 so we sample randomly.
@@ -581,8 +636,9 @@ The number differs between treatment and control communities,
 to allow oversampling the control observation to compensate for matching losses.
 To do this, we run the `resample_data()` function separately for treatment and control
 communities,
-using a combination of nest and map2 functions 
-(see [here](https://jennybc.github.io/purrr-tutorial/ls12_different-sized-samples.html)).
+using the `pmap` approach from the [previous chapter](#programming) 
+(for an implementation using a combination of nest and map2 functions,
+see [here](https://jennybc.github.io/purrr-tutorial/ls12_different-sized-samples.html)).
 
 ```{r}
 
@@ -591,25 +647,42 @@ respondents_treat <- 10
 respondents_control <- 15
 
 resample_hhs  <- function(df, communities_per_arm, respondents_treat, 
-                          respondents_control){
-  df %>% 
-    filter(vill_treat == 0 | Z == 1) %>% 
-    mutate(respondents = if_else(Z == 1, respondents_treat, respondents_control)) %>%
-    nest(.by = c(Z, respondents)) %>%
-    mutate(
-      data = map2(
-        data, 
-        respondents, 
-        ~resample_data(
-          .x, 
-          N = c(communities_per_arm,.y), 
-          ID_labels = c("village", "hh"),
-          unique_labels = TRUE
-        )
-      )
-    ) %>% 
-  unnest(data)
+                           respondents_control){
+
+  # first, we prepare the data set:
+  # we only observe treated households in treated communities, 
+  # but all households in control communities: 
+  df <-
+    df |>
+    filter(vill_treat == 0 | Z == 1)
+
+
+  # then, create a df of conditions that we can pmap over
+  # if we want to vary the number communities between the arms, that would be
+  # straightforward to add here as well
+  conditions <- tibble(
+    treat = c(0,1),
+    respondents = c(respondents_control, respondents_treat), 
+    communities = communities_per_arm
+  )
+
+  # finally we pmap to sample for each condition
+  conditions |>
+    pmap(
+      function(treat, respondents, communities){
+        df %>%
+          filter(Z == treat) |>
+          resample_data(
+            N = c(communities, respondents), 
+            ID_labels = c("village", "hh"),
+            unique_labels = TRUE
+          ) |> 
+          as_tibble()
+      }
+    ) |>
+    bind_rows()
 }
+
 
 resampling_matching <- declare_step(
   handler = resample_hhs,
@@ -709,12 +782,13 @@ Then I add two estimator: one that uses PSM ('nearest') and one that uses CEM ('
 so that we can compare these two matching methods in our diagnosis.
 
 ```{r}
+
 estimator_matching_psm <- declare_estimator(
   Z ~ educated + LivestockHoldings,
   handler = label_estimator(custom_match),
   inquiry = "ATE",  # Tie the estimator to the declared inquiry
   label = "Matched PSM",
-  term = "Z",
+  term = "Z"
 )
 
 estimator_matching_cem <- declare_estimator(
@@ -736,6 +810,8 @@ design_matching  <-
   model_matching +  assignment_matching +  resampling_matching + measurement_matching + 
   inquiry_matching + 
   estimator_matching_no_matching + estimator_matching_psm + estimator_matching_cem
+
+
 
 ```
 
