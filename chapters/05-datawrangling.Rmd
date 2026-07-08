@@ -740,15 +740,17 @@ allows you to use [tidy select](https://dplyr.tidyverse.org/reference/dplyr_tidy
 Do note that while this is very flexible, it can be EXTREMELY slow, 
 as all computations are done row by row.
 
-`pmap()` is vectorized, so may be faster, but less easy to read.
-Note that `pmap_dbl()` outputs a vector of numbers (doubles) has two arguments:
+`pmap()` is vectorized, so is noticeably faster than `rowwise()`, 
+but it's also much less easy to read if you're not deep into the `tidyverse`.
+What it basically does, 
+`pmap_dbl()` (the pmap variant that outputs a vector of numbers instead of a list) 
+takes two arguments: 
+- A data frame, the rows of which it will iterate over. 
+Here, I use `pick` to select all age variables, but you could also use `select()` or `across()`.  
+- A function that takes the columns of the data frame as its arguments. 
+Here, I use an anonymous function `\` that uses `(...)` to capture all columns.
 
-- The first is the iterabe object, in this case the current data frame 
-with only the age variables selected. 
-Within dplyr verbs such as mutate, you can use `pick()` to create such a dataframe.
-- The second is an anonymous function (here we use the `\` shorthand to declare one),
-which takes all the variabes in the data frame as its arguments using `(...)`.
-
+ 
 Another useful way to compute row-wise summary statistics,
 is to pivot to long first, and then just use plain-old `summarize()`.
 
