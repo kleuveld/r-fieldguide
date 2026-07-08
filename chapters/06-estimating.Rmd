@@ -700,43 +700,41 @@ and by saving them in a function, you can reuse them easily.
 
 ### Lollipop plot
 
-A lollipop plot is a nice alternative to a bar chart. Here is an example. 
-It uses `reorder` to put the longest lollipops are at the top. 
-
-<!-- , and
-and the `brewur()` function to select four colors from the WUR theme.  -->
-
-I also quite like `theme_ipsum` from `hrbrthemes`:
+A lollipop plot is a nice alternative to a bar chart.
+You can make one by combining `geom_linerange()` and `geom_point()`, 
+using `fct_reorder()` to put the longest lollipops are at the top. 
+Here is an example, in `theme_ipsum()`, from the `hrbrthemes` package, 
+which is a nice clean theme for this kind of plot.
 
 ```{r}
 
 library(hrbrthemes)
 
-N <- nrow(data)
-
 read_csv(here("data/SAFI_clean.csv"), na = "NULL") %>%
-    separate_longer_delim(items_owned, delim = ";") %>%
-    select(items_owned) %>%
-    filter(!is.na(items_owned)) %>%
-    group_by(items_owned) %>%
-    summarize(Count = n() / N) %>%
-    mutate(items_owned = reorder(items_owned, Count)) %>%
-    ggplot(aes(x = Count, y = items_owned)) +
-    geom_linerange(
-      aes(y = items_owned, xmin = 0, xmax = Count),
-      color = "gray"
-    ) +
-    geom_point(
-      aes(x = Count, y = items_owned), 
-      size = 4, 
-      position = position_dodge(width = 0.5),
-      # color = brewur()[[1]]
-    ) +
-    theme_ipsum() + 
-    scale_x_continuous(labels = scales::percent_format()) +
-    labs(
-      title = "Look at this graph",
-      subtitle = "People love radios, phones, and a good plough")
+  mutate(N = nrow(.)) %>% 
+  separate_longer_delim(items_owned, delim = ";") %>%
+  select(items_owned, N) %>% 
+  filter(!is.na(items_owned)) %>% 
+  summarize(Count = n() / first(N), .by = items_owned) %>%
+  mutate(items_owned = fct_reorder(items_owned, Count)) %>%
+  ggplot(aes(x = Count, y = items_owned)) +
+  geom_linerange(
+    aes(y = items_owned, xmin = 0, xmax = Count),
+    color = "gray"
+  ) +
+  geom_point(
+    aes(x = Count, y = items_owned), 
+    size = 4, 
+    position = position_dodge(width = 0.5),
+    color = "steelblue"
+  ) +
+  theme_ipsum(grid = "X") + 
+  scale_x_continuous(labels = scales::percent_format()) +
+  theme(plot.title.position = "plot") +
+  labs(
+    title = "Look at this graph",
+    subtitle = "People love radios, phones, and a good plough", 
+    y = "Item", x = "Percent of households owning item")
 
 ```
 

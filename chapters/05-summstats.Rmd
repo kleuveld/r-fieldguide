@@ -1,0 +1,14 @@
+# Summary statistics
+
+## Tables
+
+table1
+balance table
+t
+## Plots
+
+maps
+discrete: stacked bar charts and lollipop charts
+continuous: ridge plots and ggdist
+ggauto 
+<!--- ggauto--->
