@@ -23,7 +23,7 @@
 <meta name="author" content="Koen Leuveld-Postma" />
 
 
-<meta name="date" content="2026-04-17" />
+<meta name="date" content="2026-07-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -447,7 +447,7 @@ things. The previous was just declaration!</p>
 ## 
 ## Added variable: Y 
 ##  min median   mean  max     sd N_missing N_unique
-##    0     70 107.46 7570 468.41         0       59
+##    0     70 107.46 7500 465.42         0       59
 ## 
 ## Step 5 (estimator): declare_estimator(Y ~ Z, clusters = village, inquiry = &quot;ATE&quot;, term = &quot;Z&quot;, label = &quot;Simple&quot;) 
 ## 
@@ -455,7 +455,7 @@ things. The previous was just declaration!</p>
 ## 
 ## A single draw of the estimator:
 ##  term estimator estimate std.error statistic   p.value  conf.low conf.high
-##     Z    Simple 104.7459  61.32274  1.708108 0.1069577 -25.26167  234.7534
+##     Z    Simple 25.12828  60.23699  0.417157 0.6821118 -102.5774   152.834
 ##        df outcome inquiry
 ##  15.98618       Y     ATE</code></pre>
 </div>
@@ -485,7 +485,7 @@ find a statistically significant effect.</p>
 <div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="declaredesign.html#cb63-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
 <span id="cb63-2"><a href="declaredesign.html#cb63-2" tabindex="-1"></a><span class="fu">diagnose_design</span>(design_simple)</span></code></pre></div>
 <pre><code>## 
-## Research design diagnosis based on 500 simulations. Diagnosis completed in 5 secs. Diagnosand estimates with bootstrapped standard errors in parentheses (100 replicates).
+## Research design diagnosis based on 500 simulations. Diagnosis completed in 4 secs. Diagnosand estimates with bootstrapped standard errors in parentheses (100 replicates).
 ## 
 ##         Design Inquiry Estimator Outcome Term N Sims Mean Estimand
 ##  design_simple     ATE    Simple       Y    Z    500         70.00

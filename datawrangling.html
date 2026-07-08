@@ -23,7 +23,7 @@
 <meta name="author" content="Koen Leuveld-Postma" />
 
 
-<meta name="date" content="2026-04-17" />
+<meta name="date" content="2026-07-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1163,15 +1163,15 @@ to get a bunch of variables into any function you want:</p>
 allows you to use <a href="https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html">tidy select</a> syntax within any function.
 Do note that while this is very flexible, it can be EXTREMELY slow,
 as all computations are done row by row.</p>
-<p><code>pmap()</code> is vectorized, so may be faster, but less easy to read.
-Note that <code>pmap_dbl()</code> outputs a vector of numbers (doubles) has two arguments:</p>
-<ul>
-<li>The first is the iterabe object, in this case the current data frame
-with only the age variables selected.
-Within dplyr verbs such as mutate, you can use <code>pick()</code> to create such a dataframe.</li>
-<li>The second is an anonymous function (here we use the <code>\</code> shorthand to declare one),
-which takes all the variabes in the data frame as its arguments using <code>(...)</code>.</li>
-</ul>
+<p><code>pmap()</code> is vectorized, so is noticeably faster than <code>rowwise()</code>,
+but it’s also much less easy to read if you’re not deep into the <code>tidyverse</code>.
+What it basically does,
+<code>pmap_dbl()</code> (the pmap variant that outputs a vector of numbers instead of a list)
+takes two arguments:
+- A data frame, the rows of which it will iterate over.
+Here, I use <code>pick</code> to select all age variables, but you could also use <code>select()</code> or <code>across()</code>.<br />
+- A function that takes the columns of the data frame as its arguments.
+Here, I use an anonymous function <code>\</code> that uses <code>(...)</code> to capture all columns.</p>
 <p>Another useful way to compute row-wise summary statistics,
 is to pivot to long first, and then just use plain-old <code>summarize()</code>.</p>
 </div>
