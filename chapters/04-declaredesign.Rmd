@@ -8,6 +8,9 @@ rm(list = ls())
 run_diagnosis <- FALSE
 
 
+
+
+
 ```
 
 # (PART\*) Part 2: phases of your research {-}
@@ -64,6 +67,11 @@ rhomis_raw <-
   filter(Country == "Burundi") |>
   filter(!is.na(GPS_LAT)) |> 
   arrange(GPS_LAT)
+
+
+rhomis_raw |>
+  summarize(land = mean(LandOwned, na.rm = TRUE), .by = c(Head_EducationLevel, HouseholdType)) |>
+ggauto(Head_EducationLevel, HouseholdType, land)
 
 ```
 
@@ -286,8 +294,6 @@ Now, I want a nice plot.
 For this I filter the tibble I created, and pipe it into `ggplot()`:
 
 ```{r}
-
-#options(device = "windows") # On Windows
 
 diagnosis_simple %>%
   filter(diagnosand == "power") %>%
@@ -524,22 +530,27 @@ But honestly, I am suprised with how small the differences are.
 ## Matching
 
 Finally, let's imagine a scenario where treatment isn't random,
-but correlated to outcomes, so we would need matching. 
+but correlated to outcomes, so we would to do some sort of matching procedure. 
+But which one? Let's do two and see which performs better!
 
-Let's also look at `food_secure`, since it's binary, and thus adds a twist here and there.
-
-Also, I will use the `resample_data()` function to pretend that we can visit 
-more households than are in my original data set.
+Let's also look at `food_secure`,
+since it's binary, and thus adds a twist here and there.
+As a final added bit of complexity, 
+I will use the `resample_data()` function to increase our sample size beyond 
+the original data set.
 
 ### Declare Design
 
 The first novel thing is the binary outcome.
 We want an easy-to-interpret effect size:
 a percentage point increase in food secure households.
+So if the fraction of food secure households in the control group is 0.3, 
+and the effect size is 0.1, 
+then we want to end up with 0.4 in the treatment group.
 This is a bit tricky: before we just added the effect size to everyone. 
 But for binary variables,
 we only change a 0 to a 1 for a certain share of the treated population.
-This means the number of 0s we need to flip to 1s depends on the current 
+And the number of 0s we need to flip to 1s depends on the current 
 number of units and the share of 1s in the treatment group.
 Let's just work out how to do that first.
 The function below flips a certain number of 0s to 1, 
@@ -683,7 +694,6 @@ resample_hhs  <- function(df, communities_per_arm, respondents_treat,
     bind_rows()
 }
 
-
 resampling_matching <- declare_step(
   handler = resample_hhs,
   communities_per_arm = communities_per_arm,
@@ -698,7 +708,7 @@ I defined my treatment effects as a percentage point increase in food secure hou
 So if the percentage of food insecure households is very large relative to the effect size,
 the chance an individual household become food insecure is low.
 This messes with potential outcomes, 
-as the effect on each individal depends on the means in the treatment group, 
+as the effect on each individual depends on the means in the treatment group, 
 and thus on the randomization.
 I therefore skip the potential outcomes, 
 and just define my estimand as the effect size.
@@ -731,14 +741,15 @@ estimator_matching_no_matching <-
 ```
 
 Finally, I need to somehow put my matching model in DeclareDesign.
-Fortunately, you can put any the output of any function into the `declare_estimator()` function 
+Fortunately, 
+you can use the output of any function in `declare_estimator()`, 
 using the `handler` argument. 
-It does need to accept a `data` argument, 
-and output a [`tidy()`](https://broom.tidymodels.org/articles/broom.html) dataframe.
+The handler function simply needs to accept a `data` argument, 
+and output a [`tidy()`](https://broom.tidymodels.org/articles/broom.html) dataframe
+of the estimation results.
 
 My function `custom_match()` accepts a data frame, uses `MatchIt` to create
-a matched data set,
-I define a function that does that, and some labelling:
+a matched data set, and then runs the regression on the matched data.
 
 ```{r}
 
@@ -758,9 +769,12 @@ custom_match <- function(data,
   term_value <- term
 
   # run the matching model
-  matchit_model <- matchit(equation,
-                          data = data,
-                         method = method)
+  matchit_model <-
+    matchit(
+      equation,
+      data = data,
+      method = method
+    )
   matched_df <- match.data(matchit_model)
 
   # run a regression, weighted by the propensity score
@@ -778,7 +792,7 @@ custom_match <- function(data,
 
 ```
 
-Then I add two estimator: one that uses PSM ('nearest') and one that uses CEM ('cem'),
+Then I add two estimators: one that uses PSM ('nearest') and one that uses CEM ('cem'),
 so that we can compare these two matching methods in our diagnosis.
 
 ```{r}
@@ -807,8 +821,8 @@ And let's combine it into one design!
 ```{r}
 
 design_matching  <-
-  model_matching +  assignment_matching +  resampling_matching + measurement_matching + 
-  inquiry_matching + 
+  model_matching +  assignment_matching +  resampling_matching + 
+  measurement_matching +   inquiry_matching + 
   estimator_matching_no_matching + estimator_matching_psm + estimator_matching_cem
 
 
