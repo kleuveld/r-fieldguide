@@ -37,7 +37,7 @@ This website is intended as a quick reference for some techniques
 that I think people may need to keep their code reproducible
 when cleaning, analyzing, or presenting data. 
 The main audience is me, but I think it may be useful for other people as well,
-especialy those doing work similar to me: 
+especially those doing work similar to me: 
 analyzing household survey data.
 It is not intended as a quick-start guide to R. 
 For that, try 
@@ -55,15 +55,26 @@ for any research work, you should to be able to show how you arrived
 at your results.
 That means other people -- co-authors, reviewers, seniors, etc. -- 
 should be able to take your code and data, 
-and arrive at the same results.
+and run it on their machines.
+This mainly means organizing your files well, in a project-oriented way.
+Then once they have your files and code running,
+they should be able to understand what you did, 
+and be able to modify it to test the robustness of your results.
+For this, 
+the code itself should be well-organized and readable.
+Of course, 
+even if you never send the code to anyone, 
+you yourself should be able to understand the code:
+if there are mistakes in there, you should be able to find them and fix them.
+Because your name is on the paper, you are responsible for the results.
+That's the main thrust of this website: 
+writing R code that is reproducible and readable to reduce the risk of sloppy science.
 
-For these other people to make sense of your code, 
-it should be well-organized and readable.
-Such code has more advantages than just research integrity: 
+It turns out that well-organized and readable code has more advantages than just research integrity: 
 because it is easier to understand,
 it's easier to modify and re-use. 
-It turns out that while my projects are one-off, 
-every projects involves activities that I need to repeat
+While my projects are one-off, 
+every project involves activities that I will need to repeat
 in future projects.
 Making sure my code can easily be repurposed by changing a few
 parameters is thus worthwhile just because of the time it saves me.
@@ -71,9 +82,7 @@ Moreover, such code is less likely to produce wrong results.
 Errors are easier to spot, 
 and the code tends to make fewer assumptions about the data, 
 because it has to work with different datasets.
-
-In short, 
-non-reproducible code increases the risk of sloppy science.
+Which further helps with the integrity of the research.
 
 
 ## Packages used in this site
@@ -82,11 +91,11 @@ Throughout this site, I will mostly make use of `tidyverse` packages.
 While there are alternatives,
 such as `data.table` which is faster,
 `tidyverse` makes writing and reading code easy and quick,
-which is imortant from a reproducibility perspective.
+which is important from a reproducibility perspective.
 Moreover, we are not so concerned with performance, 
 since household survey datasets are almost never large enough for that matter.
 
-To provide easy access to the pacakges used in this site, 
+To provide easy access to the packages used in this site, 
 as well as all data,
 everything is available on [github](https://github.com/kleuveld/r_cheatsheet).
 So if you want all code and data follow the following steps:

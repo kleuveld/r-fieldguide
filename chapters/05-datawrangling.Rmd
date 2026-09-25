@@ -494,7 +494,7 @@ wide_data %>%
   mutate(
     across(
       .cols = starts_with("age_"),
-      .fns = function(var) if_else(var == -99,NA, var)
+      .fns = function(var) if_else(var == -99, NA, var)
     )
   )
 
@@ -525,9 +525,9 @@ factor_data <-
   fabricate(
     N = num_obs * num_vars,
     n = 1:N,
-    key_ID = ceiling(n/num_vars),
-    var = rep(1:num_vars, N/num_vars),
-    value = as_factor(sample(c("yes", "no"),N, replace = TRUE))
+    key_ID = ceiling(n / num_vars),
+    var = rep(1:num_vars, N / num_vars),
+    value = as_factor(sample(c("yes", "no"), N, replace = TRUE))
   ) %>% 
   # and then turn it to wide to create num_var factor variables
   pivot_wider(
@@ -544,23 +544,24 @@ factor_data %>% glimpse()
 
 Then we need to select all columns that solely consist of "yes" and "no" values,
  and convert them to 1s and 0s.
-The `where` function can do this, 
-by using `setequal()` to compare the levels of factors to the vector `c("yes","no")`:
+We use across again:
+
+- `.cols`: we use `where` to select all variables that meet a certain condition. 
+In thise case the `levels()` of the factor variable should be equal to `c("yes","no")`.
+We use `setequal()` to check this, as it ignores the order of the levels. 
+- `.fns`: we use an inline function (defined with `\`) to convert the factor to a 
+dummy variable.
+  
 
 ```{r}
 
 factor_data %>%
-  mutate(key_ID = as.character(key_ID)) %>%
   mutate(
     across(
-      where(~setequal(levels(.x), c("yes", "no"))),
-      ~as.integer(.x == "yes")
+      .cols = where(~setequal(levels(.x), c("yes", "no"))),
+      .fns = \(var) as.integer(var == "yes")
     )
   ) %>%
-  mutate(across(
-    where(~setequal(unique(.x), 0:1)),
-    ~factor(.x, levels = c(0, 1), labels = c("no", "yes"))
-  ))
   glimpse()
 
 ```
