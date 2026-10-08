@@ -1,14 +1,675 @@
 # Summary statistics
 
-## Tables
+Getting a sense of your data can be daunting, especially if you have a lot of variables.
+This chapter is intended to give some quick examples of tables and plots that often
+come back when exploring your data and when making reports.
 
-table1
-balance table
-t
+
+## Generating some fake data
+
+First we make a fake intervention aimed at improving fertilizer adoption.
+Adoption depends on the treatment and education and a random component.
+The page on [DeclareDesign](#declaredesign) has more advanced techniques
+to generate fake data.
+
+```{r}
+
+library(tidyverse)
+library(here)
+library(modelsummary)
+library(flextable)
+library(estimatr)
+library(ggauto)
+
+rm(list=ls())
+set.seed(1)
+
+data <-  
+  read_csv(here("data/SAFI_clean.csv"), na = "NULL") %>%
+  left_join(
+    {.} %>%
+    select(village) %>%
+    distinct(village) %>%
+    mutate(
+      treatment = rbinom(nrow(.),1,0.5))
+  )%>%
+  mutate(
+    educated = rbinom(nrow(.),1,0.3),      
+    u = sample(c(0.1,0.2,0.3),nrow(.),replace = TRUE),
+    prob = 0.3 * treatment + 0.1 * educated + u,
+    uses_fertilizer = rbinom(nrow(.),1,prob),
+    treatment = factor(treatment, levels = c(0,1), labels = c("Control","Treatment")),
+    uses_fertilizer = factor(uses_fertilizer, levels = c(0,1), labels = c("No Fertilizer","Fertilizer")),
+
+  ) %>%
+  select(-prob,-u) 
+
+```
+
+
+
+
+
+## Making a table of summary statistics
+
+### Using modelsummary and flextable
+
+The `modelsummary` package is the most convenient to create tables. To convert them
+to word, I use the `flextable` package.
+
+For a simple table of descriptive statistics, use the `datasummary()` function. 
+I also
+define a vector with variable labels, which I use throughout this chapter. Below, I use
+it in the `labelizor()` function, which applies labels to a flextable object. 
+I also 
+apply the `autofit()` and `fix_border_issues()` functions to make the table look nicer.
+
+
+```{r}
+
+library(modelsummary)
+library(flextable)
+
+# vector for labelling variable names
+labels = c(no_membrs = "# HH Members",
+           years_liv = "Year in village",
+           rooms = "# Rooms",
+           liv_count = "# Livestock",
+           no_meals = "# Meals",
+           treatment = "Treated",
+           educated = "Educated",
+           uses_fertilizer = "Uses fertilizer",
+           `(Intercept)` = "Constant")
+
+# descriptive stats
+data %>%
+  select(where(is.numeric), -ends_with("ID")) %>%
+  datasummary(All(.) ~ Mean + SD + min + max + Histogram , data = ., output = "flextable") %>%
+  labelizor(j =1,labels = labels, part = "all")%>% 
+  fix_border_issues() %>% 
+  autofit()
+
+```
+
+Flextables can be easily exported to Word using the `save_as_docx()` function.
+
+
+### Balance Table
+
+Using `modelsummary`'s `datasummary_balance()` table function, it is easy
+to create a balance table:
+
+```{r}
+
+treat_labels <- c("0" = "Control", "1" = "Treated")
+
+# balance table
+data %>%
+  select(where(is.numeric), -ends_with("ID")) %>%
+  datasummary_balance( ~ treatment , data = ., 
+                      output = "flextable", stars = TRUE, 
+                      dinm = TRUE, dinm_statistic = "p.value") %>%
+  labelizor(j =1,labels = labels, part = "all")%>%
+  labelizor(labels = treat_labels, part = "header")%>% 
+  fix_border_issues() %>% 
+  autofit()
+
+```
+
+### Advanced: Using only Flextable
+
+For more control, the flextable package can convert data frames into good-looking tables using the 
+`tabulator()` function.
+
+First, make a data frame with summary statistics. 
+I duplicate the data set using `bind_rows()` to create an overall group. 
+Then I use 
+[`summarize(across(...))`](https://dplyr.tidyverse.org/reference/across.html)
+to apply summarizing functions to a number of variables. 
+
+```{r}
+
+summstats <-
+  bind_rows(
+    data,
+    data |>
+      mutate(treatment = "Overall")
+  ) |> 
+  mutate(
+    treatment = factor(
+      treatment, levels = c("Control", "Treatment", "Overall")
+    )
+  ) |> 
+  select(where(is.numeric),treatment,-key_ID) |>
+  summarize(
+    across(
+      .cols = everything(),
+      .fns = list(
+        # this list defines the summary statistics to be calculated for each variable
+        n =  ~sum(!is.na(.x)),
+        nmiss =  \(x) sum(is.na(x)), # another way of writing an anonymous function
+        mean = function (x) mean(x,na.rm=TRUE), # or like this!
+        sd = ~sd(.x,na.rm=TRUE),
+        min =  ~min(.x,na.rm=TRUE),
+        max =  ~max(.x,na.rm=TRUE),
+        iqr =  ~IQR(.x,na.rm=TRUE)
+      ),
+      .names =  "{.col}-{.fn}"
+    ),
+    .by = treatment
+  ) %>%
+  pivot_longer(cols = -treatment,
+                 names_to = c("Variable",".value"),
+                 names_sep="-") 
+
+
+
+summstats
+
+
+
+
+```
+
+
+Then use I flextable's `tabulator()` to make output that looks good in word. 
+
+I've added a bunch of statistics to show the flexibility:
+
+```{r}
+
+library(flextable)
+
+summstats %>%
+  tabulator(
+    rows = "Variable",
+    columns = "treatment",
+    `N` = as_paragraph(as_chunk(n - nmiss, digits=0)),
+    `Mean (SD)` = as_paragraph(
+      as_chunk(fmt_avg_dev(mean, sd, digit1 = 2, digit2 = 2))
+    ),
+    Range = as_paragraph(as_chunk(min,digits=3), "-", as_chunk(max,digits=3))) |>
+  as_flextable()
+
+
+```
+
+To add a column with differences, I first define a 
+[function](#functions) to compute the differences (I use a regression 
+rather than a ttest, so I can cluster my standard errors etc. to this if
+I need to). 
+Then I use 
+[`summarize(across(...))`](https://dplyr.tidyverse.org/reference/across.html) 
+in much the same way as above, now to create a dataframe called `difcol`. 
+
+```{r}
+
+library(estimatr)
+
+get_diffs <- function(equation, clusters = NULL, weights = NULL, std.error = FALSE){
+
+  reg <-  
+    lm_robust(equation, clusters = {{ clusters }}, weights = {{ weights }}) %>% 
+    broom::tidy()
+
+  estimate <- round(reg[2,2],2)
+
+  p <- reg[2,5]
+
+  stars = case_when(p < 0.001 ~ "***",
+                    p < 0.01 ~ "**",
+                    p < 0.05 ~ "*",
+                    .default = "" )
+
+    paste0(estimate,stars)
+  
+}
+
+difcol <-
+  data %>%
+  select(where(is.numeric),-key_ID,treatment,village) %>%
+  summarize(across(.cols = c(everything(), -treatment, -village),
+                   .fns = ~get_diffs(.x ~ treatment, clusters = village))) %>% 
+  pivot_longer(cols =everything(),
+               names_to = "Variable",
+               values_to="Difference")  
+
+
+
+```
+
+Then, all I have to do is add it to `tabulator()` using its `datasup_last` 
+argument. Below, I also use a few other flextable function to make the 
+table nicer. In particular, `labelizor()` to add variable
+labels, for which I use the named vector I defined above.
+
+```{r}
+
+descriptive_table_flex <-
+  summstats %>%
+  tabulator(rows = "Variable",
+            columns = "treatment",
+            datasup_last = difcol,
+            `N` = as_paragraph(as_chunk(n,digits=0)),
+            `Mean (SD)` =  as_paragraph(as_chunk(fmt_avg_dev(mean, sd, digit1=2,digit2 = 2)))) %>%
+  as_flextable()  %>%
+  labelizor(j = "Variable", labels = labels, part = "body") %>% 
+  fix_border_issues() %>% 
+  autofit()
+
+descriptive_table_flex
+
+```
+
+Again, to save it as a word file, use
+`save_as_docx(path = "my/file.docx")`.
+
+
 ## Plots
+
+### Quick plots
+
+Can be made using `ggauto()`, which picks sensible defaults for plot type, colors etc.
+
+Here's two factors:
+
+```{r}
+glimpse(data)
+
+data |>
+  ggauto(treatment, uses_fertilizer)
+
+```
+
+A factor and continuous variable:
+
+```{r}
+data |>
+  ggauto(treatment, no_membrs)
+  
+```
+
+
+
+
 
 maps
 discrete: stacked bar charts and lollipop charts
 continuous: ridge plots and ggdist
 ggauto 
 <!--- ggauto--->
+
+
+
+
+
+## Plots
+
+To make plots, use `ggplot2`. 
+Plenty of help out there, here's some examples, using the following data:
+
+```{r}
+plot_data <- 
+  read_csv(here("data/SAFI_clean.csv"), na = "NULL") %>%
+    separate_longer_delim(items_owned, delim = ";") %>%
+    mutate(value = 1) %>%
+    pivot_wider(names_from = items_owned,
+                values_from = value,
+                names_glue = "owns_{items_owned}",
+                values_fill = 0) %>%
+    rowwise %>%
+    select(-"owns_NA") %>%
+    mutate(number_items = sum(c_across(starts_with("owns_"))))  
+```
+
+### Faceting {#faceting}
+
+Faceting allows splitting a graph in multiple parts:
+
+```{r}
+
+plot_data %>%
+    group_by(village) %>%
+    summarize(across(.cols = starts_with("owns_"),
+                     .fns = ~sum(.x,na.rm=TRUE) / n() * 100,
+                     .names = "{str_replace(.col, 'owns_', '')}")) %>%
+    pivot_longer(-village, names_to = "items", values_to = "percent") %>%
+    ggplot(aes(x = village, y = percent)) +
+        geom_bar(stat = "identity", position = "dodge") +
+        facet_wrap(~ items) +
+        theme_bw() +
+        theme(panel.grid = element_blank())
+
+
+```
+
+Note that the `.names` argument to `summarize(across())` is specified as a 
+[glue string](https://glue.tidyverse.org/) that uses `str_replace()` to cut off the `"owns_"` 
+bit of the column names.
+
+For more control, look into [patchwork](https://patchwork.data-imaginist.com/).
+
+### Continuous
+
+
+#### Auto
+
+`[ggauto](https://nrennie.rbind.io/ggauto/)` has a bunch of sensible defaults for plotting different types of variables.
+So each section will start with that.
+
+The default for a single variable is a raincloud plot:
+```{r}
+
+library(fabricatr)
+
+  fabricate(
+    N = 100,
+    x = rnorm(N),
+  ) |>
+  ggauto(x)
+
+
+```
+
+Or a scatter plot for two:
+
+```{r}
+
+library(fabricatr)
+
+  fabricate(
+    N = 100,
+    x = rnorm(N),
+    y = 5 + rnorm(N)
+  ) |>
+  ggauto(x, y)
+  
+
+
+
+```
+
+Or two raincloud plots for a categorical variable and a continuous variable.
+
+```{r}
+  fabricate(
+    N = 100,
+    cat = sample(c("a", "b"), N, replace = TRUE),
+    x = rnorm(N) + (cat == "a"),
+  ) |>
+  ggauto(cat, x)
+
+```
+
+
+`[ggdist](https://mjskay.github.io/ggdist/index.html)` has a variety of geoms for visualizing distributions. 
+
+The standard is the `stat_slabinterval()`, 
+which is the cloud part of the raincloud plot,
+combined below with `geom_weave()`, the rain drops.
+
+Honestly, it doesn't look as good out of the box as `ggauto`, 
+but it allows for a lot more flexibility. 
+I also like lines:
+a thin one between the 5th and 95th percentiles,
+a thick one between the 25th and 75th as well as a dot at the median, 
+which further helps in assessing the distribution of the data.
+
+```{r}
+
+library(ggdist)
+
+fabricate(
+    N = 200,
+    cat = sample(c("a", "b"), N, replace = TRUE),
+    x = rnorm(N) + (cat == "a")
+) |>
+ggplot(aes(y = cat, x = x)) +
+geom_weave() +
+stat_slabinterval() 
+  
+
+
+```
+
+### Discrete
+
+#### Auto 
+
+To plot frequencies of categories, ``ggauto` uses this kind of heatmp:
+
+```{r}
+
+library(ggauto)
+read_csv(here("data/SAFI_clean.csv"), na = "NULL") %>%
+  ggauto(village, respondent_wall_type)
+
+```
+
+
+I like the type of heatmap below a bit better:
+
+  ```{r}
+
+read_csv(here("data/SAFI_clean.csv"), na = "NULL") %>%
+  select(key_ID, village, respondent_wall_type) |>
+
+  # put wall types in a factor, so the order makes sense
+  mutate(
+    respondent_wall_type = factor(
+      respondent_wall_type,
+      levels = c("muddaub", "sunbricks", "burntbricks", "cement")
+    )
+  ) |>
+
+  # compute a column with percentage of wall type by village
+  summarize(
+    n = n(),
+    .by = c(village, respondent_wall_type)
+  ) |>
+  mutate(
+    pct = n / sum(n), # we will use scales::percent() later
+    .by = village
+  ) |> 
+
+  # make sure the zeros are in the data
+  complete(village, respondent_wall_type, fill = list(n = 0, pct = 0)) |>
+
+  # and plot!
+  ggplot(aes(y = village, x = respondent_wall_type, fill = pct)) +
+    geom_tile(color = "white", linewidth = 0.5, show.legend = FALSE) +
+    geom_text(aes(label = scales::percent(pct,accuracy = 1)), color = "white", size = 3) #+
+
+
+```
+
+#### Stacked bar plots
+
+Stacked bar plots are another useful way to show distributions of categorical variables.
+Here is a function that makes a stacked bar plot, with percentages on the x-axis,
+counts inside the bars, and a legend at the bottom.
+
+It uses a bunch of techniques:
+
+- The plot is complex, but because it is contained in a reusable function,
+it is easy to (re-)use.
+- Category counts are computed, and added to factor labels, using `count_label()`.
+- Cell counts are extracted and displayed inside the bars, using `after_stat()`.
+
+
+
+```{r}
+
+stacked_bar_plot <- function(df, by, fill) {
+  # outputs a stacked bar chart
+  
+  df %>%
+    # the category labels should include counts
+    mutate( {{ by }} := count_label( {{ by }})) %>%
+    ggplot(aes(y = {{ by }}, fill = {{ fill }})) +
+    geom_bar(position = position_fill(reverse = TRUE)) +
+    labs(x= "") +
+    geom_text(
+      stat = "count", 
+      # for %: after_stat(scales::percent(count / sum(count),accuracy=1))
+      aes(label = after_stat(count)), 
+      position = position_fill(vjust = 0.5, reverse = TRUE),
+      color = "white"
+    ) +
+    scale_x_continuous(labels = scales::percent_format()) +
+    theme(legend.position="bottom") +
+    guides(
+      fill = guide_legend(
+        nrow = 1,
+        title.position="top",
+        title.hjust = 0.5
+      )
+    )
+}
+
+count_label <- function(vector) {
+  # takes a vector of strings or factor, 
+  # output a factor vector with N = N included in the labels
+  fct_recode(
+    factor(vector), 
+    !!!vector %>%
+      as_tibble() %>%
+      group_by(value) %>%
+      summarize(n = n()) %>%
+      mutate(
+        value = as.character(value),
+        newlabel = paste0(value,"\nn=",n)
+      ) %>%
+    pull(value, name = newlabel)
+  )
+  
+}
+
+
+read_csv(here("data/SAFI_clean.csv"), na = "NULL") %>%
+  stacked_bar_plot(village, respondent_wall_type)
+
+
+```
+
+The point here is that plots can get quite complex, 
+and by saving them in a function, you can reuse them easily.
+
+
+
+#### Lollipop plot
+
+A lollipop plot is a nice alternative to a bar chart.
+You can make one by combining `geom_linerange()` and `geom_point()`, 
+using `fct_reorder()` to put the longest lollipops are at the top. 
+Here is an example, in `theme_ipsum()`, from the `hrbrthemes` package, 
+which is a nice clean theme for this kind of plot.
+
+```{r}
+
+library(hrbrthemes)
+
+read_csv(here("data/SAFI_clean.csv"), na = "NULL") %>%
+  mutate(N = nrow(.)) %>% 
+  separate_longer_delim(items_owned, delim = ";") %>%
+  select(items_owned, N) %>% 
+  filter(!is.na(items_owned)) %>% 
+  summarize(Count = n() / first(N), .by = items_owned) %>%
+  mutate(items_owned = fct_reorder(items_owned, Count)) %>%
+  ggplot(aes(x = Count, y = items_owned)) +
+  geom_linerange(
+    aes(y = items_owned, xmin = 0, xmax = Count),
+    color = "gray"
+  ) +
+  geom_point(
+    aes(x = Count, y = items_owned), 
+    size = 4, 
+    position = position_dodge(width = 0.5),
+    color = "steelblue"
+  ) +
+  theme_ipsum(grid = "X") + 
+  scale_x_continuous(labels = scales::percent_format()) +
+  theme(plot.title.position = "plot") +
+  labs(
+    title = "Look at this graph",
+    subtitle = "People love radios, phones, and a good plough", 
+    y = "Item", x = "Percent of households owning item")
+
+```
+
+
+### Maps
+
+For maps, we use the `sf` package, and a sample data set, in geo-json format (but sf can use
+all sorts of shapefiles).
+I add some fake data to plot to the shapefile, 
+using familiar `mutate()` syntax:
+
+```{r}
+
+library(sf)
+
+file <- "https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json"
+
+
+shapefile <- 
+  st_read(file) %>%
+  mutate(x = rnorm(n = nrow(.))) 
+
+shapefile
+
+```
+
+You can then use `ggplot()` and `geom_sf()` to make a map:
+
+You can use the `fill` aesthetic to color your shapefile:
+
+```{r}
+
+shapefile %>%
+    ggplot(aes(fill = x)) +
+        geom_sf(colour = NA) +  # removes borders
+        theme_void()            # removes grid
+
+```
+
+You can also make an interactive map, 
+which you can use in html documents created with rmarkdown,
+or in shiny applications. It uses a palette I created using the `colorBin()` function.
+
+```{r}
+
+library(leaflet)
+
+
+pallete <- colorBin(
+  palette = "YlOrBr", domain = shapefile$x,
+  na.color = "transparent", bins = 5
+)
+
+shapefile %>%
+    #mutate(x = rnorm(n = nrow(.))) %>%
+    leaflet() %>%
+    addTiles() %>%
+    addPolygons(fillColor = ~pallete(x),
+                stroke = TRUE,
+                fillOpacity = 0.9,
+                color = "white",
+                weight = 0.3) %>%
+    addLegend(pal = pallete, values = ~x, opacity = 0.9,
+              title = "Look at these pretty colours", position = "bottomleft")
+
+```
+
+
+The key to plotting this, is `geom_tile()`:
+
+```{r}
+
+data_for_heatmap_long |>
+ ggplot(aes(y = question, x = answer, fill = pct)) +
+  geom_tile(color = "white", linewidth = 0.5, show.legend = FALSE) +
+  geom_text(aes(label = scales::percent(pct,accuracy = 1)), color = "white", size = 3) #+
+
+````
+
