@@ -293,13 +293,6 @@ data |>
 
 
 
-maps
-discrete: stacked bar charts and lollipop charts
-continuous: ridge plots and ggdist
-ggauto 
-<!--- ggauto--->
-
-
 
 
 
@@ -321,33 +314,6 @@ plot_data <-
     select(-"owns_NA") %>%
     mutate(number_items = sum(c_across(starts_with("owns_"))))  
 ```
-
-### Faceting {#faceting}
-
-Faceting allows splitting a graph in multiple parts:
-
-```{r}
-
-plot_data %>%
-    group_by(village) %>%
-    summarize(across(.cols = starts_with("owns_"),
-                     .fns = ~sum(.x,na.rm=TRUE) / n() * 100,
-                     .names = "{str_replace(.col, 'owns_', '')}")) %>%
-    pivot_longer(-village, names_to = "items", values_to = "percent") %>%
-    ggplot(aes(x = village, y = percent)) +
-        geom_bar(stat = "identity", position = "dodge") +
-        facet_wrap(~ items) +
-        theme_bw() +
-        theme(panel.grid = element_blank())
-
-
-```
-
-Note that the `.names` argument to `summarize(across())` is specified as a 
-[glue string](https://glue.tidyverse.org/) that uses `str_replace()` to cut off the `"owns_"` 
-bit of the column names.
-
-For more control, look into [patchwork](https://patchwork.data-imaginist.com/).
 
 ### Continuous
 
@@ -402,18 +368,9 @@ Or two raincloud plots for a categorical variable and a continuous variable.
 ```
 
 
-`[ggdist](https://mjskay.github.io/ggdist/index.html)` has a variety of geoms for visualizing distributions. 
-
-The standard is the `stat_slabinterval()`, 
-which is the cloud part of the raincloud plot,
-combined below with `geom_weave()`, the rain drops.
-
-Honestly, it doesn't look as good out of the box as `ggauto`, 
-but it allows for a lot more flexibility. 
-I also like lines:
-a thin one between the 5th and 95th percentiles,
-a thick one between the 25th and 75th as well as a dot at the median, 
-which further helps in assessing the distribution of the data.
+[`ggdist`](https://mjskay.github.io/ggdist/index.html) has a variety of geoms for visualizing distributions. 
+You can recreate the raincloud plot above using `stat_slabinterval()` and `geom_weave()`.
+You can then further customize the result.
 
 ```{r}
 
@@ -425,14 +382,19 @@ fabricate(
     x = rnorm(N) + (cat == "a")
 ) |>
 ggplot(aes(y = cat, x = x)) +
-geom_weave() +
-stat_slabinterval() 
-  
+  geom_weave(
+    side = "bottom",
+    position = position_nudge(y = -0.02)
+  ) +
+  stat_slabinterval() 
+ 
 
 
 ```
 
 ### Discrete
+
+There's quite a number of ways to plot counts of discrete categories: heat maps, bar charts, lollipop charts etc.
 
 #### Auto 
 
@@ -449,7 +411,7 @@ read_csv(here("data/SAFI_clean.csv"), na = "NULL") %>%
 
 I like the type of heatmap below a bit better:
 
-  ```{r}
+```{r}
 
 read_csv(here("data/SAFI_clean.csv"), na = "NULL") %>%
   select(key_ID, village, respondent_wall_type) |>
@@ -598,6 +560,34 @@ read_csv(here("data/SAFI_clean.csv"), na = "NULL") %>%
 ```
 
 
+### Faceting {#faceting}
+
+Faceting allows splitting a graph in multiple parts:
+
+```{r}
+
+plot_data %>%
+    group_by(village) %>%
+    summarize(across(.cols = starts_with("owns_"),
+                     .fns = ~sum(.x,na.rm=TRUE) / n() * 100,
+                     .names = "{str_replace(.col, 'owns_', '')}")) %>%
+    pivot_longer(-village, names_to = "items", values_to = "percent") %>%
+    ggplot(aes(x = village, y = percent)) +
+        geom_bar(stat = "identity", position = "dodge") +
+        facet_wrap(~ items) +
+        theme_bw() +
+        theme(panel.grid = element_blank())
+
+
+```
+
+Note that the `.names` argument to `summarize(across())` is specified as a 
+[glue string](https://glue.tidyverse.org/) that uses `str_replace()` to cut off the `"owns_"` 
+bit of the column names.
+
+For more control, look into [patchwork](https://patchwork.data-imaginist.com/).
+
+
 ### Maps
 
 For maps, we use the `sf` package, and a sample data set, in geo-json format (but sf can use
@@ -671,5 +661,5 @@ data_for_heatmap_long |>
   geom_tile(color = "white", linewidth = 0.5, show.legend = FALSE) +
   geom_text(aes(label = scales::percent(pct,accuracy = 1)), color = "white", size = 3) #+
 
-````
+```
 
