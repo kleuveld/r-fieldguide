@@ -1,0 +1,216 @@
+# (PART\*) Part 3: Methods in Focus {-}
+
+
+# 7. Differences in Differences {#did}
+
+The differences-in-differences (DiD) method is a quasi-experimental approach to estimate the causal effect of a treatment by comparing changes in outcomes over time between a treatment group and a control group. DiD is widely used in economics, epidemiology, and social sciences due to its ability to control for unobserved time-invariant confounders (Angrist and Pischke, 2008; Imbens and Rubin, 2015).
+
+## Design considerations for a diff-in-diff
+
+### Key Assumptions
+
+- **Parallel Trends**: The treatment and control groups would have followed the same trend in the absence of treatment. This is the core identifying assumption for DiD (Angrist and Pischke, 2008).
+- **Stable Unit Treatment Value Assumption (SUTVA)**: No interference between units, meaning the treatment status of one unit does not affect the outcomes of another (Rubin, 1980).
+- **No Anticipation**: The treatment does not affect outcomes before its implementation. Violations of this assumption can bias estimates (Roth, 2023).
+
+### Study Design
+
+- **Pre- and Post-Treatment Periods**: Define clear time periods for before and after the treatment. Multiple pre- and post-treatment periods can strengthen the design (Cunningham, 2021).
+- **Treatment and Control Groups**: Ensure the control group is unaffected by the treatment and is comparable to the treatment group. Random assignment is ideal, but DiD can also work with non-randomized designs if assumptions hold.
+- **Data Requirements**: Panel data (repeated observations for the same units over time) is required. Cross-sectional data can be used in a repeated cross-section DiD design, but this requires stronger assumptions.
+
+### Common Pitfalls
+
+- **Violations of Parallel Trends**: Test for pre-treatment trends to validate the assumption. A significant difference in pre-treatment trends between groups suggests a violation (Roth, 2023).
+- **Heterogeneous Treatment Effects**: Consider whether effects vary across units or over time. Staggered adoption designs can complicate inference (de Chaisemartin and D'Haultfoeuille, 2020).
+- **Dynamic Effects**: Account for lagged or persistent effects of the treatment. Event study plots can help visualize these dynamics (Jacobson et al., 1993).
+
+## Estimating diff-in-diff in R
+
+### Basic Two-Way Fixed Effects Model
+The most common approach to estimating DiD is a two-way fixed effects model, which includes unit and time fixed effects. This can be estimated using the `feols()` function from the **fixest** package (Berg et al., 2023), which is efficient and user-friendly.
+
+
+```{r}
+
+library(fabricatr)
+library(tidyverse)
+library(randomizr)
+
+df <-
+fabricate(
+  village = add_level(
+    N = 10,
+    treatment = rep(0:1, N/2),
+    vill_shock = runif(N)
+  ),
+  hh = add_level(
+    N = 10,
+    y0 = runif(N)
+  ),
+
+  # then create the year
+  t = add_level(
+    N = 2, 
+    nest = FALSE, 
+    t_shock = runif(N),
+    t = 0:1), 
+  obs = cross_levels(
+    by = join_using(hh, t),
+    obs = NULL,
+    y = y0 + vill_shock + t_shock + (t * treatment * 0.1)
+  )
+)
+
+```
+
+```{r}
+library(fixest)
+# Example: Estimating DiD with feols
+model <- feols(
+  y ~ treatment:t | treatment + t, 
+  data = df,
+  cluster = ~village
+)
+
+
+summary(model)
+```
+
+Here, `treatment` is a binary indicator for the treatment group, `post` is a binary indicator for the post-treatment period, and `id` and `time` are the unit and time fixed effects, respectively. The interaction term `treatment * post` captures the DiD estimate.
+
+### Visualizing DiD
+Visualizing trends in the outcome variable for the treatment and control groups before and after the treatment can help assess the parallel trends assumption.
+
+```{r}
+library(ggplot2)
+
+# Plot trends for treatment and control groups
+df |>
+  summarize(
+    y = mean(y),
+    .by = c(treatment, t)
+  ) |>
+ggplot(aes(x = t, y = y, color = factor(treatment))) +
+  geom_line(alpha = 0.5) +
+  #geom_smooth(method = "loess", se = FALSE) +
+  labs(
+    title = "Trends in Outcome by Group",
+    x = "Time", 
+    y = "Outcome",
+    color = "Group"
+  ) +
+  ylim(0,NA) +
+  theme_minimal()
+```
+
+### Robustness Checks
+- **Placebo Tests**: Apply the DiD method to pre-treatment periods to check for parallel trends. If the estimated effect is significant in pre-treatment periods, the parallel trends assumption may be violated.
+
+```{r}
+
+  # Placebo test: Estimate DiD for pre-treatment periods only
+  placebo_model <- feols(
+    outcome ~ treatment * placebo_post | id + time,
+    data = df,
+    cluster = ~id
+  )
+  summary(placebo_model)
+```
+
+- **Event Study Plots**: Visualize treatment effects over time to check for dynamic effects and validate the parallel trends assumption.
+
+```{r}
+  library(fixest)
+  library(ggplot2)
+
+  # Estimate event study coefficients
+  event_model <- feols(
+    outcome ~ i(time, ref = -1) * treatment | id + time,
+    data = df,
+    cluster = ~id
+  )
+
+  # Plot event study coefficients
+  coefs <- coef(event_model)
+  event_plot <- data.frame(
+    time = names(coefs),
+    estimate = as.numeric(coefs),
+    se = sqrt(diag(vcov(event_model)))
+  )
+
+  ggplot(event_plot, aes(x = time, y = estimate, ymin = estimate - 1.96 * se, ymax = estimate + 1.96 * se)) +
+    geom_pointrange() +
+    geom_hline(yintercept = 0, linetype = "dashed") +
+    labs(
+      title = "Event Study Plot",
+      x = "Relative Time to Treatment",
+      y = "Estimated Effect"
+    )
+
+```
+
+- **Covariate Adjustment**: Include covariates to improve precision and control for observed confounders.
+
+  ```{r}
+  adjusted_model <- feols(
+    outcome ~ treatment * post + covariate1 + covariate2 | id + time,
+    data = df,
+    cluster = ~id
+  )
+  summary(adjusted_model)
+  ```
+
+### Synthetic Differences-in-Differences
+Synthetic DiD (SDID) combines DiD with synthetic control methods to improve the estimation of treatment effects, particularly when the parallel trends assumption may not hold (Arkhangelsky et al., 2021). The **SyntheticDiffInDiff** package in R implements this approach.
+
+```{r}
+# Install and load the SyntheticDiffInDiff package
+# install.packages("SyntheticDiffInDiff")
+library(SyntheticDiffInDiff)
+
+# Example: Estimating SDID
+sdid_model <- sdiff(
+  Y = df$outcome,
+  D = df$treatment,
+  T = df$time,
+  ID = df$id
+)
+summary(sdid_model)
+```
+
+SDID constructs a synthetic control group that closely matches the pre-treatment trends of the treatment group, reducing reliance on the parallel trends assumption.
+
+### Advanced Topics
+- **Staggered Adoption**: Use methods like `fixest::feols()` with appropriate standard errors for staggered treatment timing (de Chaisemartin and D'Haultfoeuille, 2020).
+
+  ```{r}
+  staggered_model <- feols(
+    outcome ~ treatment * post | id + time,
+    data = df,
+    cluster = ~id
+  )
+  summary(staggered_model)
+  ```
+
+- **Heterogeneous Effects**: Test for differential effects across subgroups by including interaction terms.
+
+  ```{r}
+  het_model <- feols(
+    outcome ~ treatment * post * subgroup | id + time,
+    data = df,
+    cluster = ~id
+  )
+  summary(het_model)
+  ```
+
+- **Standard Errors**: Use clustered standard errors to account for serial correlation and heteroskedasticity.
+
+  ```{r}
+  robust_model <- feols(
+    outcome ~ treatment * post | id + time,
+    data = df,
+    cluster = ~id
+  )
+  summary(robust_model)
+  ```
