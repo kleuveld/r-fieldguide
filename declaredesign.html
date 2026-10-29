@@ -23,7 +23,7 @@
 <meta name="author" content="Koen Leuveld-Postma" />
 
 
-<meta name="date" content="2026-07-08" />
+<meta name="date" content="2026-10-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -447,7 +447,7 @@ things. The previous was just declaration!</p>
 ## 
 ## Added variable: Y 
 ##  min median   mean  max     sd N_missing N_unique
-##    0     70 107.46 7500 465.42         0       59
+##    0     70 107.46 7500 465.57         0       59
 ## 
 ## Step 5 (estimator): declare_estimator(Y ~ Z, clusters = village, inquiry = &quot;ATE&quot;, term = &quot;Z&quot;, label = &quot;Simple&quot;) 
 ## 
@@ -455,7 +455,7 @@ things. The previous was just declaration!</p>
 ## 
 ## A single draw of the estimator:
 ##  term estimator estimate std.error statistic   p.value  conf.low conf.high
-##     Z    Simple 25.12828  60.23699  0.417157 0.6821118 -102.5774   152.834
+##     Z    Simple 29.16985  60.40281 0.4829221 0.6356979 -98.88739  157.2271
 ##        df outcome inquiry
 ##  15.98618       Y     ATE</code></pre>
 </div>
@@ -468,16 +468,16 @@ use the <code>draw_data()</code> function. This is useful to examine the propert
 <pre><code>## # A tibble: 290 × 7
 ##    village NFertInput ID    Y_Z_0 Y_Z_1     Z     Y
 ##      &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;
-##  1       1          5 001       5    75     0     5
-##  2       1         26 002      26    96     0    26
-##  3       1         40 003      40   110     0    40
-##  4       1          0 004       0    70     0     0
-##  5       1         10 005      10    80     0    10
-##  6       1         25 006      25    95     0    25
-##  7       1         25 007      25    95     0    25
-##  8       1         60 008      60   130     0    60
-##  9       1          0 009       0    70     0     0
-## 10       1          0 010       0    70     0     0
+##  1       1          5 001       5    75     1    75
+##  2       1         26 002      26    96     1    96
+##  3       1         40 003      40   110     1   110
+##  4       1          0 004       0    70     1    70
+##  5       1         10 005      10    80     1    80
+##  6       1         25 006      25    95     1    95
+##  7       1         25 007      25    95     1    95
+##  8       1         60 008      60   130     1   130
+##  9       1          0 009       0    70     1    70
+## 10       1          0 010       0    70     1    70
 ## # ℹ 280 more rows</code></pre>
 <p>Now to calculate our power. The <code>diagnose_design()</code> will run our
 model 500 times and our power is simply the fraction of times we
@@ -485,7 +485,7 @@ find a statistically significant effect.</p>
 <div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="declaredesign.html#cb63-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
 <span id="cb63-2"><a href="declaredesign.html#cb63-2" tabindex="-1"></a><span class="fu">diagnose_design</span>(design_simple)</span></code></pre></div>
 <pre><code>## 
-## Research design diagnosis based on 500 simulations. Diagnosis completed in 4 secs. Diagnosand estimates with bootstrapped standard errors in parentheses (100 replicates).
+## Research design diagnosis based on 500 simulations. Diagnosis completed in 6 secs. Diagnosand estimates with bootstrapped standard errors in parentheses (100 replicates).
 ## 
 ##         Design Inquiry Estimator Outcome Term N Sims Mean Estimand
 ##  design_simple     ATE    Simple       Y    Z    500         70.00
