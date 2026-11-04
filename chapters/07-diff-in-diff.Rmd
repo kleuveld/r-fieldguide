@@ -27,9 +27,18 @@ The differences-in-differences (DiD) method is a quasi-experimental approach to 
 
 ## Estimating diff-in-diff in R
 
-### Basic Two-Way Fixed Effects Model
-The most common approach to estimating DiD is a two-way fixed effects model, which includes unit and time fixed effects. This can be estimated using the `feols()` function from the **fixest** package (Berg et al., 2023), which is efficient and user-friendly.
+### Generating data
 
+First, generate some data, using `fabricatr.`
+
+I generate 10 village, half of which receive the treatment; 
+in each village I create 10 households.
+And then I create 4 time periods: three pre-periods, and one post.
+
+My outcome y consists of a random variable per household,
+a random confouder `x`,
+time and village-level shocks,
+a treatment effect of `0.1` and a random error term:
 
 ```{r}
 
@@ -37,6 +46,7 @@ library(fabricatr)
 library(tidyverse)
 library(randomizr)
 
+set.seed(2)
 df <-
 fabricate(
   village = add_level(
@@ -51,35 +61,25 @@ fabricate(
 
   # then create the year
   t = add_level(
-    N = 2, 
+    N = 4, 
     nest = FALSE, 
     t_shock = runif(N),
-    t = 0:1), 
+    post = c(rep(0,N-1),1)
+  ), 
   obs = cross_levels(
     by = join_using(hh, t),
     obs = NULL,
-    y = y0 + vill_shock + t_shock + (t * treatment * 0.1)
+    x = rnorm(n = N, mean = 0, sd = 0.1),
+    error = rnorm(n = N, mean = 0, sd = 0.1),
+    y = y0 + x + vill_shock + t_shock + (post * treatment * 0.1) + error
   )
 )
 
 ```
 
-```{r}
-library(fixest)
-# Example: Estimating DiD with feols
-model <- feols(
-  y ~ treatment:t | treatment + t, 
-  data = df,
-  cluster = ~village
-)
+### Plot
 
-
-summary(model)
-```
-
-Here, `treatment` is a binary indicator for the treatment group, `post` is a binary indicator for the post-treatment period, and `id` and `time` are the unit and time fixed effects, respectively. The interaction term `treatment * post` captures the DiD estimate.
-
-### Visualizing DiD
+First, let's visualize:
 Visualizing trends in the outcome variable for the treatment and control groups before and after the treatment can help assess the parallel trends assumption.
 
 ```{r}
@@ -91,7 +91,7 @@ df |>
     y = mean(y),
     .by = c(treatment, t)
   ) |>
-ggplot(aes(x = t, y = y, color = factor(treatment))) +
+ggplot(aes(x = as.numeric(t), y = y, color = factor(treatment))) +
   geom_line(alpha = 0.5) +
   #geom_smooth(method = "loess", se = FALSE) +
   labs(
@@ -100,88 +100,360 @@ ggplot(aes(x = t, y = y, color = factor(treatment))) +
     y = "Outcome",
     color = "Group"
   ) +
+  geom_vline(xintercept = 3, linetype = "dashed") + 
+  geom_vline(xintercept = 4, linetype = "dashed") + 
   ylim(0,NA) +
   theme_minimal()
-```
-
-### Robustness Checks
-- **Placebo Tests**: Apply the DiD method to pre-treatment periods to check for parallel trends. If the estimated effect is significant in pre-treatment periods, the parallel trends assumption may be violated.
-
-```{r}
-
-  # Placebo test: Estimate DiD for pre-treatment periods only
-  placebo_model <- feols(
-    outcome ~ treatment * placebo_post | id + time,
-    data = df,
-    cluster = ~id
-  )
-  summary(placebo_model)
-```
-
-- **Event Study Plots**: Visualize treatment effects over time to check for dynamic effects and validate the parallel trends assumption.
-
-```{r}
-  library(fixest)
-  library(ggplot2)
-
-  # Estimate event study coefficients
-  event_model <- feols(
-    outcome ~ i(time, ref = -1) * treatment | id + time,
-    data = df,
-    cluster = ~id
-  )
-
-  # Plot event study coefficients
-  coefs <- coef(event_model)
-  event_plot <- data.frame(
-    time = names(coefs),
-    estimate = as.numeric(coefs),
-    se = sqrt(diag(vcov(event_model)))
-  )
-
-  ggplot(event_plot, aes(x = time, y = estimate, ymin = estimate - 1.96 * se, ymax = estimate + 1.96 * se)) +
-    geom_pointrange() +
-    geom_hline(yintercept = 0, linetype = "dashed") +
-    labs(
-      title = "Event Study Plot",
-      x = "Relative Time to Treatment",
-      y = "Estimated Effect"
-    )
 
 ```
 
-- **Covariate Adjustment**: Include covariates to improve precision and control for observed confounders.
+### Basic Two-Way Fixed Effects Model
+The most common approach to estimating DiD is a two-way fixed effects model, which includes unit and time fixed effects. This can be estimated using the `feols()` function from the **fixest** package (Berg et al., 2023), which is efficient and user-friendly.
 
-  ```{r}
-  adjusted_model <- feols(
-    outcome ~ treatment * post + covariate1 + covariate2 | id + time,
-    data = df,
-    cluster = ~id
-  )
-  summary(adjusted_model)
-  ```
-
-### Synthetic Differences-in-Differences
-Synthetic DiD (SDID) combines DiD with synthetic control methods to improve the estimation of treatment effects, particularly when the parallel trends assumption may not hold (Arkhangelsky et al., 2021). The **SyntheticDiffInDiff** package in R implements this approach.
 
 ```{r}
-# Install and load the SyntheticDiffInDiff package
-# install.packages("SyntheticDiffInDiff")
-library(SyntheticDiffInDiff)
-
-# Example: Estimating SDID
-sdid_model <- sdiff(
-  Y = df$outcome,
-  D = df$treatment,
-  T = df$time,
-  ID = df$id
+library(fixest)
+# Example: Estimating DiD with feols
+model <- feols(
+  y ~ treatment:post | treatment + t, 
+  data = df,
+  cluster = ~village
 )
-summary(sdid_model)
+
+
+summary(model)
 ```
 
-SDID constructs a synthetic control group that closely matches the pre-treatment trends of the treatment group, reducing reliance on the parallel trends assumption.
+We get quite close to our true treatment effect of `0.1`.
 
-### Advanced Topics
+### Parallel trends
+
+Let's have a look at the parallel trends assumption.
+
+For this, we run a event-study-type regression to determine if the difference between treatment and control is the same as in 2019 (our base year):
+
+$$
+Y_{it} = \alpha_i + \lambda_t + \sum_{\substack{k = k_{\min} \\ k \neq 3}}^{2} \beta_k \, \mathbb{1}[t = k] \cdot D_i + \varepsilon_{it}
+$$ {#eq-pretrends}
+
+where $Y_{it}$ is `y` for unit $i$ in year $t$, $\alpha_i$ are unit fixed effects, $\lambda_t$ are t fixed effects, and $D_i$ is our `treatment`. The sample is restricted to $t \leq 3$, and 3 is the omitted reference year, so $\beta_{3} \equiv 0$. Each $\beta_k$ measures how the association between $D_i$ and the outcome in year $k$ differs from that in 2019. Parallel pre-trends imply $H_0: \beta_k = 0$ for all $k < 3$, which we test jointly with a Wald test. Standard errors are clustered at the level of `village`.
+
+```{r}
+
+pretrends_model <- feols(
+  y ~ i(t, treatment, ref = "3") | treatment + t, 
+    cluster = ~village,
+
+  data = df |> filter(t <= 3)
+)
+
+wald(pretrends_model, keep = "t::")
+
+```
+
+The wald test fails to reject the null hypothesis; so trends appear to be parallel. Do note that this is an underpowered test.
+
+Personally, I quite like a coefficient plot:
+
+```{r}
+library(modelsummary)
+
+
+# first, run model plot at different confidence bands:
+pretrends_dat <-
+    map_dfr(c(.90, .95, .99), function(x) {
+      modelplot(pretrends_model, conf_level = x, draw = FALSE) %>%
+      mutate(.width = x)
+    }) |>
+  mutate(
+    t = str_extract(term, "t::(\\d):treatment", group = 1)
+  )
+
+# and plot the result
+ggplot(pretrends_dat, aes(
+    y = estimate, x = t,
+    ymin = conf.low, ymax = conf.high)) +
+  geom_point(size = 5  ) +
+  ggdist::geom_pointinterval(
+    position = "dodge",
+    interval_size_range = c(1, 3),
+    fatten_point = .1) +
+  geom_hline(yintercept = 0, linetype = "dashed")
+
+```
+
+
+### Covariate Adjustment
+
+Include time-variant covariates to improve precision and control for observed confounders.
+
+```{r}
+  
+feols(
+  y ~ treatment:post + x | treatment + t, 
+  data = df,
+  cluster = ~village
+)
+
+```
+
+## Synthetic Differences-in-Differences
+
+Synthetic DiD (SDID) combines DiD with synthetic control methods to improve the estimation of treatment effects, particularly when the parallel trends assumption may not hold (Arkhangelsky et al., 2021). The `synth` package in R implements this approach.
+
+
+Let's first violate some parallel trends!
+
+I modify my data frame so that `y0` now is affected by a time trend that is different for treatment than control.
+The difference is tiny.
+I also create a level difference between the groups, just to show that `synthdid` is not bothered at all by this.
+
+```{r}
+set.seed(2)
+df_synth <-
+fabricate(
+  treatment = add_level(
+    N = 2,
+    treatment = 0:1,
+    trend = c(0.86,1.086),
+    level_diff = c(0,1)
+  ),
+  village = add_level(
+    N = 10,
+    #treatment = rep(0:1, N/2),
+    vill_shock = runif(N)
+  ),
+  hh = add_level(
+    N = 10,
+    y0 = runif(N) 
+  ),
+
+  # then create the year
+  t = add_level(
+    N = 4, 
+    nest = FALSE, 
+    t_shock = runif(N),
+    post = c(rep(0,N-1),1)
+  ), 
+  obs = cross_levels(
+    by = join_using(hh, t),
+    obs = NULL,
+    x = rnorm(n = N, mean = 0, sd = 0.1),
+    error = rnorm(n = N, mean = 0, sd = 0.1),
+    y = level_diff + (y0 * (trend * as.numeric(t))) + x + vill_shock + t_shock + (post * treatment * 0.1) + error
+  )
+)
+```
+
+Let's plot the shape of our data:
+
+```{r}
+library(ggplot2)
+
+# Plot trends for treatment and control groups
+df_synth |>
+  summarize(
+    y = mean(y),
+    .by = c(treatment, t)
+  ) |>
+ggplot(aes(x = as.numeric(t), y = y, color = factor(treatment))) +
+  geom_line(alpha = 0.5) +
+  #geom_smooth(method = "loess", se = FALSE) +
+  labs(
+    title = "Trends in Outcome by Group",
+    x = "Time", 
+    y = "Outcome",
+    color = "Group"
+  ) +
+  geom_vline(xintercept = 3, linetype = "dashed") + 
+  geom_vline(xintercept = 4, linetype = "dashed") + 
+  ylim(0,NA) +
+  theme_minimal()
+
+```
+
+Note that the levels are quite different, but that's no issue, we only care about trends.
+However, the difference in them is quite difficult to see.
+
+Let's formally test for parallel trends:
+
+```{r}
+
+pretrends_model_synth <- feols(
+  y ~ i(t, treatment, ref = "3") | treatment + t, 
+    cluster = ~village,
+
+  data = df_synth |> filter(t <= 3)
+)
+
+wald(pretrends_model_synth, keep = "t::")
+
+```
+
+The wald test barely fails to reject the null hypothesis.
+Given how underpowered this test is, we shouldn't really put much stock in any results.
+The coefficient plot shows substantial differences in the tends, but only t=2 is significant at the 5% level.
+
+
+```{r}
+library(modelsummary)
+
+
+# first, run model plot at different confidence bands:
+pretrends_synth_dat <-
+    map_dfr(c(.90, .95, .99), function(x) {
+      modelplot(pretrends_model_synth, conf_level = x, draw = FALSE) %>%
+      mutate(.width = x)
+    }) |>
+  mutate(
+    t = str_extract(term, "t::(\\d):treatment", group = 1)
+  )
+
+# and plot the result
+ggplot(pretrends_synth_dat, aes(
+    y = estimate, x = t,
+    ymin = conf.low, ymax = conf.high)) +
+  geom_point(size = 5  ) +
+  ggdist::geom_pointinterval(
+    position = "dodge",
+    interval_size_range = c(1, 3),
+    fatten_point = .1) +
+  geom_hline(yintercept = 0, linetype = "dashed")
+
+```
+
+Let's see what this does to our findings:
+
+```{r}
+  
+feols(
+  y ~ treatment:post + x | treatment + t, 
+  data = df_synth,
+  cluster = ~village
+) 
+
+```
+
+They are clearly biased. Our true impact was 0.1, and here we find 0.27, which implies quite a bit of bias.
+
+Now for synthetic diff in diff (Arkhangelsky et al. 2019).
+
+```{r}
+
+library(synthdid)
+
+
+setup_synth <-
+df_synth |>
+  mutate(D = treatment * post) |>
+  panel.matrices(
+
+    unit = "hh",
+    time = "t",
+    outcome = "y",
+    treatment = "D"
+
+  )
+
+
+model_synth <- synthdid_estimate(setup_synth$Y, N0 = setup_synth$N0, T0 = setup_synth$T0)
+
+model_synth
+```
+
+The synthetic diff-in-diff is much closer to our true treatment effect.
+
+In the plot, we can see that synthethic diff-in-diff got the trends lined up. 
+Note that synthdid did not ensure that levels are the same, as that is no pre-requisite of a diff-in-diff.
+
+```{r}
+
+plot(model_synth)
+
+```
+
+
+## Matched diff-in-diff
+
+We are often tempted to a matched diff in diff.
+
+
+```{r}
+
+library(MatchIt)
+
+
+cem_match <- 
+  matchit(
+    treatment ~ y,
+    method = "CEM",
+    data = df_synth |> filter(t == "3")
+  )
+
+
+
+matched_ids <- 
+  match.data(cem_match, drop.unmatched = FALSE) |> #count(weights)
+  select(hh, weights)
+
+df_synth_matched <-
+  df_synth |>
+  left_join(matched_ids, by = "hh")
+
+```
+
+
+First, let's visualize:
+Visualizing trends in the outcome variable for the treatment and control groups before and after the treatment can help assess the parallel trends assumption.
+
+```{r}
+
+# Plot trends for treatment and control groups
+df_synth_matched |>
+  summarize(
+    y = weighted.mean(y, w = weights),
+    .by = c(treatment, t)
+  ) |>
+ggplot(aes(x = as.numeric(t), y = y, color = factor(treatment))) +
+  geom_line(alpha = 0.5) +
+  #geom_smooth(method = "loess", se = FALSE) +
+  labs(
+    title = "Trends in Outcome by Group",
+    x = "Time", 
+    y = "Outcome",
+    color = "Group"
+  ) +
+  geom_vline(xintercept = 3, linetype = "dashed") + 
+  geom_vline(xintercept = 4, linetype = "dashed") + 
+  ylim(0,NA) +
+  theme_minimal()
+
+```
+
+Something is up here: the trends are completely botched. 
+This is due to [regression to the mean](https://pmc.ncbi.nlm.nih.gov/articles/PMC6232412/).
+
+
+Let's see what this does to our findings:
+
+```{r}
+  
+feols(
+  y ~ treatment:post + x | treatment + t, 
+  data = df_synth_matched,
+  weights = ~weights,
+  cluster = ~village
+) 
+
+```
+
+We are way worse off than in our initial specification!
+
+Part of this is because I made `y` very volatile: the more stable to matching variables are, the less bad this problem becomes.
+
+I am quite surprised about the direction of the change: I would have expected underestimation of the effect.
+
+## Advanced Topics
 - **Staggered Adoption**: Use methods like `fixest::feols()` with appropriate standard errors for staggered treatment timing (de Chaisemartin and D'Haultfoeuille, 2020).
 
   ```{r}
