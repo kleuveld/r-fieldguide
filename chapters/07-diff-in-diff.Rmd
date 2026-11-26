@@ -3,27 +3,40 @@
 
 # 7. Differences in Differences {#did}
 
-The differences-in-differences (DiD) method is a quasi-experimental approach to estimate the causal effect of a treatment by comparing changes in outcomes over time between a treatment group and a control group. DiD is widely used in economics, epidemiology, and social sciences due to its ability to control for unobserved time-invariant confounders (Angrist and Pischke, 2008; Imbens and Rubin, 2015).
+The differences-in-differences (DiD) method is a quasi-experimental approach to estimate the causal effect of a treatment by comparing changes in outcomes over time between a treatment group and a control group.
+DiD is very attractive, because of its ability to control for unobserved time-invariant confounders,
+which is useful in many practical settings.
 
 ## Design considerations for a diff-in-diff
 
-### Key Assumptions
+This first section refreshes some key concepts in the design of a DiD.
 
-- **Parallel Trends**: The treatment and control groups would have followed the same trend in the absence of treatment. This is the core identifying assumption for DiD (Angrist and Pischke, 2008).
-- **Stable Unit Treatment Value Assumption (SUTVA)**: No interference between units, meaning the treatment status of one unit does not affect the outcomes of another (Rubin, 1980).
-- **No Anticipation**: The treatment does not affect outcomes before its implementation. Violations of this assumption can bias estimates (Roth, 2023).
+### Core Components
 
-### Study Design
+- **Pre- and Post-Treatment Periods**: Define clear time periods for before and after the treatment. Multiple pre- and post-treatment periods strengthen the design (Cunningham, 2021). Several pre-periods allow you to test for differential pre-trends, and several post-periods allow you to examine whether effects are immediate, build up gradually, or fade out. This needs to be planned well with any implementing partners, so that the rollout date is fixed and documented in advance, baseline data collection is completed before any treatment activity begins, and the length of the post-period is long enough to capture the outcomes of interest.
+- **Treatment and Control Groups**: Ensure the control group is unaffected by the treatment and is comparable to the treatment group. Random assignment is ideal, but the strength of a DiD design is that it also works with non-randomized designs if the identifying assumptions hold. Comparability does not require identical levels of the outcome, only that the groups would have followed the same trend in the absence of treatment. Guard against spillovers (e.g., control units benefiting indirectly) and anticipation effects (units changing behavior before treatment starts), since both bias the estimate.
+- **Data Requirements**: Panel data (repeated observations for the same units over time) is preferred. Cross-sectional data can be used in a repeated cross-section DiD design, but this requires stronger assumptions, notably that the composition of the sampled population does not change differentially between groups over time. Collect the same outcome measures, with the same instruments, in every wave and for both groups. Also collect covariates measured before treatment, which can be used to improve precision or to condition the parallel trends assumption.
 
-- **Pre- and Post-Treatment Periods**: Define clear time periods for before and after the treatment. Multiple pre- and post-treatment periods can strengthen the design (Cunningham, 2021).
-- **Treatment and Control Groups**: Ensure the control group is unaffected by the treatment and is comparable to the treatment group. Random assignment is ideal, but DiD can also work with non-randomized designs if assumptions hold.
-- **Data Requirements**: Panel data (repeated observations for the same units over time) is required. Cross-sectional data can be used in a repeated cross-section DiD design, but this requires stronger assumptions.
+### Key assumptions
 
-### Common Pitfalls
+Before settling on a diff in diff for your project,
+make sure that your study design satisfies the key assumptioms of a diff-in-diff:
 
-- **Violations of Parallel Trends**: Test for pre-treatment trends to validate the assumption. A significant difference in pre-treatment trends between groups suggests a violation (Roth, 2023).
-- **Heterogeneous Treatment Effects**: Consider whether effects vary across units or over time. Staggered adoption designs can complicate inference (de Chaisemartin and D'Haultfoeuille, 2020).
-- **Dynamic Effects**: Account for lagged or persistent effects of the treatment. Event study plots can help visualize these dynamics (Jacobson et al., 1993).
+- **Parallel Trends**: The treatment and control groups would have followed the same trend in the absence of the intervention. This is the core identifying assumption for DiD. 
+It is difficult to prove, but with multipe pre-interventions periods, 
+you can at least assess whether the assumption holds before the intervention.
+- **Stable Unit Treatment Value Assumption (SUTVA, no spillovers)**: No interference between units, meaning the treatment status of one unit does not affect the outcomes of another (Rubin, 1980).
+- **Stable composition**: The units observed before and after treatment are the same (panel) or drawn from the same population (repeated cross-section).
+- **No Anticipation**: The treatment does not affect outcomes before its implementation. Violations of this assumption can bias estimates.
+
+
+### Intervention Timing
+
+The timing of the intervention determines both the estimator you should use and the assumptions you need to defend.
+
+- **Simultaneous (single-date) adoption**: All treated units receive the intervention at the same time. This is the classic two-group, two-period setup (extendable to multiple periods). The treatment effect is identified by comparing the change in outcomes for treated units with the change for control units. It is simple to implement and interpret, and the standard two-way fixed effects (TWFE) estimator is valid here. The main requirement is a credible control group that is never treated during the study window.
+- **Staggered adoption**: Units receive the intervention at different times, for example in phased rollouts or when implementing partners can only reach some sites at a time. This design is often more practical and ethically easier to justify, since everyone eventually receives the intervention, and it provides more variation in treatment timing. However, when treatment effects differ across units or evolve over time, the conventional TWFE estimator can be biased, because already-treated units end up serving as controls for later-treated units (Goodman-Bacon, 2021; de Chaisemartin & D'Haultfœuille, 2020). Use estimators designed for this setting, such as Callaway & Sant'Anna (2021), Sun & Abraham (2021), or Borusyak, Jaravel & Spiess (2024), which compare newly treated units only to not-yet-treated or never-treated units.
+
 
 ## Estimating diff-in-diff in R
 
@@ -31,7 +44,7 @@ The differences-in-differences (DiD) method is a quasi-experimental approach to 
 
 First, generate some data, using `fabricatr.`
 
-I generate 10 village, half of which receive the treatment; 
+I generate 10 villages, half of which receive the treatment; 
 in each village I create 10 households.
 And then I create 4 time periods: three pre-periods, and one post.
 
@@ -108,7 +121,7 @@ ggplot(aes(x = as.numeric(t), y = y, color = factor(treatment))) +
 ```
 
 ### Basic Two-Way Fixed Effects Model
-The most common approach to estimating DiD is a two-way fixed effects model, which includes unit and time fixed effects. This can be estimated using the `feols()` function from the **fixest** package (Berg et al., 2023), which is efficient and user-friendly.
+The most common approach to estimating DiD is a two-way fixed effects model, which includes unit and time fixed effects. This can be estimated using the `feols()` function from the `fixest` package.
 
 
 ```{r}
@@ -134,7 +147,7 @@ For this, we run a event-study-type regression to determine if the difference be
 
 $$
 Y_{it} = \alpha_i + \lambda_t + \sum_{\substack{k = k_{\min} \\ k \neq 3}}^{2} \beta_k \, \mathbb{1}[t = k] \cdot D_i + \varepsilon_{it}
-$$ {#eq-pretrends}
+$$ 
 
 where $Y_{it}$ is `y` for unit $i$ in year $t$, $\alpha_i$ are unit fixed effects, $\lambda_t$ are t fixed effects, and $D_i$ is our `treatment`. The sample is restricted to $t \leq 3$, and 3 is the omitted reference year, so $\beta_{3} \equiv 0$. Each $\beta_k$ measures how the association between $D_i$ and the outcome in year $k$ differs from that in 2019. Parallel pre-trends imply $H_0: \beta_k = 0$ for all $k < 3$, which we test jointly with a Wald test. Standard errors are clustered at the level of `village`.
 
@@ -182,6 +195,7 @@ ggplot(pretrends_dat, aes(
 
 ```
 
+The trends in t1 and t2 are equal to those in t3, so trends are parallel.
 
 ### Covariate Adjustment
 
@@ -197,10 +211,11 @@ feols(
 
 ```
 
+Look at that, an extra star!
+
 ## Synthetic Differences-in-Differences
 
 Synthetic DiD (SDID) combines DiD with synthetic control methods to improve the estimation of treatment effects, particularly when the parallel trends assumption may not hold (Arkhangelsky et al., 2021). The `synth` package in R implements this approach.
-
 
 Let's first violate some parallel trends!
 
@@ -336,7 +351,7 @@ feols(
 
 They are clearly biased. Our true impact was 0.1, and here we find 0.27, which implies quite a bit of bias.
 
-Now for synthetic diff in diff (Arkhangelsky et al. 2019).
+Let's see how synthetic diff in diff deals with this (Arkhangelsky et al. 2019).
 
 ```{r}
 
@@ -376,7 +391,10 @@ plot(model_synth)
 ## Matched diff-in-diff
 
 We are often tempted to a matched diff in diff.
+If we match on pre-intervention outcomes, we should have nicely comparable control group,
+right?
 
+Let's first match on pre-intervention (t3) outcomes, using coarsened exact matching:
 
 ```{r}
 
@@ -390,13 +408,24 @@ cem_match <-
     data = df_synth |> filter(t == "3")
   )
 
+```
 
 
+
+A love plot shows we improved balance by a lot:
+```{r}
+cobalt::love.plot(cem_match)
+```
+
+
+Now we have to get the weights from out match object into our analysis data:
+
+```{r}
 matched_ids <- 
   match.data(cem_match, drop.unmatched = FALSE) |> #count(weights)
   select(hh, weights)
 
-df_synth_matched <-
+df_matched <-
   df_synth |>
   left_join(matched_ids, by = "hh")
 
@@ -409,7 +438,7 @@ Visualizing trends in the outcome variable for the treatment and control groups 
 ```{r}
 
 # Plot trends for treatment and control groups
-df_synth_matched |>
+df_matched |>
   summarize(
     y = weighted.mean(y, w = weights),
     .by = c(treatment, t)
@@ -440,7 +469,7 @@ Let's see what this does to our findings:
   
 feols(
   y ~ treatment:post + x | treatment + t, 
-  data = df_synth_matched,
+  data = df_matched,
   weights = ~weights,
   cluster = ~village
 ) 
@@ -453,36 +482,171 @@ Part of this is because I made `y` very volatile: the more stable to matching va
 
 I am quite surprised about the direction of the change: I would have expected underestimation of the effect.
 
-## Advanced Topics
-- **Staggered Adoption**: Use methods like `fixest::feols()` with appropriate standard errors for staggered treatment timing (de Chaisemartin and D'Haultfoeuille, 2020).
+The key message here is that matching on outcomes is a bad idea.
 
-  ```{r}
-  staggered_model <- feols(
-    outcome ~ treatment * post | id + time,
-    data = df,
-    cluster = ~id
-  )
-  summary(staggered_model)
-  ```
+## Staggered Adoption
 
-- **Heterogeneous Effects**: Test for differential effects across subgroups by including interaction terms.
+With staggered adoption, villages start treatment at different times. This
+creates a problem for the two-way fixed effects (2FE) estimator when the
+treatment effect is dynamic, meaning it grows over time.
 
-  ```{r}
-  het_model <- feols(
-    outcome ~ treatment * post * subgroup | id + time,
-    data = df,
-    cluster = ~id
-  )
-  summary(het_model)
-  ```
+The 2FE estimator learns about the effect from changes in treatment status:
+a village going from untreated to treated. Villages whose status does not
+change in a given period, whether they are never treated or already treated,
+are used as the comparison group. For villages that are already treated, this
+is only valid if their outcomes change purely because of the time trend. If
+the treatment effect is still growing in these villages, that growth is
+mistaken for a time trend. It is then subtracted from the effect measured in
+the villages that start treatment later, so the 2FE estimate is biased,
+usually towards zero or even the wrong sign (Goodman-Bacon, 2021).
 
-- **Standard Errors**: Use clustered standard errors to account for serial correlation and heteroskedasticity.
+With a constant effect this problem does not arise, because already-treated
+villages show no extra change that could be mistaken for a time trend.
 
-  ```{r}
-  robust_model <- feols(
-    outcome ~ treatment * post | id + time,
-    data = df,
-    cluster = ~id
-  )
-  summary(robust_model)
-  ```
+```{r}
+library(fabricatr)
+library(tidyverse)
+library(randomizr)
+
+set.seed(2)
+
+T <- 5
+df <-
+  fabricate(
+    village = add_level(
+      N = 12,
+      # adoption period: 3 villages each in periods 2, 3, 4, and 3 never treated
+      cohort = as.numeric(as.character(
+        complete_ra(N, m_each = c(3, 3, 3, 3), conditions = c(2, 3, 4, T+1))
+      )),
+      vill_shock = runif(N)
+    ),
+    hh = add_level(
+      N = 10,
+      y0 = runif(N),
+      hh = as.numeric(hh)
+    ),
+
+    # then create the periods
+    t = add_level(
+      N = T,
+      nest = FALSE,
+      t_shock = runif(N),
+      period = 1:N
+    ),
+    obs = cross_levels(
+      by = join_using(hh, t),
+      obs = NULL,
+      x = rnorm(n = N, mean = 0, sd = 0.1),
+      error = rnorm(n = N, mean = 0, sd = 0.1),
+      treated = as.numeric(period >= cohort),
+      # dynamic effect: grows by 0.2 for each period since adoption
+      tau = if_else(treated == 1, 0.2 * (period - cohort + 1), 0),
+      y = y0 + x + vill_shock + t_shock + tau + error    
+    )
+  ) 
+```
+
+
+Before, we constructed the treatment effect to be constant,
+now we have to take the average over all rounds:
+
+```{r}
+# True average effect on the treated observations, for reference
+true_att <- df |> filter(treated == 1) |> summarize(att = mean(tau)) |> pull(att)
+true_att
+```
+
+### Plot
+
+With staggered adoption, plot trends separately by adoption cohort. Each cohort should track the never-treated group until its own adoption date, then diverge.
+
+```{r}
+df |>
+  mutate(
+    cohort_label = if_else(is.infinite(cohort), "Never treated",
+                           paste("Adopts in period", cohort))
+  ) |>
+  summarize(y = mean(y), .by = c(cohort_label, period)) |>
+  ggplot(aes(x = period, y = y, color = cohort_label)) +
+  geom_line() +
+  geom_point() +
+  labs(
+    title = "Trends in Outcome by Adoption Cohort",
+    x = "Time",
+    y = "Outcome",
+    color = "Cohort"
+  ) +
+  ylim(0, NA) +
+  theme_minimal()
+```
+
+### Naive Two-Way Fixed Effects Model
+
+The conventional TWFE estimator regresses the outcome on a treatment indicator that switches on at each unit's adoption date, with unit and time fixed effects. Note that the fixed effects are now at the village level (the unit at which treatment is assigned), not on the treatment indicator itself.
+
+```{r}
+library(fixest)
+
+twfe <- feols(
+  y ~ treated | village + period,
+  data = df,
+  cluster = ~village
+)
+
+summary(twfe)
+```
+
+With heterogeneous and dynamic effects, this coefficient is a weighted average that can be biased, because already-treated villages act as controls for later-treated ones (Goodman-Bacon, 2021). Compare it with `true_att` above: it is way lower.
+
+### Staggered-Robust Estimators
+
+**Sun & Abraham (2021)** is available directly in `fixest` via `sunab()`. It estimates cohort-specific effects by time relative to adoption, using never-treated units as the comparison, and aggregates them into an event study.
+
+```{r}
+sa <- feols(
+  y ~ sunab(cohort, period) | village + period,
+  data = df,
+  cluster = ~village
+)
+
+```
+
+We can plot the coefficients in each period:
+
+```{r}
+
+# Event-study plot (effects by periods relative to adoption)
+iplot(sa, main = "Sun & Abraham event study", xlab = "Periods relative to adoption")
+
+```
+The increase nicely, just as we constructed them. 
+In fact, the ATT is quite close to what we constructed:
+
+
+```{r}
+# Overall average effect across cohorts and post-periods
+summary(sa, agg = "att")
+
+```
+
+
+
+**Callaway & Sant'Anna (2021)** estimates group-time average treatment effects, ATT(g, t), comparing each cohort to never-treated units, and then aggregates them.
+
+```{r}
+
+library(did)
+
+cs <- att_gt(
+  yname = "y",
+  tname = "period",
+  idname = "hh",
+  gname = "cohort",
+  data = df |> mutate(cohort = if_else(cohort > T, 0, cohort)), # cohort needs to 0 for never treated
+  control_group = "nevertreated"
+)
+aggte(cs, type = "simple")
+```
+
+Again, the ATT is very similar to what we found before.

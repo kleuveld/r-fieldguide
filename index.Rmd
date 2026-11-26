@@ -108,6 +108,8 @@ project oriented workflows, general R techniques such as loops and functions tha
 The chapters in part two each cover a part of the research cycle:
 design, data cleaning and data analysis (including reporting the results). 
 For each, there's specific code examples using survey data. 
+The chapters of part three are meant to each focus on a specific method. 
+At this moment, there is ony a chapter on diff-in-diff.
 
 
 

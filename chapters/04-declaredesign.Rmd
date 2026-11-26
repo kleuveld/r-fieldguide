@@ -278,6 +278,8 @@ Perhaps we can increase power using a diff-in-diff design?
 
 ## Dif in diff
 
+Note: for more onf diff in diff, see [the diff-in-diff chapter](#did)
+
 We have one round of data, 
 so to analyze a diff in diff, we would have to simulate data.
 The key reason why a diff in diff design would matter, 
