@@ -23,7 +23,7 @@
 <meta name="author" content="Koen Leuveld-Postma" />
 
 
-<meta name="date" content="2026-10-29" />
+<meta name="date" content="2026-11-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -250,6 +250,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="reporting.html"><a href="reporting.html#stacked-bar-plots"><i class="fa fa-check"></i>Stacked bar plots</a></li>
 <li class="chapter" data-level="" data-path="reporting.html"><a href="reporting.html#lollipop-plot"><i class="fa fa-check"></i>Lollipop plot</a></li>
 <li class="chapter" data-level="" data-path="reporting.html"><a href="reporting.html#maps"><i class="fa fa-check"></i>Maps</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>Part 3: Methods in Focus</b></span></li>
+<li class="chapter" data-level="" data-path="did.html"><a href="did.html"><i class="fa fa-check"></i>7. Differences in Differences</a>
+<ul>
+<li class="chapter" data-level="" data-path="did.html"><a href="did.html#design-considerations-for-a-diff-in-diff"><i class="fa fa-check"></i>Design considerations for a diff-in-diff</a>
+<ul>
+<li class="chapter" data-level="" data-path="did.html"><a href="did.html#core-components"><i class="fa fa-check"></i>Core Components</a></li>
+<li class="chapter" data-level="" data-path="did.html"><a href="did.html#key-assumptions"><i class="fa fa-check"></i>Key assumptions</a></li>
+<li class="chapter" data-level="" data-path="did.html"><a href="did.html#intervention-timing"><i class="fa fa-check"></i>Intervention Timing</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="did.html"><a href="did.html#estimating-diff-in-diff-in-r"><i class="fa fa-check"></i>Estimating diff-in-diff in R</a>
+<ul>
+<li class="chapter" data-level="" data-path="did.html"><a href="did.html#generating-data"><i class="fa fa-check"></i>Generating data</a></li>
+<li class="chapter" data-level="" data-path="did.html"><a href="did.html#plot"><i class="fa fa-check"></i>Plot</a></li>
+<li class="chapter" data-level="" data-path="did.html"><a href="did.html#basic-two-way-fixed-effects-model"><i class="fa fa-check"></i>Basic Two-Way Fixed Effects Model</a></li>
+<li class="chapter" data-level="" data-path="did.html"><a href="did.html#parallel-trends"><i class="fa fa-check"></i>Parallel trends</a></li>
+<li class="chapter" data-level="" data-path="did.html"><a href="did.html#covariate-adjustment"><i class="fa fa-check"></i>Covariate Adjustment</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="did.html"><a href="did.html#synthetic-differences-in-differences"><i class="fa fa-check"></i>Synthetic Differences-in-Differences</a></li>
+<li class="chapter" data-level="" data-path="did.html"><a href="did.html#matched-diff-in-diff"><i class="fa fa-check"></i>Matched diff-in-diff</a></li>
+<li class="chapter" data-level="" data-path="did.html"><a href="did.html#staggered-adoption"><i class="fa fa-check"></i>Staggered Adoption</a>
+<ul>
+<li class="chapter" data-level="" data-path="did.html"><a href="did.html#plot-1"><i class="fa fa-check"></i>Plot</a></li>
+<li class="chapter" data-level="" data-path="did.html"><a href="did.html#naive-two-way-fixed-effects-model"><i class="fa fa-check"></i>Naive Two-Way Fixed Effects Model</a></li>
+<li class="chapter" data-level="" data-path="did.html"><a href="did.html#staggered-robust-estimators"><i class="fa fa-check"></i>Staggered-Robust Estimators</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -503,6 +529,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

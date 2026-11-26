@@ -23,7 +23,7 @@
 <meta name="author" content="Koen Leuveld-Postma" />
 
 
-<meta name="date" content="2026-10-29" />
+<meta name="date" content="2026-11-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -252,6 +252,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="reporting.html"><a href="reporting.html#maps"><i class="fa fa-check"></i>Maps</a></li>
 </ul></li>
 </ul></li>
+<li class="part"><span><b>Part 3: Methods in Focus</b></span></li>
+<li class="chapter" data-level="" data-path="did.html"><a href="did.html"><i class="fa fa-check"></i>7. Differences in Differences</a>
+<ul>
+<li class="chapter" data-level="" data-path="did.html"><a href="did.html#design-considerations-for-a-diff-in-diff"><i class="fa fa-check"></i>Design considerations for a diff-in-diff</a>
+<ul>
+<li class="chapter" data-level="" data-path="did.html"><a href="did.html#core-components"><i class="fa fa-check"></i>Core Components</a></li>
+<li class="chapter" data-level="" data-path="did.html"><a href="did.html#key-assumptions"><i class="fa fa-check"></i>Key assumptions</a></li>
+<li class="chapter" data-level="" data-path="did.html"><a href="did.html#intervention-timing"><i class="fa fa-check"></i>Intervention Timing</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="did.html"><a href="did.html#estimating-diff-in-diff-in-r"><i class="fa fa-check"></i>Estimating diff-in-diff in R</a>
+<ul>
+<li class="chapter" data-level="" data-path="did.html"><a href="did.html#generating-data"><i class="fa fa-check"></i>Generating data</a></li>
+<li class="chapter" data-level="" data-path="did.html"><a href="did.html#plot"><i class="fa fa-check"></i>Plot</a></li>
+<li class="chapter" data-level="" data-path="did.html"><a href="did.html#basic-two-way-fixed-effects-model"><i class="fa fa-check"></i>Basic Two-Way Fixed Effects Model</a></li>
+<li class="chapter" data-level="" data-path="did.html"><a href="did.html#parallel-trends"><i class="fa fa-check"></i>Parallel trends</a></li>
+<li class="chapter" data-level="" data-path="did.html"><a href="did.html#covariate-adjustment"><i class="fa fa-check"></i>Covariate Adjustment</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="did.html"><a href="did.html#synthetic-differences-in-differences"><i class="fa fa-check"></i>Synthetic Differences-in-Differences</a></li>
+<li class="chapter" data-level="" data-path="did.html"><a href="did.html#matched-diff-in-diff"><i class="fa fa-check"></i>Matched diff-in-diff</a></li>
+<li class="chapter" data-level="" data-path="did.html"><a href="did.html#staggered-adoption"><i class="fa fa-check"></i>Staggered Adoption</a>
+<ul>
+<li class="chapter" data-level="" data-path="did.html"><a href="did.html#plot-1"><i class="fa fa-check"></i>Plot</a></li>
+<li class="chapter" data-level="" data-path="did.html"><a href="did.html#naive-two-way-fixed-effects-model"><i class="fa fa-check"></i>Naive Two-Way Fixed Effects Model</a></li>
+<li class="chapter" data-level="" data-path="did.html"><a href="did.html#staggered-robust-estimators"><i class="fa fa-check"></i>Staggered-Robust Estimators</a></li>
+</ul></li>
+</ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -447,15 +473,15 @@ things. The previous was just declaration!</p>
 ## 
 ## Added variable: Y 
 ##  min median   mean  max     sd N_missing N_unique
-##    0     70 107.46 7500 465.57         0       59
+##    0     70 107.46 7570 468.52         0       58
 ## 
 ## Step 5 (estimator): declare_estimator(Y ~ Z, clusters = village, inquiry = &quot;ATE&quot;, term = &quot;Z&quot;, label = &quot;Simple&quot;) 
 ## 
 ## Formula: Y ~ Z 
 ## 
 ## A single draw of the estimator:
-##  term estimator estimate std.error statistic   p.value  conf.low conf.high
-##     Z    Simple 29.16985  60.40281 0.4829221 0.6356979 -98.88739  157.2271
+##  term estimator estimate std.error statistic    p.value  conf.low conf.high
+##     Z    Simple 107.5391  61.21332  1.756792 0.09808666 -22.23647  237.3147
 ##        df outcome inquiry
 ##  15.98618       Y     ATE</code></pre>
 </div>
@@ -527,6 +553,7 @@ Perhaps we can increase power using a diff-in-diff design?</p>
 </div>
 <div id="dif-in-diff" class="section level2 hasAnchor">
 <h2>Dif in diff<a href="declaredesign.html#dif-in-diff" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Note: for more onf diff in diff, see <a href="did.html#did">the diff-in-diff chapter</a></p>
 <p>We have one round of data,
 so to analyze a diff in diff, we would have to simulate data.
 The key reason why a diff in diff design would matter,
@@ -975,6 +1002,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
