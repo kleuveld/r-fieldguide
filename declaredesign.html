@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>4. Design | Reproducible and reusable social science with R: a field guide</title>
   <meta name="description" content="This page contains tips to make your R code reproducible." />
-  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
 
   <meta property="og:title" content="4. Design | Reproducible and reusable social science with R: a field guide" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Koen Leuveld-Postma" />
 
 
-<meta name="date" content="2026-11-26" />
+<meta name="date" content="2026-11-27" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -54,7 +54,7 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <link href="libs/tabwid-1.1.3/tabwid.css" rel="stylesheet" />
 <script src="libs/tabwid-1.1.3/tabwid.js"></script>
-<link href="libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet" />
+<link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet" />
 <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
 <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
 <script src="libs/leaflet-1.3.1/leaflet.js"></script>
@@ -62,7 +62,7 @@
 <script src="libs/proj4-2.6.2/proj4.min.js"></script>
 <script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
 <link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="libs/leaflet-binding-2.2.2/leaflet.js"></script>
+<script src="libs/leaflet-binding-2.2.3/leaflet.js"></script>
 
 
 <style type="text/css">
@@ -460,7 +460,7 @@ things. The previous was just declaration!</p>
 ## 
 ## Added variable: Z 
 ##     0    1
-##   146  144
+##   144  146
 ##  0.50 0.50
 ## 
 ## Step 3 (inquiry): declare_inquiry(ATE = mean(Y_Z_1 - Y_Z_0)) -------------------
@@ -473,15 +473,15 @@ things. The previous was just declaration!</p>
 ## 
 ## Added variable: Y 
 ##  min median   mean  max     sd N_missing N_unique
-##    0     70 107.46 7570 468.52         0       58
+##    0     70 107.95 7500 464.97         0       59
 ## 
 ## Step 5 (estimator): declare_estimator(Y ~ Z, clusters = village, inquiry = &quot;ATE&quot;, term = &quot;Z&quot;, label = &quot;Simple&quot;) 
 ## 
 ## Formula: Y ~ Z 
 ## 
 ## A single draw of the estimator:
-##  term estimator estimate std.error statistic    p.value  conf.low conf.high
-##     Z    Simple 107.5391  61.21332  1.756792 0.09808666 -22.23647  237.3147
+##  term estimator estimate std.error statistic   p.value  conf.low conf.high
+##     Z    Simple 13.21861  60.28273 0.2192769 0.8292096 -114.5841  141.0213
 ##        df outcome inquiry
 ##  15.98618       Y     ATE</code></pre>
 </div>
@@ -517,8 +517,8 @@ find a statistically significant effect.</p>
 ##  design_simple     ATE    Simple       Y    Z    500         70.00
 ##                                                             (0.00)
 ##  Mean Estimate   Bias SD Estimate   RMSE  Power Coverage
-##          67.30  -2.70       59.82  59.82   0.23     1.00
-##         (2.38) (2.38)      (0.84) (0.81) (0.02)   (0.00)</code></pre>
+##          72.34   2.34       60.30  60.29   0.27     1.00
+##         (2.84) (2.84)      (0.82) (0.80) (0.02)   (0.00)</code></pre>
 <p>Our power is 0.23, meaning we found a significant result in 23%
 of our model runs.
 That’s way lower than the traditional 80% threshold.</p>
@@ -545,7 +545,7 @@ For this I filter the tibble I created, and pipe it into <code>ggplot()</code>:<
 <span id="cb66-5"><a href="declaredesign.html#cb66-5" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
 <span id="cb66-6"><a href="declaredesign.html#cb66-6" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb66-7"><a href="declaredesign.html#cb66-7" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="fl">0.8</span>,<span class="at">linetype=</span><span class="dv">2</span>) </span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-44-1.png" alt="" width="672" /></p>
 <p>We can reliably detect an effect size between 150 and 200 kgs of fertilizer.
 The mean fertilizer use is 70kg, so that seems unlikely to be realistic.
 Perhaps we can increase power using a diff-in-diff design?</p>
@@ -668,7 +668,7 @@ which controls the correlation between fertilizer input in years 0 and 1:</p>
 <span id="cb74-6"><a href="declaredesign.html#cb74-6" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
 <span id="cb74-7"><a href="declaredesign.html#cb74-7" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb74-8"><a href="declaredesign.html#cb74-8" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="fl">0.8</span>, <span class="at">linetype=</span><span class="dv">2</span>) </span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-53-1.png" alt="" width="672" /></p>
 <p>So at high levels of Rho, our power is slightly higher than when using the simple model.
 The lower rho is, the less added value the diff-in-diff model has.
 But honestly, I am suprised with how small the differences are.</p>
@@ -864,21 +864,24 @@ so that we can compare these two matching methods in our diagnosis.</p>
 <span id="cb82-4"><a href="declaredesign.html#cb82-4" tabindex="-1"></a>  <span class="at">inquiry =</span> <span class="st">&quot;ATE&quot;</span>,  <span class="co"># Tie the estimator to the declared inquiry</span></span>
 <span id="cb82-5"><a href="declaredesign.html#cb82-5" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">&quot;Matched PSM&quot;</span>,</span>
 <span id="cb82-6"><a href="declaredesign.html#cb82-6" tabindex="-1"></a>  <span class="at">term =</span> <span class="st">&quot;Z&quot;</span>,</span>
-<span id="cb82-7"><a href="declaredesign.html#cb82-7" tabindex="-1"></a>)</span>
-<span id="cb82-8"><a href="declaredesign.html#cb82-8" tabindex="-1"></a></span>
-<span id="cb82-9"><a href="declaredesign.html#cb82-9" tabindex="-1"></a>estimator_matching_cem <span class="ot">&lt;-</span> <span class="fu">declare_estimator</span>(</span>
-<span id="cb82-10"><a href="declaredesign.html#cb82-10" tabindex="-1"></a>  Z <span class="sc">~</span> educated <span class="sc">+</span> LivestockHoldings,</span>
-<span id="cb82-11"><a href="declaredesign.html#cb82-11" tabindex="-1"></a>  <span class="at">handler =</span> <span class="fu">label_estimator</span>(custom_match),</span>
-<span id="cb82-12"><a href="declaredesign.html#cb82-12" tabindex="-1"></a>  <span class="at">inquiry =</span> <span class="st">&quot;ATE&quot;</span>,  <span class="co"># Tie the estimator to the declared inquiry</span></span>
-<span id="cb82-13"><a href="declaredesign.html#cb82-13" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">&quot;Matched CEM&quot;</span>,</span>
-<span id="cb82-14"><a href="declaredesign.html#cb82-14" tabindex="-1"></a>  <span class="at">term =</span> <span class="st">&quot;Z&quot;</span>,</span>
-<span id="cb82-15"><a href="declaredesign.html#cb82-15" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;cem&quot;</span></span>
-<span id="cb82-16"><a href="declaredesign.html#cb82-16" tabindex="-1"></a>)</span></code></pre></div>
+<span id="cb82-7"><a href="declaredesign.html#cb82-7" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## Error in `capture_globals_quosure()`:
+## ! argument &quot;expr&quot; is missing, with no default</code></pre>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="declaredesign.html#cb84-1" tabindex="-1"></a>estimator_matching_cem <span class="ot">&lt;-</span> <span class="fu">declare_estimator</span>(</span>
+<span id="cb84-2"><a href="declaredesign.html#cb84-2" tabindex="-1"></a>  Z <span class="sc">~</span> educated <span class="sc">+</span> LivestockHoldings,</span>
+<span id="cb84-3"><a href="declaredesign.html#cb84-3" tabindex="-1"></a>  <span class="at">handler =</span> <span class="fu">label_estimator</span>(custom_match),</span>
+<span id="cb84-4"><a href="declaredesign.html#cb84-4" tabindex="-1"></a>  <span class="at">inquiry =</span> <span class="st">&quot;ATE&quot;</span>,  <span class="co"># Tie the estimator to the declared inquiry</span></span>
+<span id="cb84-5"><a href="declaredesign.html#cb84-5" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">&quot;Matched CEM&quot;</span>,</span>
+<span id="cb84-6"><a href="declaredesign.html#cb84-6" tabindex="-1"></a>  <span class="at">term =</span> <span class="st">&quot;Z&quot;</span>,</span>
+<span id="cb84-7"><a href="declaredesign.html#cb84-7" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;cem&quot;</span></span>
+<span id="cb84-8"><a href="declaredesign.html#cb84-8" tabindex="-1"></a>)</span></code></pre></div>
 <p>And let’s combine it into one design!</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="declaredesign.html#cb83-1" tabindex="-1"></a>design_matching  <span class="ot">&lt;-</span></span>
-<span id="cb83-2"><a href="declaredesign.html#cb83-2" tabindex="-1"></a>  model_matching <span class="sc">+</span>  assignment_matching <span class="sc">+</span>  resampling_matching <span class="sc">+</span> measurement_matching <span class="sc">+</span> </span>
-<span id="cb83-3"><a href="declaredesign.html#cb83-3" tabindex="-1"></a>  inquiry_matching <span class="sc">+</span> </span>
-<span id="cb83-4"><a href="declaredesign.html#cb83-4" tabindex="-1"></a>  estimator_matching_no_matching <span class="sc">+</span> estimator_matching_psm <span class="sc">+</span> estimator_matching_cem</span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="declaredesign.html#cb85-1" tabindex="-1"></a>design_matching  <span class="ot">&lt;-</span></span>
+<span id="cb85-2"><a href="declaredesign.html#cb85-2" tabindex="-1"></a>  model_matching <span class="sc">+</span>  assignment_matching <span class="sc">+</span>  resampling_matching <span class="sc">+</span> measurement_matching <span class="sc">+</span> </span>
+<span id="cb85-3"><a href="declaredesign.html#cb85-3" tabindex="-1"></a>  inquiry_matching <span class="sc">+</span> </span>
+<span id="cb85-4"><a href="declaredesign.html#cb85-4" tabindex="-1"></a>  estimator_matching_no_matching <span class="sc">+</span> estimator_matching_psm <span class="sc">+</span> estimator_matching_cem</span></code></pre></div>
+<pre><code>## Error:
+## ! object &#39;estimator_matching_psm&#39; not found</code></pre>
 <p>Note that to explore this design and fine tune matching procedures,
 it may be useful to run <code>draw_data()</code> a few times.</p>
 </div>
@@ -887,57 +890,57 @@ it may be useful to run <code>draw_data()</code> a few times.</p>
 <p>First, let’s examine bias, given selection effects.
 The strength of the selection effect is given by <code>rho</code>,
 so I use <code>redesign()</code> to vary it:</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="declaredesign.html#cb84-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb84-2"><a href="declaredesign.html#cb84-2" tabindex="-1"></a>diagnosis_matching_bias <span class="ot">&lt;-</span></span>
-<span id="cb84-3"><a href="declaredesign.html#cb84-3" tabindex="-1"></a>  design_matching <span class="sc">%&gt;%</span></span>
-<span id="cb84-4"><a href="declaredesign.html#cb84-4" tabindex="-1"></a>  <span class="fu">redesign</span>(<span class="at">rho =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="fl">0.75</span>, <span class="at">by =</span> <span class="fl">0.25</span>))  <span class="sc">%&gt;%</span></span>
-<span id="cb84-5"><a href="declaredesign.html#cb84-5" tabindex="-1"></a>  <span class="fu">diagnose_design</span>(<span class="at">sims =</span> num_sims) <span class="sc">%&gt;%</span></span>
-<span id="cb84-6"><a href="declaredesign.html#cb84-6" tabindex="-1"></a>  <span class="fu">tidy</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb84-7"><a href="declaredesign.html#cb84-7" tabindex="-1"></a>  <span class="fu">as_tibble</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="declaredesign.html#cb87-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb87-2"><a href="declaredesign.html#cb87-2" tabindex="-1"></a>diagnosis_matching_bias <span class="ot">&lt;-</span></span>
+<span id="cb87-3"><a href="declaredesign.html#cb87-3" tabindex="-1"></a>  design_matching <span class="sc">%&gt;%</span></span>
+<span id="cb87-4"><a href="declaredesign.html#cb87-4" tabindex="-1"></a>  <span class="fu">redesign</span>(<span class="at">rho =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="fl">0.75</span>, <span class="at">by =</span> <span class="fl">0.25</span>))  <span class="sc">%&gt;%</span></span>
+<span id="cb87-5"><a href="declaredesign.html#cb87-5" tabindex="-1"></a>  <span class="fu">diagnose_design</span>(<span class="at">sims =</span> num_sims) <span class="sc">%&gt;%</span></span>
+<span id="cb87-6"><a href="declaredesign.html#cb87-6" tabindex="-1"></a>  <span class="fu">tidy</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb87-7"><a href="declaredesign.html#cb87-7" tabindex="-1"></a>  <span class="fu">as_tibble</span>()</span></code></pre></div>
 <p>And I put the result in a plot:</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="declaredesign.html#cb85-1" tabindex="-1"></a>diagnosis_matching_bias <span class="sc">%&gt;%</span></span>
-<span id="cb85-2"><a href="declaredesign.html#cb85-2" tabindex="-1"></a>  <span class="fu">filter</span>(diagnosand <span class="sc">==</span> <span class="st">&quot;bias&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb85-3"><a href="declaredesign.html#cb85-3" tabindex="-1"></a>  <span class="fu">select</span>(rho, <span class="at">bias =</span> estimate, estimator) <span class="sc">%&gt;%</span></span>
-<span id="cb85-4"><a href="declaredesign.html#cb85-4" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> rho, <span class="at">y =</span> bias, </span>
-<span id="cb85-5"><a href="declaredesign.html#cb85-5" tabindex="-1"></a>             <span class="at">shape =</span> estimator, <span class="at">color=</span>estimator)) <span class="sc">+</span></span>
-<span id="cb85-6"><a href="declaredesign.html#cb85-6" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb85-7"><a href="declaredesign.html#cb85-7" tabindex="-1"></a>    <span class="fu">geom_point</span>() </span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="declaredesign.html#cb88-1" tabindex="-1"></a>diagnosis_matching_bias <span class="sc">%&gt;%</span></span>
+<span id="cb88-2"><a href="declaredesign.html#cb88-2" tabindex="-1"></a>  <span class="fu">filter</span>(diagnosand <span class="sc">==</span> <span class="st">&quot;bias&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb88-3"><a href="declaredesign.html#cb88-3" tabindex="-1"></a>  <span class="fu">select</span>(rho, <span class="at">bias =</span> estimate, estimator) <span class="sc">%&gt;%</span></span>
+<span id="cb88-4"><a href="declaredesign.html#cb88-4" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> rho, <span class="at">y =</span> bias, </span>
+<span id="cb88-5"><a href="declaredesign.html#cb88-5" tabindex="-1"></a>             <span class="at">shape =</span> estimator, <span class="at">color=</span>estimator)) <span class="sc">+</span></span>
+<span id="cb88-6"><a href="declaredesign.html#cb88-6" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb88-7"><a href="declaredesign.html#cb88-7" tabindex="-1"></a>    <span class="fu">geom_point</span>() </span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-65-1.png" alt="" width="672" /></p>
 <p>It’s clear that while PSM reduced bias, but CEM performed much better.</p>
 </div>
 <div id="power" class="section level3 hasAnchor">
 <h3>Power<a href="declaredesign.html#power" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Then, let’s examine power.
 I drop the no matching a psm, to save some simulation time.</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="declaredesign.html#cb86-1" tabindex="-1"></a>design_cem  <span class="ot">&lt;-</span></span>
-<span id="cb86-2"><a href="declaredesign.html#cb86-2" tabindex="-1"></a>  model_matching <span class="sc">+</span>  assignment_matching <span class="sc">+</span>  resampling_matching <span class="sc">+</span> measurement_matching <span class="sc">+</span> </span>
-<span id="cb86-3"><a href="declaredesign.html#cb86-3" tabindex="-1"></a>  inquiry_matching <span class="sc">+</span> </span>
-<span id="cb86-4"><a href="declaredesign.html#cb86-4" tabindex="-1"></a>  estimator_matching_cem</span>
-<span id="cb86-5"><a href="declaredesign.html#cb86-5" tabindex="-1"></a></span>
-<span id="cb86-6"><a href="declaredesign.html#cb86-6" tabindex="-1"></a></span>
-<span id="cb86-7"><a href="declaredesign.html#cb86-7" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb86-8"><a href="declaredesign.html#cb86-8" tabindex="-1"></a>diagnosis_matched_power <span class="ot">&lt;-</span></span>
-<span id="cb86-9"><a href="declaredesign.html#cb86-9" tabindex="-1"></a>  design_cem <span class="sc">%&gt;%</span></span>
-<span id="cb86-10"><a href="declaredesign.html#cb86-10" tabindex="-1"></a>  <span class="fu">redesign</span>(</span>
-<span id="cb86-11"><a href="declaredesign.html#cb86-11" tabindex="-1"></a>    <span class="at">communities_per_arm =</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">30</span>,<span class="dv">50</span>),</span>
-<span id="cb86-12"><a href="declaredesign.html#cb86-12" tabindex="-1"></a>    <span class="at">effect_size_matching =</span> <span class="fu">c</span>(<span class="fl">0.01</span>,<span class="fl">0.2</span>, <span class="fl">0.3</span>)</span>
-<span id="cb86-13"><a href="declaredesign.html#cb86-13" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb86-14"><a href="declaredesign.html#cb86-14" tabindex="-1"></a>  <span class="fu">diagnose_design</span>(<span class="at">sims =</span> num_sims) <span class="sc">%&gt;%</span></span>
-<span id="cb86-15"><a href="declaredesign.html#cb86-15" tabindex="-1"></a>  <span class="fu">tidy</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb86-16"><a href="declaredesign.html#cb86-16" tabindex="-1"></a>  <span class="fu">as_tibble</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="declaredesign.html#cb89-1" tabindex="-1"></a>design_cem  <span class="ot">&lt;-</span></span>
+<span id="cb89-2"><a href="declaredesign.html#cb89-2" tabindex="-1"></a>  model_matching <span class="sc">+</span>  assignment_matching <span class="sc">+</span>  resampling_matching <span class="sc">+</span> measurement_matching <span class="sc">+</span> </span>
+<span id="cb89-3"><a href="declaredesign.html#cb89-3" tabindex="-1"></a>  inquiry_matching <span class="sc">+</span> </span>
+<span id="cb89-4"><a href="declaredesign.html#cb89-4" tabindex="-1"></a>  estimator_matching_cem</span>
+<span id="cb89-5"><a href="declaredesign.html#cb89-5" tabindex="-1"></a></span>
+<span id="cb89-6"><a href="declaredesign.html#cb89-6" tabindex="-1"></a></span>
+<span id="cb89-7"><a href="declaredesign.html#cb89-7" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb89-8"><a href="declaredesign.html#cb89-8" tabindex="-1"></a>diagnosis_matched_power <span class="ot">&lt;-</span></span>
+<span id="cb89-9"><a href="declaredesign.html#cb89-9" tabindex="-1"></a>  design_cem <span class="sc">%&gt;%</span></span>
+<span id="cb89-10"><a href="declaredesign.html#cb89-10" tabindex="-1"></a>  <span class="fu">redesign</span>(</span>
+<span id="cb89-11"><a href="declaredesign.html#cb89-11" tabindex="-1"></a>    <span class="at">communities_per_arm =</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">30</span>,<span class="dv">50</span>),</span>
+<span id="cb89-12"><a href="declaredesign.html#cb89-12" tabindex="-1"></a>    <span class="at">effect_size_matching =</span> <span class="fu">c</span>(<span class="fl">0.01</span>,<span class="fl">0.2</span>, <span class="fl">0.3</span>)</span>
+<span id="cb89-13"><a href="declaredesign.html#cb89-13" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb89-14"><a href="declaredesign.html#cb89-14" tabindex="-1"></a>  <span class="fu">diagnose_design</span>(<span class="at">sims =</span> num_sims) <span class="sc">%&gt;%</span></span>
+<span id="cb89-15"><a href="declaredesign.html#cb89-15" tabindex="-1"></a>  <span class="fu">tidy</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb89-16"><a href="declaredesign.html#cb89-16" tabindex="-1"></a>  <span class="fu">as_tibble</span>()</span></code></pre></div>
 <p>So at 30 communities per arm,
 our design can pick up an effect of 0.3,
 but to pick up an effect of 0.2 we should ideally increase our sample.</p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="declaredesign.html#cb87-1" tabindex="-1"></a>diagnosis_matched_power <span class="sc">%&gt;%</span> </span>
-<span id="cb87-2"><a href="declaredesign.html#cb87-2" tabindex="-1"></a>  <span class="fu">filter</span>(diagnosand <span class="sc">==</span> <span class="st">&quot;power&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb87-3"><a href="declaredesign.html#cb87-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">effect_size_matching =</span> <span class="fu">factor</span>(effect_size_matching)) <span class="sc">%&gt;%</span></span>
-<span id="cb87-4"><a href="declaredesign.html#cb87-4" tabindex="-1"></a>  <span class="fu">select</span>(communities_per_arm, <span class="at">power =</span> estimate, estimator, effect_size_matching) <span class="sc">%&gt;%</span></span>
-<span id="cb87-5"><a href="declaredesign.html#cb87-5" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> communities_per_arm, <span class="at">y =</span> power, </span>
-<span id="cb87-6"><a href="declaredesign.html#cb87-6" tabindex="-1"></a>             <span class="at">shape =</span> effect_size_matching, <span class="at">color=</span>effect_size_matching)) <span class="sc">+</span></span>
-<span id="cb87-7"><a href="declaredesign.html#cb87-7" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb87-8"><a href="declaredesign.html#cb87-8" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb87-9"><a href="declaredesign.html#cb87-9" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="fl">0.8</span>,<span class="at">linetype=</span><span class="dv">2</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-68-1.png" width="672" /></p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="declaredesign.html#cb90-1" tabindex="-1"></a>diagnosis_matched_power <span class="sc">%&gt;%</span> </span>
+<span id="cb90-2"><a href="declaredesign.html#cb90-2" tabindex="-1"></a>  <span class="fu">filter</span>(diagnosand <span class="sc">==</span> <span class="st">&quot;power&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb90-3"><a href="declaredesign.html#cb90-3" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">effect_size_matching =</span> <span class="fu">factor</span>(effect_size_matching)) <span class="sc">%&gt;%</span></span>
+<span id="cb90-4"><a href="declaredesign.html#cb90-4" tabindex="-1"></a>  <span class="fu">select</span>(communities_per_arm, <span class="at">power =</span> estimate, estimator, effect_size_matching) <span class="sc">%&gt;%</span></span>
+<span id="cb90-5"><a href="declaredesign.html#cb90-5" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> communities_per_arm, <span class="at">y =</span> power, </span>
+<span id="cb90-6"><a href="declaredesign.html#cb90-6" tabindex="-1"></a>             <span class="at">shape =</span> effect_size_matching, <span class="at">color=</span>effect_size_matching)) <span class="sc">+</span></span>
+<span id="cb90-7"><a href="declaredesign.html#cb90-7" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb90-8"><a href="declaredesign.html#cb90-8" tabindex="-1"></a>    <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb90-9"><a href="declaredesign.html#cb90-9" tabindex="-1"></a>    <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="fl">0.8</span>,<span class="at">linetype=</span><span class="dv">2</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-68-1.png" alt="" width="672" /></p>
 
 </div>
 </div>
