@@ -2,7 +2,7 @@
   "name": "Bookdown Dev Container",
   "image": "ghcr.io/kleuveld/koentainr:0.3.r_cheatsheet",
   "workspaceFolder": "/doc", // Set the container's working directory to /doc
-  "workspaceMount": "source=/home/koen/git/r_cheatsheet,target=/doc,type=bind",
+  "workspaceMount": "source=/home/koen/git/r-fieldguide,target=/doc,type=bind",
   "mounts": [
     "type=bind,source=/home/koen/.ssh,target=/root/.ssh,consistency=cached"
   ],
